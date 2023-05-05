@@ -1,0 +1,21 @@
+name: python-intro-PGR
+channels:
+  - defaults
+  - conda-forge
+dependencies:
+  - python=3.10
+  - numpy=1.21.*
+  - scipy
+  - pandas=1.4.*
+  - matplotlib=3.5.*
+  - xlrd
+  - openpyxl
+  - notebook
+  - scikit-learn
+  - statsmodels
+  - conda-forge:yfinance
+  - conda-forge:nasdaq-data-link
+  - pandas-datareader
+  - pip
+  - pip:
+    - fredapi

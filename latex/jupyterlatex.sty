@@ -1,0 +1,126 @@
+\ProvidesPackage{jupyterexercise}[]
+
+\RequirePackage[utf8]{inputenc}
+
+\RequirePackage{relsize} % for resizing subscripts
+\RequirePackage{calc}
+\RequirePackage{xspace}
+
+\RequirePackage{xcolor}
+
+\RequirePackage{etoolbox}
+%\RequirePackage{ifthen}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% KOMA script options
+
+\KOMAoptions{paper=a4,twoside=false}
+\KOMAoptions{numbers=noendperiod}
+
+\KOMAoptions{parskip=half}
+\KOMAoptions{fontsize=10}
+
+\setcounter{tocdepth}{\subsectiontocdepth}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Package option processing
+\RequirePackage{kvoptions}
+
+% Skip prefix, just dump global document options into global "namespace" 
+% without any prefix
+\SetupKeyvalOptions{family=, prefix=}
+
+% Creates \ifanswers 
+\DeclareBoolOption{answers}
+\ProcessKeyvalOptions*
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Setup for exercises/answers
+
+
+% \definecolor{answer}{RGB}{53,143,185}
+\colorlet{answer}{blue}
+
+\newenvironment{answer}{%
+  \smallskip
+  \noindent\textcolor{answer}{\rule{\textwidth}{0.65mm}}
+  \color{answer}
+  \textbf{\textit{Solution.}}
+}{\noindent\textcolor{answer}{\rule{\textwidth}{0.65mm}}}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Affiliation in title block
+
+\RequirePackage{etoolbox}
+\makeatletter
+\providecommand{\institute}[1]{% add institute to \maketitle
+  \apptocmd{\@author}{\end{tabular}
+    \par
+    \begin{tabular}[t]{c}
+    \textit{#1}}{}{}
+}
+\makeatother
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Fonts
+
+% Fixed-width font for Python code
+% \RequirePackage{tgcursor}
+%\RequirePackage{inconsolata}
+\RequirePackage[scale=0.9]{FiraMono} 
+
+\RequirePackage{mathpazo}
+\RequirePackage{bm}
+
+\RequirePackage{microtype}
+
+
+\setkomafont{caption}{\small}
+\addtokomafont{disposition}{\rmfamily}
+
+  
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% References
+
+\RequirePackage{varioref}
+
+% \RequirePackage[x11names,pdftex,hyperref]{xcolor}
+\RequirePackage{hyperref}
+
+\labelformat{figure}{Figure~#1}
+\labelformat{subfigure}{(#1)}
+\labelformat{table}{Table~#1}
+\labelformat{section}{section~#1}
+\labelformat{appsection}{appendix~#1}
+\labelformat{part}{part~#1}
+\labelformat{chapter}{chapter~#1}
+\labelformat{subsection}{section~#1}
+\labelformat{subsubsection}{section~#1}
+\labelformat{equation}{(#1)}
+\labelformat{example}{Example #1}
+\labelformat{exercise}{Exercise #1}
+\labelformat{examquestion}{Question #1}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Abbreviations
+
+\RequirePackage{xspace}
+
+
+\newcommand*{\eg}{e.g.,\@\xspace}
+\newcommand*{\Eg}{E.g.,\@\xspace}
+\newcommand*{\etc}{etc.\@\xspace}
+\newcommand*{\ie}{i.e.,\@\xspace}
+\newcommand*{\vs}{vs.\@\xspace}
+\newcommand*{\viz}{viz.\@\xspace}
+
+\newcommand*{\Jr}{Jr.\@\xspace}
+\newcommand*{\tth}{\textsuperscript{th}\xspace}
