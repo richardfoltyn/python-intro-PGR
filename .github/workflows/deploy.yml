@@ -26,7 +26,6 @@ jobs:
           mkdir content
           cp -a index.ipynb content
           cp -a lectures content
-          cp -a exercises content
           cp -a data content
           jupyter lite build --contents content --output-dir dist
       - name: Upload artifact
