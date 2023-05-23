@@ -47,7 +47,7 @@
     \fi
 
     \usepackage{fancyvrb} % verbatim replacement that allows latex
-    \usepackage{grffile} % extends the file name processing of package graphics 
+    \usepackage{grffile} % extends the file name processing of package graphics
                          % to support a larger range
     \makeatletter % fix for old versions of grffile with XeLaTeX
     \@ifpackagelater{grffile}{2019/11/01}
@@ -131,7 +131,7 @@
     \newcommand{\RegionMarkerTok}[1]{{#1}}
     \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
     \newcommand{\NormalTok}[1]{{#1}}
-    
+
     % Additional commands for more recent versions of Pandoc
     \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
     \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
@@ -150,8 +150,8 @@
     \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
     \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
     \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
-    
-    
+
+
     % Define a nice break command that doesn't care if a line doesn't already
     % exist.
     \def\br{\hspace*{\fill} \\* }
@@ -278,53 +278,53 @@
 \makeatother
 
 
-    % For linebreaks inside Verbatim environment from package fancyvrb. 
+    % For linebreaks inside Verbatim environment from package fancyvrb.
     \makeatletter
-        \newbox\Wrappedcontinuationbox 
-        \newbox\Wrappedvisiblespacebox 
-        \newcommand*\Wrappedvisiblespace {\textcolor{red}{\textvisiblespace}} 
-        \newcommand*\Wrappedcontinuationsymbol {\textcolor{red}{\llap{\tiny$\m@th\hookrightarrow$}}} 
-        \newcommand*\Wrappedcontinuationindent {3ex } 
-        \newcommand*\Wrappedafterbreak {\kern\Wrappedcontinuationindent\copy\Wrappedcontinuationbox} 
-        % Take advantage of the already applied Pygments mark-up to insert 
-        % potential linebreaks for TeX processing. 
-        %        {, <, #, %, $, ' and ": go to next line. 
-        %        _, }, ^, &, >, - and ~: stay at end of broken line. 
-        % Use of \textquotesingle for straight quote. 
-        \newcommand*\Wrappedbreaksatspecials {% 
-            \def\PYGZus{\discretionary{\char`\_}{\Wrappedafterbreak}{\char`\_}}% 
-            \def\PYGZob{\discretionary{}{\Wrappedafterbreak\char`\{}{\char`\{}}% 
-            \def\PYGZcb{\discretionary{\char`\}}{\Wrappedafterbreak}{\char`\}}}% 
-            \def\PYGZca{\discretionary{\char`\^}{\Wrappedafterbreak}{\char`\^}}% 
-            \def\PYGZam{\discretionary{\char`\&}{\Wrappedafterbreak}{\char`\&}}% 
-            \def\PYGZlt{\discretionary{}{\Wrappedafterbreak\char`\<}{\char`\<}}% 
-            \def\PYGZgt{\discretionary{\char`\>}{\Wrappedafterbreak}{\char`\>}}% 
-            \def\PYGZsh{\discretionary{}{\Wrappedafterbreak\char`\#}{\char`\#}}% 
-            \def\PYGZpc{\discretionary{}{\Wrappedafterbreak\char`\%}{\char`\%}}% 
-            \def\PYGZdl{\discretionary{}{\Wrappedafterbreak\char`\$}{\char`\$}}% 
-            \def\PYGZhy{\discretionary{\char`\-}{\Wrappedafterbreak}{\char`\-}}% 
-            \def\PYGZsq{\discretionary{}{\Wrappedafterbreak\textquotesingle}{\textquotesingle}}% 
-            \def\PYGZdq{\discretionary{}{\Wrappedafterbreak\char`\"}{\char`\"}}% 
-            \def\PYGZti{\discretionary{\char`\~}{\Wrappedafterbreak}{\char`\~}}% 
-        } 
-        % Some characters . , ; ? ! / are not pygmentized. 
-        % This macro makes them "active" and they will insert potential linebreaks 
-        \newcommand*\Wrappedbreaksatpunct {% 
-            \lccode`\~`\.\lowercase{\def~}{\discretionary{\hbox{\char`\.}}{\Wrappedafterbreak}{\hbox{\char`\.}}}% 
-            \lccode`\~`\,\lowercase{\def~}{\discretionary{\hbox{\char`\,}}{\Wrappedafterbreak}{\hbox{\char`\,}}}% 
-            \lccode`\~`\;\lowercase{\def~}{\discretionary{\hbox{\char`\;}}{\Wrappedafterbreak}{\hbox{\char`\;}}}% 
-            \lccode`\~`\:\lowercase{\def~}{\discretionary{\hbox{\char`\:}}{\Wrappedafterbreak}{\hbox{\char`\:}}}% 
-            \lccode`\~`\?\lowercase{\def~}{\discretionary{\hbox{\char`\?}}{\Wrappedafterbreak}{\hbox{\char`\?}}}% 
-            \lccode`\~`\!\lowercase{\def~}{\discretionary{\hbox{\char`\!}}{\Wrappedafterbreak}{\hbox{\char`\!}}}% 
-            \lccode`\~`\/\lowercase{\def~}{\discretionary{\hbox{\char`\/}}{\Wrappedafterbreak}{\hbox{\char`\/}}}% 
+        \newbox\Wrappedcontinuationbox
+        \newbox\Wrappedvisiblespacebox
+        \newcommand*\Wrappedvisiblespace {\textcolor{red}{\textvisiblespace}}
+        \newcommand*\Wrappedcontinuationsymbol {\textcolor{red}{\llap{\tiny$\m@th\hookrightarrow$}}}
+        \newcommand*\Wrappedcontinuationindent {3ex }
+        \newcommand*\Wrappedafterbreak {\kern\Wrappedcontinuationindent\copy\Wrappedcontinuationbox}
+        % Take advantage of the already applied Pygments mark-up to insert
+        % potential linebreaks for TeX processing.
+        %        {, <, #, %, $, ' and ": go to next line.
+        %        _, }, ^, &, >, - and ~: stay at end of broken line.
+        % Use of \textquotesingle for straight quote.
+        \newcommand*\Wrappedbreaksatspecials {%
+            \def\PYGZus{\discretionary{\char`\_}{\Wrappedafterbreak}{\char`\_}}%
+            \def\PYGZob{\discretionary{}{\Wrappedafterbreak\char`\{}{\char`\{}}%
+            \def\PYGZcb{\discretionary{\char`\}}{\Wrappedafterbreak}{\char`\}}}%
+            \def\PYGZca{\discretionary{\char`\^}{\Wrappedafterbreak}{\char`\^}}%
+            \def\PYGZam{\discretionary{\char`\&}{\Wrappedafterbreak}{\char`\&}}%
+            \def\PYGZlt{\discretionary{}{\Wrappedafterbreak\char`\<}{\char`\<}}%
+            \def\PYGZgt{\discretionary{\char`\>}{\Wrappedafterbreak}{\char`\>}}%
+            \def\PYGZsh{\discretionary{}{\Wrappedafterbreak\char`\#}{\char`\#}}%
+            \def\PYGZpc{\discretionary{}{\Wrappedafterbreak\char`\%}{\char`\%}}%
+            \def\PYGZdl{\discretionary{}{\Wrappedafterbreak\char`\$}{\char`\$}}%
+            \def\PYGZhy{\discretionary{\char`\-}{\Wrappedafterbreak}{\char`\-}}%
+            \def\PYGZsq{\discretionary{}{\Wrappedafterbreak\textquotesingle}{\textquotesingle}}%
+            \def\PYGZdq{\discretionary{}{\Wrappedafterbreak\char`\"}{\char`\"}}%
+            \def\PYGZti{\discretionary{\char`\~}{\Wrappedafterbreak}{\char`\~}}%
+        }
+        % Some characters . , ; ? ! / are not pygmentized.
+        % This macro makes them "active" and they will insert potential linebreaks
+        \newcommand*\Wrappedbreaksatpunct {%
+            \lccode`\~`\.\lowercase{\def~}{\discretionary{\hbox{\char`\.}}{\Wrappedafterbreak}{\hbox{\char`\.}}}%
+            \lccode`\~`\,\lowercase{\def~}{\discretionary{\hbox{\char`\,}}{\Wrappedafterbreak}{\hbox{\char`\,}}}%
+            \lccode`\~`\;\lowercase{\def~}{\discretionary{\hbox{\char`\;}}{\Wrappedafterbreak}{\hbox{\char`\;}}}%
+            \lccode`\~`\:\lowercase{\def~}{\discretionary{\hbox{\char`\:}}{\Wrappedafterbreak}{\hbox{\char`\:}}}%
+            \lccode`\~`\?\lowercase{\def~}{\discretionary{\hbox{\char`\?}}{\Wrappedafterbreak}{\hbox{\char`\?}}}%
+            \lccode`\~`\!\lowercase{\def~}{\discretionary{\hbox{\char`\!}}{\Wrappedafterbreak}{\hbox{\char`\!}}}%
+            \lccode`\~`\/\lowercase{\def~}{\discretionary{\hbox{\char`\/}}{\Wrappedafterbreak}{\hbox{\char`\/}}}%
             \catcode`\.\active
-            \catcode`\,\active 
+            \catcode`\,\active
             \catcode`\;\active
             \catcode`\:\active
             \catcode`\?\active
             \catcode`\!\active
-            \catcode`\/\active 
-            \lccode`\~`\~ 	
+            \catcode`\/\active
+            \lccode`\~`\~
         }
     \makeatother
 
@@ -347,10 +347,10 @@
             \discretionary{\copy\Wrappedvisiblespacebox}{\Wrappedafterbreak}
             {\kern\fontdimen2\font}%
         }%
-        
+
         % Allow breaks at special characters using \PYG... macros.
         \Wrappedbreaksatspecials
-        % Breaks at punctuation characters . , ; ? ! and / need catcode=\active 	
+        % Breaks at punctuation characters . , ; ? ! and / need catcode=\active
         \OriginalVerbatim[#1,fontsize=\small,codes*=\Wrappedbreaksatpunct]%
     }
     \makeatother
@@ -360,7 +360,7 @@
     \definecolor{outcolor}{HTML}{D84315}
     \definecolor{cellborder}{HTML}{CFCFCF}
     \definecolor{cellbackground}{HTML}{FCFCFC}
-    
+
     % prompt
     \makeatletter
     \newcommand{\boxspacing}{\kern\kvtcb@left@rule\kern\kvtcb@boxsep}
@@ -372,7 +372,7 @@
 
     
     % Prevent overflowing lines due to hard-to-break entities
-    \sloppy 
+    \sloppy
     % Setup hyperref package
     \hypersetup{
       breaklinks=true,  % so long urls are correctly broken across lines
@@ -436,7 +436,7 @@ This means that
 
 \begin{itemize}
 \item
-  arrays contain a \emph{homogenous} data type. \emph{All} elements are
+  Arrays contain a \emph{homogenous} data type. \emph{All} elements are
   either 64-bit integers (\texttt{np.int64}), 64-bit floating-point
   numbers (\texttt{np.float64}), or some other of the many data types
   supported by NumPy.
@@ -488,7 +488,7 @@ simple example:
 \end{tcolorbox}
 
     \begin{Verbatim}[commandchars=\\\{\}]
-159 µs ± 445 ns per loop (mean ± std. dev. of 7 runs, 10,000 loops each)
+156 µs ± 413 ns per loop (mean ± std. dev. of 7 runs, 10,000 loops each)
     \end{Verbatim}
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
@@ -503,7 +503,7 @@ simple example:
 \end{tcolorbox}
 
     \begin{Verbatim}[commandchars=\\\{\}]
-928 ns ± 18.8 ns per loop (mean ± std. dev. of 7 runs, 1,000,000 loops each)
+719 ns ± 22.6 ns per loop (mean ± std. dev. of 7 runs, 1,000,000 loops each)
     \end{Verbatim}
 
     \begin{itemize}
@@ -588,7 +588,7 @@ see the NumPy
 \href{https://numpy.org/doc/stable/reference/routines.array-creation.html}{documentation}
 for details.
 
-\emph{Examples:}
+\vspace{1em}\emph{Examples:}
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
 \prompt{In}{incolor}{3}{\boxspacing}
@@ -715,7 +715,7 @@ as their first argument. Array shapes are usually specified as tuples:
 We can query the shape of an array using the \texttt{shape} attribute,
 and the number of dimensions is stored in the \texttt{ndim} attribute.
 
-\emph{Examples:}
+\vspace{1em}\emph{Examples:}
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
 \prompt{In}{incolor}{9}{\boxspacing}
@@ -763,8 +763,8 @@ built-in type \texttt{float} has neither a \texttt{shape}, nor an
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
 \prompt{Out}{outcolor}{11}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
-array([4.66962811e-310, 0.00000000e+000, 4.66850624e-310, 4.66850624e-310,
-       6.94586692e-310])
+array([2.14593767e-316, 0.00000000e+000, 1.89238130e-316, 1.88839953e-316,
+       2.37151510e-322])
 \end{Verbatim}
 \end{tcolorbox}
         
@@ -874,19 +874,10 @@ array([0.])
 
 We previously discussed single element indexing and slicing, which works
 the same way for both Python \texttt{list} and \texttt{tuple} objects as
-well as NumPy arrays.
-
-NumPy additionally implements more sophisticated indexing mechanisms
-which we cover now.
-
-\begin{itemize}
-\tightlist
-\item
-  You might also want to consult the NumPy indexing
-  \href{https://numpy.org/doc/stable/user/basics.indexing.html}{tutorial}
-  and the detailed indexing
-  \href{https://numpy.org/doc/stable/reference/arrays.indexing.html}{reference}.
-\end{itemize}
+well as NumPy arrays. NumPy additionally implements more sophisticated
+indexing mechanisms which we cover now. You might also want to consult
+the NumPy indexing
+\href{https://numpy.org/doc/stable/user/basics.indexing.html}{tutorial}.
 
 \hypertarget{boolean-or-mask-indexing}{%
 \subsubsection{Boolean or ``mask''
@@ -908,7 +899,7 @@ We can pass logical arrays as indices:
   indexed array.
 \end{itemize}
 
-\emph{Examples:}
+\vspace{1em}\emph{Examples:}
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
 \prompt{In}{incolor}{17}{\boxspacing}
@@ -1094,7 +1085,7 @@ Moreover,
   indices on the remaining axes.
 \end{itemize}
 
-\emph{Examples:}
+\vspace{1em}\emph{Examples:}
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
 \prompt{In}{incolor}{26}{\boxspacing}
@@ -1245,7 +1236,7 @@ numerous functions defined in NumPy, such as
 
     You can find a complete list of mathematical functions in the NumPy
 \href{https://numpy.org/doc/stable/reference/routines.math.html}{documentation}
-(not all functions listed there operate element-wise, though!).
+(not all functions listed there operate element-wise, though).
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
 \prompt{In}{incolor}{31}{\boxspacing}
@@ -1467,7 +1458,7 @@ restricts the operation to a specific axis.
   (flattened) array.
 \end{itemize}
 
-\emph{Examples:}
+\vspace{1em}\emph{Examples:}
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
 \prompt{In}{incolor}{40}{\boxspacing}
@@ -1546,7 +1537,7 @@ specific example, and will discuss the technical details below.
   a \(2 \times 3\) matrix. This is exactly what NumPy does.
 \end{itemize}
 
-\emph{Examples:}
+\vspace{1em}\emph{Examples:}
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
 \prompt{In}{incolor}{43}{\boxspacing}
@@ -1675,14 +1666,14 @@ Broadcasting is applied in four steps:
   have 1's \emph{prepended} to its shape until its dimension corresponds
   to the largest one.
 
-  \emph{Example:} given array \texttt{a} with shape \texttt{(m,n)} and
+\vspace{1em}\emph{Example:} given array \texttt{a} with shape \texttt{(m,n)} and
   array \texttt{b} with shape \texttt{(n,)}, the maximum dimension is 2,
   and \texttt{b} will be implicitly reshaped to \texttt{(1,n)}.
 \item
   The size of the output array is determined as the maximum size of all
   arrays along each dimension.
 
-  \emph{Example:} Continuing with our example from above, the maximum
+\vspace{1em}\emph{Example:} Continuing with our example from above, the maximum
   size along dimension 1 is \texttt{m}, and the maximum size along
   dimension 2 is \texttt{n}, so the output array has shape
   \texttt{(m,n)}.
@@ -1691,7 +1682,7 @@ Broadcasting is applied in four steps:
   its size either matches the output size or is equal to 1. If this is
   not the case, broadcasting cannot be applied and the operation fails.
 
-  \emph{Example:} In the above example, the shape of \texttt{a} matches
+\vspace{1em}\emph{Example:} In the above example, the shape of \texttt{a} matches
   the output shape exactly. The implied shape of \texttt{b} is
   \texttt{(1,n)}, so it matches exactly along the second dimension, and
   is 1 along the first, and thus can be used.
@@ -1700,7 +1691,7 @@ Broadcasting is applied in four steps:
   element in this dimension will be used for all calculations along that
   dimension.
 
-  \emph{Example:} Any element \texttt{a{[}i,j{]}} will be matched with
+\vspace{1em}\emph{Example:} Any element \texttt{a{[}i,j{]}} will be matched with
   the element \texttt{b{[}0,j{]}} to the calculate the output value at
   \texttt{(i,j)}.
 \end{enumerate}
@@ -1795,8 +1786,10 @@ array with a (1-dimensional) vector:
 \end{tcolorbox}
 
     We can manually expand the vector to have the same shape as the array
-\texttt{a} using \texttt{np.tile()} which creates \texttt{k\ *\ m}
-copies of the \texttt{n} elements in \texttt{b}:
+\texttt{a} using
+\href{https://numpy.org/doc/stable/reference/generated/numpy.tile.html}{\texttt{np.tile()}}
+which creates \texttt{k\ *\ m} copies of the \texttt{n} elements in
+\texttt{b}:
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
 \prompt{In}{incolor}{52}{\boxspacing}
@@ -1826,7 +1819,7 @@ explicitly expand \texttt{b}:
 \end{tcolorbox}
 
     \begin{Verbatim}[commandchars=\\\{\}]
-2.02 µs ± 22.8 ns per loop (mean ± std. dev. of 7 runs, 100,000 loops each)
+2.08 µs ± 46.7 ns per loop (mean ± std. dev. of 7 runs, 100,000 loops each)
     \end{Verbatim}
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
@@ -1838,7 +1831,7 @@ explicitly expand \texttt{b}:
 \end{tcolorbox}
 
     \begin{Verbatim}[commandchars=\\\{\}]
-5.72 µs ± 53.9 ns per loop (mean ± std. dev. of 7 runs, 100,000 loops each)
+5.49 µs ± 57.3 ns per loop (mean ± std. dev. of 7 runs, 100,000 loops each)
     \end{Verbatim}
 
     As you see, not only is the second operation more complex and difficult
@@ -1902,7 +1895,7 @@ vectorised implementation reveals some striking differences:
 \end{tcolorbox}
 
     \begin{Verbatim}[commandchars=\\\{\}]
-21.7 µs ± 368 ns per loop (mean ± std. dev. of 7 runs, 10,000 loops each)
+21.4 µs ± 459 ns per loop (mean ± std. dev. of 7 runs, 10,000 loops each)
     \end{Verbatim}
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
@@ -1914,7 +1907,7 @@ vectorised implementation reveals some striking differences:
 \end{tcolorbox}
 
     \begin{Verbatim}[commandchars=\\\{\}]
-370 ns ± 5.65 ns per loop (mean ± std. dev. of 7 runs, 1,000,000 loops each)
+417 ns ± 7.25 ns per loop (mean ± std. dev. of 7 runs, 1,000,000 loops each)
     \end{Verbatim}
 
     We see that the vectorised variant is about 100 times faster! What is
@@ -1932,11 +1925,10 @@ going on?
 
 Of course this example is somewhat artificial: you would not have
 implemented a loop in Python in the first place, you probably just
-assumed that \texttt{+} works with array operands.
-
-However, we can easily construct more complex computations which may not
-be implemented in NumPy but which can use vectorised building blocks to
-speed up computations.
+assumed that \texttt{+} works with array operands. However, we can
+easily construct more complex computations which may not be implemented
+in NumPy but which can use vectorised building blocks to speed up
+computations.
 
 As an example, consider the following function which computes the sum of
 finite of elements of an array, ignoring infinity and NaNs which we
@@ -1985,7 +1977,7 @@ the performance advantage of vectorised code:
 \end{tcolorbox}
 
     \begin{Verbatim}[commandchars=\\\{\}]
-126 µs ± 1.35 µs per loop (mean ± std. dev. of 7 runs, 10,000 loops each)
+64.1 µs ± 841 ns per loop (mean ± std. dev. of 7 runs, 10,000 loops each)
     \end{Verbatim}
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
@@ -1996,7 +1988,7 @@ the performance advantage of vectorised code:
 \end{tcolorbox}
 
     \begin{Verbatim}[commandchars=\\\{\}]
-4.31 µs ± 25.4 ns per loop (mean ± std. dev. of 7 runs, 100,000 loops each)
+3.64 µs ± 26 ns per loop (mean ± std. dev. of 7 runs, 100,000 loops each)
     \end{Verbatim}
 
     The vectorised version is approximately 25 times faster, despite the
@@ -2103,8 +2095,8 @@ which we can verify using the built-in \texttt{id()} function:
 \end{tcolorbox}
 
     \begin{Verbatim}[commandchars=\\\{\}]
-140585273511248
-140585273508656
+140345072553200
+140345439305424
     \end{Verbatim}
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
@@ -2200,7 +2192,7 @@ Conversely, a \emph{copy} is created whenever
 Moreover, you can always force NumPy to create a copy by calling
 \href{https://numpy.org/doc/stable/reference/generated/numpy.copy.html}{\texttt{np.copy()}}!
 
-\emph{Examples:}
+\vspace{1em}\emph{Examples:}
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
 \prompt{In}{incolor}{70}{\boxspacing}
@@ -2302,7 +2294,7 @@ keyword argument, NumPy by default behaves as follows:
   result will be a floating-point array.
 \end{enumerate}
 
-\emph{Examples:}
+\vspace{1em}\emph{Examples:}
 
 \emph{Case 1:} default data type is \texttt{np.float64}:
 
@@ -2498,7 +2490,7 @@ where other data types need to be used:
   code.
 \end{enumerate}
 
-    \emph{Examples:}
+\vspace{1em}\emph{Examples:}
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
 \prompt{In}{incolor}{79}{\boxspacing}
@@ -3607,7 +3599,7 @@ against NumPy's.
 \end{tcolorbox}
 
     \begin{Verbatim}[commandchars=\\\{\}]
-57.3 µs ± 518 ns per loop (mean ± std. dev. of 7 runs, 10,000 loops each)
+31.7 µs ± 470 ns per loop (mean ± std. dev. of 7 runs, 10,000 loops each)
     \end{Verbatim}
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
@@ -3618,7 +3610,7 @@ against NumPy's.
 \end{tcolorbox}
 
     \begin{Verbatim}[commandchars=\\\{\}]
-22.7 µs ± 1.56 µs per loop (mean ± std. dev. of 7 runs, 10,000 loops each)
+21.9 µs ± 929 ns per loop (mean ± std. dev. of 7 runs, 10,000 loops each)
     \end{Verbatim}
 
     You may be surprised that \texttt{np.nanmean()} is only twice as fast as
@@ -3770,7 +3762,7 @@ the maxima to the \emph{same} plot.
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
 \prompt{Out}{outcolor}{117}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
-<matplotlib.legend.Legend at 0x7fdc7a01e080>
+<matplotlib.legend.Legend at 0x7fa4887cb4c0>
 \end{Verbatim}
 \end{tcolorbox}
         
@@ -3833,7 +3825,7 @@ NumPy version is approximately 100 times faster!
 \end{tcolorbox}
 
     \begin{Verbatim}[commandchars=\\\{\}]
-91.9 µs ± 1.09 µs per loop (mean ± std. dev. of 7 runs, 10,000 loops each)
+94.9 µs ± 2.64 µs per loop (mean ± std. dev. of 7 runs, 10,000 loops each)
     \end{Verbatim}
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
@@ -3845,7 +3837,7 @@ NumPy version is approximately 100 times faster!
 \end{tcolorbox}
 
     \begin{Verbatim}[commandchars=\\\{\}]
-1.3 µs ± 11.9 ns per loop (mean ± std. dev. of 7 runs, 1,000,000 loops each)
+1.63 µs ± 8.17 ns per loop (mean ± std. dev. of 7 runs, 1,000,000 loops each)
     \end{Verbatim}
 
 
