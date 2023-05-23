@@ -27,6 +27,11 @@ jobs:
           cp -a index.ipynb content
           cp -a lectures content
           cp -a data content
+          mkdir content/labs
+          cp -a labs/*.ipynb content/labs
+          mkdir content/exercises
+          cp -a exercises/*.ipynb content/exercises
+          cp repl content
           jupyter lite build --contents content --output-dir dist
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v1
