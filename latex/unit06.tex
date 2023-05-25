@@ -66,7 +66,7 @@
 
     % The hyperref package gives us a pdf with properly built
     % internal navigation ('pdf bookmarks' for the table of contents,
-    % internal cross-reference links, web links for URLs, etc.)
+    % internal cross-reference links, web links for URLs, \etc)
     \usepackage{hyperref}
     % The default LaTeX title has an obnoxious amount of whitespace. By default,
     % titling removes some of it. It also provides customization options.
@@ -402,8 +402,8 @@
 So far, we have encountered NumPy arrays as the only way to store
 numerical data (we mostly ignored the built-in containers provided
 directly in Python). However, while NumPy arrays are great for storing
-homogenous data without any particular structure, they are somewhat
-limited when we want to use them for high-level data analysis.
+\emph{homogenous} data without any particular structure, they are
+somewhat limited when we want to use them for high-level data analysis.
 
 For example, we usually want to process data sets with
 
@@ -736,7 +736,7 @@ repository.
 \PY{n}{DATA\PYZus{}PATH} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{../data}\PY{l+s+s1}{\PYZsq{}}
 
 \PY{c+c1}{\PYZsh{} Uncomment this to load data directly from GitHub}
-\PY{c+c1}{\PYZsh{} DATA\PYZus{}PATH = \PYZsq{}https://raw.githubusercontent.com/richardfoltyn/MLFP\PYZhy{}ECON5130/main/data\PYZsq{}}
+\PY{c+c1}{\PYZsh{} DATA\PYZus{}PATH = \PYZsq{}https://raw.githubusercontent.com/richardfoltyn/python\PYZhy{}intro\PYZhy{}PGR/main/data\PYZsq{}}
 \end{Verbatim}
 \end{tcolorbox}
 
@@ -843,12 +843,34 @@ max     1.000000
 and \texttt{Country} as they contain strings, and computing the mean,
 standard deviation, \etc of a string variable does not make sense.
 
-To see low-level information about the data type used in each column, we
-call
-\href{https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.info.html}{\texttt{info()}}:
+For categorical data, we can use
+\href{https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.value_counts.html}{\texttt{value\_counts()}}
+to tabulate the number of unique values of a variable. For example, the
+following code shows the number of institutions by the Russell Group
+membership:
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
 \prompt{In}{incolor}{11}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Russell}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{value\PYZus{}counts}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+
+            \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
+\prompt{Out}{outcolor}{11}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+1    17
+0     6
+Name: Russell, dtype: int64
+\end{Verbatim}
+\end{tcolorbox}
+        
+    Lastly, to see low-level information about the data type used in each
+column and the number of non-missing observations, we call
+\href{https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.info.html}{\texttt{info()}}:
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{12}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{n}{df}\PY{o}{.}\PY{n}{info}\PY{p}{(}\PY{p}{)}
 \end{Verbatim}
@@ -885,15 +907,14 @@ Pandas supports two types of indexing:
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
+\tightlist
 \item
   Indexing by position. This is basically identical to the indexing of
   other Python and NumPy containers.
 \item
   Indexing by label, \ie by the values assigned to the row or column
   index. These labels need not be integers in increasing order, as is
-  the case for NumPy.
-
-  We will see how to assign labels below.
+  the case for NumPy. We will see how to assign labels below.
 \end{enumerate}
 
 Pandas indexing is performed either by using brackets \texttt{{[}{]}},
@@ -916,7 +937,7 @@ Indexing via \texttt{{[}{]}} can be somewhat confusing:
 \vspace{1em}\emph{Example: Selecting columns}
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{12}{\boxspacing}
+\prompt{In}{incolor}{13}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k}{as} \PY{n+nn}{pd}
 
@@ -927,7 +948,7 @@ Indexing via \texttt{{[}{]}} can be somewhat confusing:
 \end{tcolorbox}
 
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
-\prompt{Out}{outcolor}{12}{\boxspacing}
+\prompt{Out}{outcolor}{13}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 0               University of Glasgow
 1             University of Edinburgh
@@ -957,14 +978,14 @@ Name: Institution, dtype: object
 \end{tcolorbox}
         
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{13}{\boxspacing}
+\prompt{In}{incolor}{14}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{n}{df}\PY{p}{[}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Institution}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Students}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{]}     \PY{c+c1}{\PYZsh{} select multiple columns using a list}
 \end{Verbatim}
 \end{tcolorbox}
 
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
-\prompt{Out}{outcolor}{13}{\boxspacing}
+\prompt{Out}{outcolor}{14}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
                         Institution  Students
 0             University of Glasgow     30805
@@ -998,14 +1019,14 @@ Name: Institution, dtype: object
 To return the rows at positions 1, 2 and 3 we use
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{14}{\boxspacing}
+\prompt{In}{incolor}{15}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{n}{df}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{:}\PY{l+m+mi}{4}\PY{p}{]}
 \end{Verbatim}
 \end{tcolorbox}
 
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
-\prompt{Out}{outcolor}{14}{\boxspacing}
+\prompt{Out}{outcolor}{15}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
                 Institution   Country  Founded  Students   Staff   Admin  \textbackslash{}
 1   University of Edinburgh  Scotland     1583     34275  4589.0  6107.0
@@ -1022,16 +1043,20 @@ To return the rows at positions 1, 2 and 3 we use
     Pandas follows the Python convention that indices are 0-based, and the
 endpoint of a slice is not included.
 
-    \hypertarget{manipulating-indices}{%
-\subsubsection{Manipulating indices}\label{manipulating-indices}}
+    \hypertarget{creating-and-manipulating-indices}{%
+\subsubsection{Creating and manipulating
+indices}\label{creating-and-manipulating-indices}}
 
 Pandas uses \emph{labels} to index and align data. These can be integer
 values starting at 0 with increments of 1 for each additional element,
-which is the default, but they need not be. The two main methods to
-manipulate indices are:
+which is the default, but they need not be. The three main methods to
+create/manipulate indices are:
 
 \begin{itemize}
 \tightlist
+\item
+  Create a new \texttt{Series} or \texttt{DataFrame} object with a
+  custom index using the \texttt{index=} argument.
 \item
   \href{https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.set_index.html}{\texttt{set\_index(keys={[}\textquotesingle{}column1\textquotesingle{},\ ...{]})}}
   uses the values of \texttt{column1} and optionally additional columns
@@ -1042,18 +1067,77 @@ manipulate indices are:
   integers starting at 0.
 \end{itemize}
 
-Both methods return a new \texttt{DataFrame} and leave the original
-\texttt{DataFrame} unchanged. If we want to change the existing
-\texttt{DataFrame}, we need to pass the argument \texttt{inplace=True}.
+    \hypertarget{creating-custom-indices}{%
+\subsubsection*{Creating custom indices}\label{creating-custom-indices}}
+
+First, consider the following code with creates a \texttt{Series} with
+three elements \texttt{{[}10,\ 20,\ 30{]}} using the default index
+\texttt{{[}0,1,2{]}}:
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{16}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k}{as} \PY{n+nn}{pd}
+
+\PY{c+c1}{\PYZsh{} Create Series with default integer index}
+\PY{n}{pd}\PY{o}{.}\PY{n}{Series}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{10}\PY{p}{,} \PY{l+m+mi}{20}\PY{p}{,} \PY{l+m+mi}{30}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+
+            \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
+\prompt{Out}{outcolor}{16}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+0    10
+1    20
+2    30
+dtype: int64
+\end{Verbatim}
+\end{tcolorbox}
+        
+    We can use the \texttt{index=} argument to specify a custom index, for
+example one containing the lower-case characters \texttt{a}, \texttt{b},
+\texttt{c} as follows:
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{17}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{c+c1}{\PYZsh{} Create Series with custom index [a, b, c]}
+\PY{n}{pd}\PY{o}{.}\PY{n}{Series}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{10}\PY{p}{,} \PY{l+m+mi}{20}\PY{p}{,} \PY{l+m+mi}{30}\PY{p}{]}\PY{p}{,} \PY{n}{index}\PY{o}{=}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{a}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{b}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{c}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+
+            \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
+\prompt{Out}{outcolor}{17}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+a    10
+b    20
+c    30
+dtype: int64
+\end{Verbatim}
+\end{tcolorbox}
+        
+    \hypertarget{manipulating-indices}{%
+\subsubsection*{Manipulating indices}\label{manipulating-indices}}
+
+To modify the index of an \emph{existing} \texttt{Series} or
+\texttt{DataFrame} object, we use the methods
+\href{https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.set_index.html}{\texttt{set\_index()}}
+and
+\href{https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.reset_index.html}{\texttt{reset\_index()}}.
+Note that these return a new object and leave the original
+\texttt{Series} or \texttt{DataFrame} unchanged. If we want to change
+the existing object, we need to pass the argument \texttt{inplace=True}.
 
 For example, we can replace the row index and use the Roman lower-case
 characters \texttt{a}, \texttt{b}, \texttt{c}, \ldots{} as labels
 instead of integers:
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{15}{\boxspacing}
+\prompt{In}{incolor}{18}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k}{as} \PY{n+nn}{pd}
+
+\PY{c+c1}{\PYZsh{} Read in university data}
 \PY{n}{df} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+sa}{f}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+si}{\PYZob{}}\PY{n}{DATA\PYZus{}PATH}\PY{l+s+si}{\PYZcb{}}\PY{l+s+s1}{/universities.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{sep}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{;}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
 
 \PY{c+c1}{\PYZsh{} Create list of lower\PYZhy{}case letters which has same}
@@ -1064,7 +1148,7 @@ instead of integers:
 \end{tcolorbox}
 
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
-\prompt{Out}{outcolor}{15}{\boxspacing}
+\prompt{Out}{outcolor}{18}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 ['a',
  'b',
@@ -1093,7 +1177,7 @@ instead of integers:
 \end{tcolorbox}
         
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{16}{\boxspacing}
+\prompt{In}{incolor}{19}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{index}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{index}                             \PY{c+c1}{\PYZsh{} create new column \PYZsq{}index\PYZsq{}}
 \PY{n}{df}\PY{o}{.}\PY{n}{set\PYZus{}index}\PY{p}{(}\PY{n}{keys}\PY{o}{=}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{index}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{inplace}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}      \PY{c+c1}{\PYZsh{} set letters as index!}
@@ -1104,7 +1188,7 @@ instead of integers:
 \end{tcolorbox}
 
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
-\prompt{Out}{outcolor}{16}{\boxspacing}
+\prompt{Out}{outcolor}{19}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
                     Institution   Country  Founded  Students   Staff   Admin  \textbackslash{}
 index
@@ -1120,15 +1204,15 @@ c       251.2        0
 \end{Verbatim}
 \end{tcolorbox}
         
-    To add to the confusion, note that when specifying a range in terms of
-labels, the last element \emph{is} included! Hence the row with index
-\texttt{c} in the above example is shown.
+    Note that when specifying a range in terms of labels, the last element
+\emph{is} included! Hence the row with index \texttt{c} in the above
+example is shown.
 
 We can reset the index to its default integer values using the
 \texttt{reset\_index()} method:
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{17}{\boxspacing}
+\prompt{In}{incolor}{20}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{c+c1}{\PYZsh{} Reset index labels to default value (integers 0, 1, 2, ...) and print }
 \PY{c+c1}{\PYZsh{} first three rows}
@@ -1137,7 +1221,7 @@ We can reset the index to its default integer values using the
 \end{tcolorbox}
 
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
-\prompt{Out}{outcolor}{17}{\boxspacing}
+\prompt{Out}{outcolor}{20}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
                 Institution   Country  Founded  Students   Staff   Admin  \textbackslash{}
 0     University of Glasgow  Scotland     1451     30805  2942.0  4003.0
@@ -1183,14 +1267,14 @@ therefore adhere to the following rules:
 To illustrate, using \texttt{.loc{[}{]}} unambiguously indexes by label:
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{18}{\boxspacing}
+\prompt{In}{incolor}{21}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{n}{df}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{d}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{f}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Institution}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Students}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{]}
 \end{Verbatim}
 \end{tcolorbox}
 
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
-\prompt{Out}{outcolor}{18}{\boxspacing}
+\prompt{Out}{outcolor}{21}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
                      Institution  Students
 index
@@ -1204,14 +1288,14 @@ f                            LSE     11850
 which is not possible with the simpler \texttt{df{[}{]}} syntax:
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{19}{\boxspacing}
+\prompt{In}{incolor}{22}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{n}{df}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{d}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{f}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Institution}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Founded}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
 \end{Verbatim}
 \end{tcolorbox}
 
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
-\prompt{Out}{outcolor}{19}{\boxspacing}
+\prompt{Out}{outcolor}{22}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
                      Institution   Country  Founded
 index
@@ -1230,7 +1314,7 @@ given \texttt{DataFrame} since the index labels are \texttt{a},
 \texttt{b}, \texttt{c},\ldots{} and not 0, 1, 2\ldots{}
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{20}{\boxspacing}
+\prompt{In}{incolor}{23}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{n}{df}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{:}\PY{l+m+mi}{4}\PY{p}{]}
 \end{Verbatim}
@@ -1246,7 +1330,7 @@ labels are integers and coincide with their position, so that
 \texttt{.loc{[}{]}} works:
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{21}{\boxspacing}
+\prompt{In}{incolor}{24}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{n}{df}\PY{o}{.}\PY{n}{reset\PYZus{}index}\PY{p}{(}\PY{n}{inplace}\PY{o}{=}\PY{k+kc}{True}\PY{p}{,} \PY{n}{drop}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}     \PY{c+c1}{\PYZsh{} reset index labels to integers,}
                                             \PY{c+c1}{\PYZsh{} drop original index}
@@ -1255,7 +1339,7 @@ labels are integers and coincide with their position, so that
 \end{tcolorbox}
 
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
-\prompt{Out}{outcolor}{21}{\boxspacing}
+\prompt{Out}{outcolor}{24}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
                  Institution   Country  Founded  Students   Staff   Admin  \textbackslash{}
 0      University of Glasgow  Scotland     1451     30805  2942.0  4003.0
@@ -1280,14 +1364,14 @@ Somewhat surprisingly, we can also pass boolean arrays to
 \texttt{.loc{[}{]}} even though these are clearly not labels:
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{22}{\boxspacing}
+\prompt{In}{incolor}{25}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{n}{df}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Country}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{==} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Scotland}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
 \end{Verbatim}
 \end{tcolorbox}
 
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
-\prompt{Out}{outcolor}{22}{\boxspacing}
+\prompt{Out}{outcolor}{25}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
                   Institution   Country  Founded  Students   Staff   Admin  \textbackslash{}
 0       University of Glasgow  Scotland     1451     30805  2942.0  4003.0
@@ -1320,14 +1404,14 @@ Conversely, if we want to select items exclusively by their position and
 ignore their labels, we use \texttt{.iloc{[}{]}}:
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{23}{\boxspacing}
+\prompt{In}{incolor}{26}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{n}{df}\PY{o}{.}\PY{n}{iloc}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{:}\PY{l+m+mi}{4}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{:}\PY{l+m+mi}{2}\PY{p}{]}           \PY{c+c1}{\PYZsh{} select first 4 rows, first 2 columns}
 \end{Verbatim}
 \end{tcolorbox}
 
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
-\prompt{Out}{outcolor}{23}{\boxspacing}
+\prompt{Out}{outcolor}{26}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
                 Institution   Country
 0     University of Glasgow  Scotland
@@ -1342,10 +1426,153 @@ including boolean arrays. See the
 \href{https://pandas.pydata.org/docs/user_guide/indexing.html\#selection-by-position}{official
 documentation} for details.
 
+    \textbf{Boolean indexing}
+
+Similar to NumPy, pandas allows us to select a subset of rows in a
+\texttt{Series} or \texttt{DataFrame} if they satisfy some condition.
+The simplest use case is to create a column of boolean values, as shown
+earlier. This even works without explicitly using the
+\texttt{.loc{[}{]}} attribute:
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{27}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{c+c1}{\PYZsh{} Read in university data}
+\PY{n}{df} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+sa}{f}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+si}{\PYZob{}}\PY{n}{DATA\PYZus{}PATH}\PY{l+s+si}{\PYZcb{}}\PY{l+s+s1}{/universities.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{sep}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{;}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+
+\PY{c+c1}{\PYZsh{} Select universities NOT in Russell Group}
+\PY{c+c1}{\PYZsh{} (equivalent to df.loc[df[\PYZsq{}Russell\PYZsq{}] != 1])}
+\PY{n}{df}\PY{p}{[}\PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Russell}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{!=} \PY{l+m+mi}{1}\PY{p}{]}
+\end{Verbatim}
+\end{tcolorbox}
+
+            \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
+\prompt{Out}{outcolor}{27}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+                  Institution   Country  Founded  Students   Staff   Admin  \textbackslash{}
+2    University of St Andrews  Scotland     1413      8984  1137.0  1576.0
+3      University of Aberdeen  Scotland     1495     14775  1086.0  1489.0
+4   University of Strathclyde  Scotland     1964     22640     NaN  3200.0
+18       University of Dundee  Scotland     1967     15915  1410.0  1805.0
+20     University of Stirling  Scotland     1967      9548     NaN  1872.0
+22         Swansea University     Wales     1920     20620     NaN  3290.0
+
+    Budget  Russell
+2    251.2        0
+3    219.5        0
+4    304.4        0
+18   256.4        0
+20   113.3        0
+22     NaN        0
+\end{Verbatim}
+\end{tcolorbox}
+        
+    Multiple conditions can be combined using the \texttt{\&} (logical and)
+or \texttt{\textbar{}} (logical or) operators:
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{28}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{c+c1}{\PYZsh{} Select universities NOT In Russell Group located in Wales}
+\PY{n}{df}\PY{p}{[}\PY{p}{(}\PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Russell}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{!=} \PY{l+m+mi}{1}\PY{p}{)} \PY{o}{\PYZam{}} \PY{p}{(}\PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Country}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{==} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Wales}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{]}
+\end{Verbatim}
+\end{tcolorbox}
+
+            \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
+\prompt{Out}{outcolor}{28}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+           Institution Country  Founded  Students  Staff   Admin  Budget  \textbackslash{}
+22  Swansea University   Wales     1920     20620    NaN  3290.0     NaN
+
+    Russell
+22        0
+\end{Verbatim}
+\end{tcolorbox}
+        
+    If we want to include rows where an observation takes on one of multiple
+values, the
+\href{https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.isin.html}{\texttt{isin()}}
+method can be used:
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{29}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{c+c1}{\PYZsh{} Select institutions located in Wales or Scotland}
+\PY{n}{df}\PY{p}{[}\PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Country}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{isin}\PY{p}{(}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Wales}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Scotland}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{)}\PY{p}{]}
+\end{Verbatim}
+\end{tcolorbox}
+
+            \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
+\prompt{Out}{outcolor}{29}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+                  Institution   Country  Founded  Students   Staff   Admin  \textbackslash{}
+0       University of Glasgow  Scotland     1451     30805  2942.0  4003.0
+1     University of Edinburgh  Scotland     1583     34275  4589.0  6107.0
+2    University of St Andrews  Scotland     1413      8984  1137.0  1576.0
+3      University of Aberdeen  Scotland     1495     14775  1086.0  1489.0
+4   University of Strathclyde  Scotland     1964     22640     NaN  3200.0
+18       University of Dundee  Scotland     1967     15915  1410.0  1805.0
+19         Cardiff University     Wales     1883     25898  3330.0  5739.0
+20     University of Stirling  Scotland     1967      9548     NaN  1872.0
+22         Swansea University     Wales     1920     20620     NaN  3290.0
+
+    Budget  Russell
+0    626.5        1
+1   1102.0        1
+2    251.2        0
+3    219.5        0
+4    304.4        0
+18   256.4        0
+19   644.8        1
+20   113.3        0
+22     NaN        0
+\end{Verbatim}
+\end{tcolorbox}
+        
+    Finally, \texttt{DataFrame} implements a
+\href{https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.query.html}{\texttt{query()}}
+method which allows us to combine multiple conditions in a single string
+in an intuitive fashion. Column names can be used directly within this
+string to put restrictions on their values.
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{30}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{c+c1}{\PYZsh{} Select institutions in England with more than 30000 students}
+\PY{n}{df}\PY{o}{.}\PY{n}{query}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Country == }\PY{l+s+s1}{\PYZdq{}}\PY{l+s+s1}{England}\PY{l+s+s1}{\PYZdq{}}\PY{l+s+s1}{ \PYZam{} Students \PYZgt{} 30000}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+
+            \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
+\prompt{Out}{outcolor}{30}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+                 Institution  Country  Founded  Students   Staff   Admin  \textbackslash{}
+6                        UCL  England     1826     41180  7700.0  5375.0
+11     King’s College London  England     1829     32895  5220.0  3485.0
+12  University of Manchester  England     2004     40250  3849.0     NaN
+14  University of Birmingham  England     1825     35445  4020.0     NaN
+17  University of Nottingham  England     1798     30798  3495.0     NaN
+
+    Budget  Russell
+6   1451.1        1
+11   902.0        1
+12  1095.4        1
+14   673.8        1
+17   656.5        1
+\end{Verbatim}
+\end{tcolorbox}
+        
 
 \hypertarget{aggregation-reduction-and-transformation}{%
 \subsection{Aggregation, reduction and
 transformation}\label{aggregation-reduction-and-transformation}}
+
+Similar to NumPy, pandas supports data aggregation and reduction
+functions such as computing sums or averages. Unlike NumPy, these
+operations can be applied to subsets of the data which have been grouped
+according to some criterion. For example, for the university data set we
+used earlier, it is straightforward to compute the average number of
+students \emph{by country}.
 
 \hypertarget{working-with-entire-dataframes}{%
 \subsubsection{Working with entire
@@ -1355,7 +1582,7 @@ The simplest way to perform data reduction is to invoke the desired
 routine on the entire \texttt{DataFrame}:
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{24}{\boxspacing}
+\prompt{In}{incolor}{31}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k}{as} \PY{n+nn}{pd}
 
@@ -1365,7 +1592,7 @@ routine on the entire \texttt{DataFrame}:
 \end{tcolorbox}
 
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
-\prompt{Out}{outcolor}{24}{\boxspacing}
+\prompt{Out}{outcolor}{31}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 Founded      1745.652174
 Students    24106.782609
@@ -1388,7 +1615,7 @@ One big advantage over NumPy is that missing values (represented by
 \texttt{np.nan}) are automatically ignored:
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{25}{\boxspacing}
+\prompt{In}{incolor}{32}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{c+c1}{\PYZsh{} mean() automatically drops 3 missing observations}
 \PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Staff}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}
@@ -1396,7 +1623,7 @@ One big advantage over NumPy is that missing values (represented by
 \end{tcolorbox}
 
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
-\prompt{Out}{outcolor}{25}{\boxspacing}
+\prompt{Out}{outcolor}{32}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 3664.25
 \end{Verbatim}
@@ -1414,7 +1641,7 @@ For example, we can easily group our universities by country using
 \href{https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.groupby.html}{\texttt{groupby()}}:
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{26}{\boxspacing}
+\prompt{In}{incolor}{33}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k}{as} \PY{n+nn}{pd}
 
@@ -1430,14 +1657,14 @@ be used to process group-specific data. To compute the group-wise
 averages, we can simply run
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{27}{\boxspacing}
+\prompt{In}{incolor}{34}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
-\PY{n}{groups}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}
+\PY{n}{groups}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{numeric\PYZus{}only}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
 \end{Verbatim}
 \end{tcolorbox}
 
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
-\prompt{Out}{outcolor}{27}{\boxspacing}
+\prompt{Out}{outcolor}{34}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
                       Founded      Students        Staff        Admin  \textbackslash{}
 Country
@@ -1460,14 +1687,14 @@ number of students for each country in our sample, we can do this as
 follows:
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{28}{\boxspacing}
+\prompt{In}{incolor}{35}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{n}{groups}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Students}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}
 \end{Verbatim}
 \end{tcolorbox}
 
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
-\prompt{Out}{outcolor}{28}{\boxspacing}
+\prompt{Out}{outcolor}{35}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 Country
 England             352558
@@ -1508,14 +1735,14 @@ Name: Students, dtype: int64
 \vspace{1em}\emph{Example: Number of elements within each group}
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{29}{\boxspacing}
+\prompt{In}{incolor}{36}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{n}{groups}\PY{o}{.}\PY{n}{size}\PY{p}{(}\PY{p}{)}       \PY{c+c1}{\PYZsh{} return number of elements in each group}
 \end{Verbatim}
 \end{tcolorbox}
 
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
-\prompt{Out}{outcolor}{29}{\boxspacing}
+\prompt{Out}{outcolor}{36}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 Country
 England             13
@@ -1529,14 +1756,14 @@ dtype: int64
 \vspace{1em}\emph{Example: Return first element of each group}
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{30}{\boxspacing}
+\prompt{In}{incolor}{37}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{n}{groups}\PY{o}{.}\PY{n}{first}\PY{p}{(}\PY{p}{)}      \PY{c+c1}{\PYZsh{} return first element in each group}
 \end{Verbatim}
 \end{tcolorbox}
 
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
-\prompt{Out}{outcolor}{30}{\boxspacing}
+\prompt{Out}{outcolor}{37}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
                                  Institution  Founded  Students   Staff  \textbackslash{}
 Country
@@ -1560,14 +1787,16 @@ on the grouped object. To illustrate, we count the number of
 universities in each country that have more than 20,000 students:
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{31}{\boxspacing}
+\prompt{In}{incolor}{38}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
+\PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+
 \PY{n}{groups}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Students}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{agg}\PY{p}{(}\PY{k}{lambda} \PY{n}{x}\PY{p}{:} \PY{n}{np}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{n}{x} \PY{o}{\PYZgt{}}\PY{o}{=} \PY{l+m+mi}{20000}\PY{p}{)}\PY{p}{)}
 \end{Verbatim}
 \end{tcolorbox}
 
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
-\prompt{Out}{outcolor}{31}{\boxspacing}
+\prompt{Out}{outcolor}{38}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 Country
 England             10
@@ -1592,7 +1821,7 @@ If we want to compute the average budget per student (in pounds), we can
 do this as follows:
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{32}{\boxspacing}
+\prompt{In}{incolor}{39}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{c+c1}{\PYZsh{} Budget is in millions of pounds, rescale by 1.0e6 to get }
 \PY{c+c1}{\PYZsh{} pounds per student}
@@ -1601,7 +1830,7 @@ do this as follows:
 \end{tcolorbox}
 
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
-\prompt{Out}{outcolor}{32}{\boxspacing}
+\prompt{Out}{outcolor}{39}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 Country
 England             36936.050239
@@ -1616,7 +1845,96 @@ dtype: float64
 never gets to see the entire chunk of data but only one column at a
 time.
 
-This section provided only a first look at pandas's
+    It is possible to apply multiple functions in a single call by passing a
+list of functions. These can be passed as strings or as callables.
+
+\vspace{1em}\emph{Example: Applying multiple functions at once}
+
+If we want to compute the mean and median number of students by country,
+we proceed as follows:
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{40}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n}{groups}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Students}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{agg}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{mean}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{median}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+
+            \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
+\prompt{Out}{outcolor}{40}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+                          mean   median
+Country
+England           27119.846154  25955.0
+Northern Ireland  18438.000000  18438.0
+Scotland          19563.142857  15915.0
+Wales             23259.000000  23259.0
+\end{Verbatim}
+\end{tcolorbox}
+        
+    Note that we could have also specified these function by passing
+references to the corresponding NumPy functions instead:
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{41}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n}{groups}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Students}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{agg}\PY{p}{(}\PY{p}{[}\PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{,} \PY{n}{np}\PY{o}{.}\PY{n}{median}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+
+            \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
+\prompt{Out}{outcolor}{41}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+                          mean   median
+Country
+England           27119.846154  25955.0
+Northern Ireland  18438.000000  18438.0
+Scotland          19563.142857  15915.0
+Wales             23259.000000  23259.0
+\end{Verbatim}
+\end{tcolorbox}
+        
+    Finally, a the following more advanced syntax allows us to create new
+column names using existing columns and some operation:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{    groups.agg(}
+\NormalTok{        new\_column\_name1}\OperatorTok{=}\NormalTok{(}\StringTok{\textquotesingle{}column\_name1\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}operation1\textquotesingle{}}\NormalTok{),}
+\NormalTok{        new\_column\_name2}\OperatorTok{=}\NormalTok{(}\StringTok{\textquotesingle{}column\_name2\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}operation2\textquotesingle{}}\NormalTok{),}
+\NormalTok{        ...}
+\NormalTok{    )}
+\end{Highlighting}
+\end{Shaded}
+
+\vspace{1em}\emph{Example: Applying multiple functions to multiple columns}
+
+The following code computes the average student numbers and the earliest
+year a university was founded in a single aggregation:
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{42}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n}{groups}\PY{o}{.}\PY{n}{agg}\PY{p}{(}
+    \PY{n}{average\PYZus{}students}\PY{o}{=}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Students}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{mean}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{,} 
+    \PY{n}{first\PYZus{}founded}\PY{o}{=}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Founded}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{first}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+
+            \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
+\prompt{Out}{outcolor}{42}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+                  average\_students  first\_founded
+Country
+England               27119.846154           1895
+Northern Ireland      18438.000000           1810
+Scotland              19563.142857           1451
+Wales                 23259.000000           1883
+\end{Verbatim}
+\end{tcolorbox}
+        
+    This section provided only a first look at pandas's
 ``split-apply-combine'' functionality implemented via \texttt{groupby}.
 See the
 \href{https://pandas.pydata.org/pandas-docs/stable/user_guide/groupby.html}{official
@@ -1637,7 +1955,7 @@ For example, for each observation we could compute the average number of
 students by the corresponding country:
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{33}{\boxspacing}
+\prompt{In}{incolor}{43}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Avg\PYZus{}Student}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{df}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Country}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{[}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Students}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{]}\PY{o}{.}\PY{n}{transform}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{mean}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
 
@@ -1647,7 +1965,7 @@ students by the corresponding country:
 \end{tcolorbox}
 
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
-\prompt{Out}{outcolor}{33}{\boxspacing}
+\prompt{Out}{outcolor}{43}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
                  Institution   Country   Avg\_Student
 0      University of Glasgow  Scotland  19563.142857
@@ -1679,7 +1997,7 @@ student differs from the average budget per student in the corresponding
 country. We could compute this using \texttt{transform()} as follows:
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{34}{\boxspacing}
+\prompt{In}{incolor}{44}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{c+c1}{\PYZsh{} Compute budget per student (multiply by 1e6 to get budget in pounds)}
 \PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Budget\PYZus{}Student}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Budget}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{/} \PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Students}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{*} \PY{l+m+mf}{1.0e6}
@@ -1693,7 +2011,7 @@ country. We could compute this using \texttt{transform()} as follows:
 \end{tcolorbox}
 
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
-\prompt{Out}{outcolor}{34}{\boxspacing}
+\prompt{Out}{outcolor}{44}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
                  Institution   Country   Budget\_Diff
 0      University of Glasgow  Scotland    804.965611
@@ -1729,7 +2047,7 @@ function (we use the data format \texttt{YYYY-MM-DD} in this section,
 but pandas also supports other date formats).
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{35}{\boxspacing}
+\prompt{In}{incolor}{45}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k}{as} \PY{n+nn}{pd}
 \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as}  \PY{n+nn}{np}
@@ -1747,7 +2065,7 @@ but pandas also supports other date formats).
 \end{tcolorbox}
 
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
-\prompt{Out}{outcolor}{35}{\boxspacing}
+\prompt{Out}{outcolor}{45}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 2022-01-01    1
 2022-01-02    2
@@ -1768,7 +2086,7 @@ want to select one specific date, we can pass it as a string to
 \texttt{.loc{[}{]}}:
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{36}{\boxspacing}
+\prompt{In}{incolor}{46}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{c+c1}{\PYZsh{} Select single observation by date}
 \PY{n}{data}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{2022\PYZhy{}01\PYZhy{}01}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
@@ -1776,7 +2094,7 @@ want to select one specific date, we can pass it as a string to
 \end{tcolorbox}
 
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
-\prompt{Out}{outcolor}{36}{\boxspacing}
+\prompt{Out}{outcolor}{46}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 1
 \end{Verbatim}
@@ -1787,7 +2105,7 @@ point (where the end point is included, as usual with label-based
 indexing in pandas):
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{37}{\boxspacing}
+\prompt{In}{incolor}{47}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{c+c1}{\PYZsh{} Select first 5 days}
 \PY{n}{data}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{2022\PYZhy{}01\PYZhy{}01}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{2022\PYZhy{}01\PYZhy{}05}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
@@ -1795,7 +2113,7 @@ indexing in pandas):
 \end{tcolorbox}
 
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
-\prompt{Out}{outcolor}{37}{\boxspacing}
+\prompt{Out}{outcolor}{47}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 2022-01-01    1
 2022-01-02    2
@@ -1815,7 +2133,7 @@ but it is much easier to specify the partial index
 includes all observations from January since no days were specified.
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{38}{\boxspacing}
+\prompt{In}{incolor}{48}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{c+c1}{\PYZsh{} Select all observations from January 2022}
 \PY{n}{data}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{2022\PYZhy{}01}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
@@ -1823,7 +2141,7 @@ includes all observations from January since no days were specified.
 \end{tcolorbox}
 
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
-\prompt{Out}{outcolor}{38}{\boxspacing}
+\prompt{Out}{outcolor}{48}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 2022-01-01     1
 2022-01-02     2
@@ -1873,7 +2191,7 @@ For example, invoking \texttt{shift(1)} creates lagged observations of
 each column in the \texttt{DataFrame}:
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{39}{\boxspacing}
+\prompt{In}{incolor}{49}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{c+c1}{\PYZsh{} Lag observations by 1 period}
 \PY{n}{data}\PY{o}{.}\PY{n}{shift}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{)}
@@ -1881,7 +2199,7 @@ each column in the \texttt{DataFrame}:
 \end{tcolorbox}
 
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
-\prompt{Out}{outcolor}{39}{\boxspacing}
+\prompt{Out}{outcolor}{49}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 2022-01-01     NaN
 2022-01-02     1.0
@@ -1907,7 +2225,7 @@ which computes the difference between adjacent observations (the period
 over which the difference is taken can be passed as a parameter).
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{40}{\boxspacing}
+\prompt{In}{incolor}{50}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{c+c1}{\PYZsh{} Compute 1\PYZhy{}period difference}
 \PY{n}{data}\PY{o}{.}\PY{n}{diff}\PY{p}{(}\PY{p}{)}
@@ -1915,7 +2233,7 @@ over which the difference is taken can be passed as a parameter).
 \end{tcolorbox}
 
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
-\prompt{Out}{outcolor}{40}{\boxspacing}
+\prompt{Out}{outcolor}{50}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 2022-01-01    NaN
 2022-01-02    1.0
@@ -1947,7 +2265,7 @@ which computes the percentage change (the relative difference) over a
 given number of periods (default: 1).
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{41}{\boxspacing}
+\prompt{In}{incolor}{51}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{c+c1}{\PYZsh{} Compute percentage change vs. previous period}
 \PY{n}{data}\PY{o}{.}\PY{n}{pct\PYZus{}change}\PY{p}{(}\PY{p}{)}
@@ -1955,7 +2273,7 @@ given number of periods (default: 1).
 \end{tcolorbox}
 
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
-\prompt{Out}{outcolor}{41}{\boxspacing}
+\prompt{Out}{outcolor}{51}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 2022-01-01         NaN
 2022-01-02    1.000000
@@ -2005,7 +2323,7 @@ an object which is very similar to the one returned by
 aggregation methods such as \texttt{mean()}:
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{42}{\boxspacing}
+\prompt{In}{incolor}{52}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{c+c1}{\PYZsh{} Resample to monthly frequency, aggregate to mean of daily observations }
 \PY{c+c1}{\PYZsh{} within each month}
@@ -2014,7 +2332,7 @@ aggregation methods such as \texttt{mean()}:
 \end{tcolorbox}
 
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
-\prompt{Out}{outcolor}{42}{\boxspacing}
+\prompt{Out}{outcolor}{52}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 2022-01-31    16.0
 2022-02-28    45.5
@@ -2031,7 +2349,7 @@ to return the last observation of each week (weeks by default start on
 Sundays):
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{43}{\boxspacing}
+\prompt{In}{incolor}{53}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{c+c1}{\PYZsh{} Return last observation of each week}
 \PY{n}{data}\PY{o}{.}\PY{n}{resample}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{W}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{o}{.}\PY{n}{last}\PY{p}{(}\PY{p}{)}
@@ -2039,7 +2357,7 @@ Sundays):
 \end{tcolorbox}
 
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
-\prompt{Out}{outcolor}{43}{\boxspacing}
+\prompt{Out}{outcolor}{53}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 2022-01-02     2
 2022-01-09     9
@@ -2076,7 +2394,7 @@ bar chart, we can directly use pandas's
 \href{https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.plot.bar.html}{\texttt{plot.bar()}}:
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{44}{\boxspacing}
+\prompt{In}{incolor}{54}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k}{as} \PY{n+nn}{pd}
 
@@ -2084,7 +2402,7 @@ bar chart, we can directly use pandas's
 \PY{n}{DATA\PYZus{}PATH} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{../data}\PY{l+s+s1}{\PYZsq{}}
 
 \PY{c+c1}{\PYZsh{} Uncomment this to load data directly from GitHub}
-\PY{c+c1}{\PYZsh{} DATA\PYZus{}PATH = \PYZsq{}https://raw.githubusercontent.com/richardfoltyn/MLFP\PYZhy{}ECON5130/main/data\PYZsq{}}
+\PY{c+c1}{\PYZsh{} DATA\PYZus{}PATH = \PYZsq{}https://raw.githubusercontent.com/richardfoltyn/python\PYZhy{}intro\PYZhy{}PGR/main/data\PYZsq{}}
 
 \PY{c+c1}{\PYZsh{} Read universities data from CSV}
 \PY{n}{df} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+sa}{f}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+si}{\PYZob{}}\PY{n}{DATA\PYZus{}PATH}\PY{l+s+si}{\PYZcb{}}\PY{l+s+s1}{/universities.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{sep}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{;}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
@@ -2098,20 +2416,20 @@ bar chart, we can directly use pandas's
 \end{tcolorbox}
 
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
-\prompt{Out}{outcolor}{44}{\boxspacing}
+\prompt{Out}{outcolor}{54}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
-<AxesSubplot:xlabel='Institution'>
+<Axes: xlabel='Institution'>
 \end{Verbatim}
 \end{tcolorbox}
         
     \begin{center}
-    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{unit06_files/unit06_103_1.pdf}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{unit06_files/unit06_125_1.pdf}
     \end{center}
     
     Alternatively, we can construct the graph using Matplotlib ourselves:
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{45}{\boxspacing}
+\prompt{In}{incolor}{55}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
 
@@ -2130,7 +2448,7 @@ bar chart, we can directly use pandas's
 \end{tcolorbox}
 
     \begin{center}
-    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{unit06_files/unit06_105_0.pdf}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{unit06_files/unit06_127_0.pdf}
     \end{center}
     
     Sometimes Matplotlib's routines directly work with pandas's data
@@ -2151,7 +2469,7 @@ should be used for the \(x\)-axis and which for the \(y\)-axis. We
 illustrate this using the US unemployment rate at annual frequency.
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{46}{\boxspacing}
+\prompt{In}{incolor}{56}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
 \PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k}{as} \PY{n+nn}{pd}
@@ -2168,14 +2486,14 @@ illustrate this using the US unemployment rate at annual frequency.
 \end{tcolorbox}
 
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
-\prompt{Out}{outcolor}{46}{\boxspacing}
+\prompt{Out}{outcolor}{56}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
-<AxesSubplot:xlabel='Year', ylabel='Unemployment rate (\%)'>
+<Axes: xlabel='Year', ylabel='Unemployment rate (\%)'>
 \end{Verbatim}
 \end{tcolorbox}
         
     \begin{center}
-    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{unit06_files/unit06_108_1.pdf}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{unit06_files/unit06_130_1.pdf}
     \end{center}
     
 \vspace{1em}\emph{Example: Creating box plots}
@@ -2186,7 +2504,7 @@ provided by pandas. We demonstrate this by plotting the distribution of
 post-ware GDP growth, inflation and the unemployment rate in the US:
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{47}{\boxspacing}
+\prompt{In}{incolor}{57}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
 \PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k}{as} \PY{n+nn}{pd}
@@ -2210,14 +2528,14 @@ post-ware GDP growth, inflation and the unemployment rate in the US:
 \end{tcolorbox}
 
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
-\prompt{Out}{outcolor}{47}{\boxspacing}
+\prompt{Out}{outcolor}{57}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
-<AxesSubplot:ylabel='Relative change'>
+<Axes: ylabel='Relative change'>
 \end{Verbatim}
 \end{tcolorbox}
         
     \begin{center}
-    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{unit06_files/unit06_110_1.pdf}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{unit06_files/unit06_132_1.pdf}
     \end{center}
     
 \vspace{1em}\emph{Example: Creating scatter plots}
@@ -2227,7 +2545,7 @@ another. To illustrate, we plot the US unemployment rate against
 inflation in any given year over the post-war period.
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{48}{\boxspacing}
+\prompt{In}{incolor}{58}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{c+c1}{\PYZsh{} Path to FRED.csv; DATA\PYZus{}PATH variable was defined above!}
 \PY{n}{filepath} \PY{o}{=} \PY{l+s+sa}{f}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+si}{\PYZob{}}\PY{n}{DATA\PYZus{}PATH}\PY{l+s+si}{\PYZcb{}}\PY{l+s+s1}{/FRED.csv}\PY{l+s+s1}{\PYZsq{}}
@@ -2238,21 +2556,22 @@ inflation in any given year over the post-war period.
 \PY{c+c1}{\PYZsh{} Compute annual inflation as growth rate of CPI}
 \PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Inflation}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{CPI}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{pct\PYZus{}change}\PY{p}{(}\PY{p}{)} \PY{o}{*} \PY{l+m+mf}{100.0}
 
-\PY{n}{df}\PY{o}{.}\PY{n}{plot}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{x}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{UNRATE}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{y}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Inflation}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{none}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} 
-    \PY{n}{edgecolor}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{steelblue}\PY{l+s+s1}{\PYZsq{}}
+\PY{n}{df}\PY{o}{.}\PY{n}{plot}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}
+    \PY{n}{x}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{UNRATE}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{y}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Inflation}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} 
+    \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{none}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{edgecolor}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{steelblue}\PY{l+s+s1}{\PYZsq{}}
 \PY{p}{)}
 \end{Verbatim}
 \end{tcolorbox}
 
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
-\prompt{Out}{outcolor}{48}{\boxspacing}
+\prompt{Out}{outcolor}{58}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
-<AxesSubplot:xlabel='UNRATE', ylabel='Inflation'>
+<Axes: xlabel='UNRATE', ylabel='Inflation'>
 \end{Verbatim}
 \end{tcolorbox}
         
     \begin{center}
-    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{unit06_files/unit06_112_1.pdf}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{unit06_files/unit06_134_1.pdf}
     \end{center}
     
     Pandas also offers the convenience function
@@ -2261,7 +2580,7 @@ which lets us easily create pairwise scatter plots for more than two
 variables:
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{49}{\boxspacing}
+\prompt{In}{incolor}{59}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{k+kn}{from} \PY{n+nn}{pandas}\PY{n+nn}{.}\PY{n+nn}{plotting} \PY{k+kn}{import} \PY{n}{scatter\PYZus{}matrix}
 
@@ -2273,17 +2592,20 @@ variables:
 
 \PY{c+c1}{\PYZsh{} Use argument diagonal=\PYZsq{}kde\PYZsq{} to plot kernel density estimate}
 \PY{c+c1}{\PYZsh{} in diagonal panels}
-\PY{n}{axes} \PY{o}{=} \PY{n}{scatter\PYZus{}matrix}\PY{p}{(}\PY{n}{df}\PY{p}{[}\PY{n}{columns}\PY{p}{]}\PY{p}{,} \PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{6}\PY{p}{,} \PY{l+m+mi}{6}\PY{p}{)}\PY{p}{,}
-    \PY{n}{diagonal}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{kde}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}     \PY{c+c1}{\PYZsh{} plot kernel density along diagonal}
-    \PY{n}{s}\PY{o}{=}\PY{l+m+mi}{70}\PY{p}{,}               \PY{c+c1}{\PYZsh{} set size of markers}
-    \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{none}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{edgecolor}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{steelblue}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} 
+\PY{n}{axes} \PY{o}{=} \PY{n}{scatter\PYZus{}matrix}\PY{p}{(}
+    \PY{n}{df}\PY{p}{[}\PY{n}{columns}\PY{p}{]}\PY{p}{,} 
+    \PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{6}\PY{p}{,} \PY{l+m+mi}{6}\PY{p}{)}\PY{p}{,}
+    \PY{n}{diagonal}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{kde}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}             \PY{c+c1}{\PYZsh{} plot kernel density along diagonal}
+    \PY{n}{s}\PY{o}{=}\PY{l+m+mi}{70}\PY{p}{,}                       \PY{c+c1}{\PYZsh{} marker size}
+    \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{none}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} 
+    \PY{n}{edgecolor}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{steelblue}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} 
     \PY{n}{alpha}\PY{o}{=}\PY{l+m+mf}{1.0}\PY{p}{,} 
 \PY{p}{)}
 \end{Verbatim}
 \end{tcolorbox}
 
     \begin{center}
-    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{unit06_files/unit06_114_0.pdf}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{unit06_files/unit06_136_0.pdf}
     \end{center}
     
     In general, the wrappers implemented in pandas are useful to get an idea
@@ -2554,13 +2876,13 @@ The solutions are also provided as Python scripts in the
 One possible implementation looks as follows:
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{50}{\boxspacing}
+\prompt{In}{incolor}{60}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k}{as} \PY{n+nn}{pd}
 
 \PY{c+c1}{\PYZsh{} Use either local or remote path to data/ directory}
 \PY{c+c1}{\PYZsh{} DATA\PYZus{}PATH = \PYZsq{}../data\PYZsq{}}
-\PY{n}{DATA\PYZus{}PATH} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{https://raw.githubusercontent.com/richardfoltyn/MLFP\PYZhy{}ECON5130/main/data}\PY{l+s+s1}{\PYZsq{}}
+\PY{n}{DATA\PYZus{}PATH} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{https://raw.githubusercontent.com/richardfoltyn/python\PYZhy{}intro\PYZhy{}PGR/main/data}\PY{l+s+s1}{\PYZsq{}}
 \PY{n}{filepath} \PY{o}{=} \PY{l+s+sa}{f}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+si}{\PYZob{}}\PY{n}{DATA\PYZus{}PATH}\PY{l+s+si}{\PYZcb{}}\PY{l+s+s1}{/FRED\PYZus{}QTR.csv}\PY{l+s+s1}{\PYZsq{}}
 
 \PY{n}{df} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{n}{filepath}\PY{p}{,} \PY{n}{sep}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{,}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{index\PYZus{}col}\PY{o}{=}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Year}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Quarter}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
@@ -2599,16 +2921,15 @@ One possible implementation looks as follows:
 \end{tcolorbox}
 
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
-\prompt{Out}{outcolor}{50}{\boxspacing}
+\prompt{Out}{outcolor}{60}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
-array([[<AxesSubplot:xlabel='Year'>, <AxesSubplot:xlabel='Year'>],
-       [<AxesSubplot:xlabel='Year'>, <AxesSubplot:xlabel='Year'>]],
-      dtype=object)
+array([[<Axes: xlabel='Year'>, <Axes: xlabel='Year'>],
+       [<Axes: xlabel='Year'>, <Axes: xlabel='Year'>]], dtype=object)
 \end{Verbatim}
 \end{tcolorbox}
         
     \begin{center}
-    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{unit06_files/unit06_124_1.pdf}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{unit06_files/unit06_146_1.pdf}
     \end{center}
     
     A few comments:
@@ -2682,13 +3003,13 @@ We then compute the decade for each year, using the fact that
 represent the 1950s.
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{51}{\boxspacing}
+\prompt{In}{incolor}{61}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k}{as} \PY{n+nn}{pd} 
 
 \PY{c+c1}{\PYZsh{} Use either local or remote path to data/ directory}
 \PY{c+c1}{\PYZsh{} DATA\PYZus{}PATH = \PYZsq{}../data\PYZsq{}}
-\PY{n}{DATA\PYZus{}PATH} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{https://raw.githubusercontent.com/richardfoltyn/MLFP\PYZhy{}ECON5130/main/data}\PY{l+s+s1}{\PYZsq{}}
+\PY{n}{DATA\PYZus{}PATH} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{https://raw.githubusercontent.com/richardfoltyn/python\PYZhy{}intro\PYZhy{}PGR/main/data}\PY{l+s+s1}{\PYZsq{}}
 \PY{n}{filepath} \PY{o}{=} \PY{l+s+sa}{f}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+si}{\PYZob{}}\PY{n}{DATA\PYZus{}PATH}\PY{l+s+si}{\PYZcb{}}\PY{l+s+s1}{/FRED\PYZus{}QTR.csv}\PY{l+s+s1}{\PYZsq{}}
 
 \PY{n}{df} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{n}{filepath}\PY{p}{,} \PY{n}{sep}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{,}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
@@ -2788,21 +3109,21 @@ have done previously. You can create the bar chart directly with pandas
 as follows:
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{52}{\boxspacing}
+\prompt{In}{incolor}{62}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{n}{df\PYZus{}avg}\PY{o}{.}\PY{n}{plot}\PY{o}{.}\PY{n}{bar}\PY{p}{(}\PY{n}{y}\PY{o}{=}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{GDP\PYZus{}growth}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Inflation}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{UNRATE}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
 \end{Verbatim}
 \end{tcolorbox}
 
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
-\prompt{Out}{outcolor}{52}{\boxspacing}
+\prompt{Out}{outcolor}{62}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
-<AxesSubplot:xlabel='Decade'>
+<Axes: xlabel='Decade'>
 \end{Verbatim}
 \end{tcolorbox}
         
     \begin{center}
-    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{unit06_files/unit06_129_1.pdf}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{unit06_files/unit06_151_1.pdf}
     \end{center}
     
     \hypertarget{solution-for-exercise-3}{%
@@ -2812,13 +3133,13 @@ We first read in the CSV file, specifying
 \texttt{\textquotesingle{};\textquotesingle{}} as the field separator:
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{53}{\boxspacing}
+\prompt{In}{incolor}{63}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k}{as} \PY{n+nn}{pd}
 
 \PY{c+c1}{\PYZsh{} Use either local or remote path to data/ directory}
 \PY{c+c1}{\PYZsh{} DATA\PYZus{}PATH = \PYZsq{}../data\PYZsq{}}
-\PY{n}{DATA\PYZus{}PATH} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{https://raw.githubusercontent.com/richardfoltyn/MLFP\PYZhy{}ECON5130/main/data}\PY{l+s+s1}{\PYZsq{}}
+\PY{n}{DATA\PYZus{}PATH} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{https://raw.githubusercontent.com/richardfoltyn/python\PYZhy{}intro\PYZhy{}PGR/main/data}\PY{l+s+s1}{\PYZsq{}}
 
 \PY{c+c1}{\PYZsh{} Load CSV file}
 \PY{n}{filepath} \PY{o}{=} \PY{l+s+sa}{f}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+si}{\PYZob{}}\PY{n}{DATA\PYZus{}PATH}\PY{l+s+si}{\PYZcb{}}\PY{l+s+s1}{/universities.csv}\PY{l+s+s1}{\PYZsq{}}
@@ -2838,7 +3159,7 @@ this by specifying the data passed to \texttt{DataFrame()} as a
 dictionary, since then we can specify the column names as keys.
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{54}{\boxspacing}
+\prompt{In}{incolor}{64}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{c+c1}{\PYZsh{} Variant 1}
 \PY{c+c1}{\PYZsh{} Compute means using apply()}
@@ -2867,7 +3188,7 @@ dictionary, since then we can specify the column names as keys.
 \end{tcolorbox}
 
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
-\prompt{Out}{outcolor}{54}{\boxspacing}
+\prompt{Out}{outcolor}{64}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
          Staff\_Student  Admin\_Student  Budget\_Student  Count
 Russell
@@ -2884,7 +3205,7 @@ and compute the means by directly calling \texttt{mean()} on the group
 object.
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{55}{\boxspacing}
+\prompt{In}{incolor}{65}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{c+c1}{\PYZsh{} Variant 2:}
 \PY{c+c1}{\PYZsh{} Compute ratios first, apply aggregation later}
@@ -2917,7 +3238,7 @@ object.
 \end{tcolorbox}
 
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
-\prompt{Out}{outcolor}{55}{\boxspacing}
+\prompt{Out}{outcolor}{65}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
          Staff\_Student  Admin\_Student  Budget\_Student  Count
 Russell
@@ -2931,7 +3252,7 @@ data is of vastly different magnitudes, we specify \texttt{sharey=False}
 so that each panel will have its own scaling on the \(y\)-axis.
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{56}{\boxspacing}
+\prompt{In}{incolor}{66}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{c+c1}{\PYZsh{} Plot results as bar charts, one panel for each variable}
 
@@ -2944,18 +3265,18 @@ so that each panel will have its own scaling on the \(y\)-axis.
 \end{tcolorbox}
 
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
-\prompt{Out}{outcolor}{56}{\boxspacing}
+\prompt{Out}{outcolor}{66}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
-array([[<AxesSubplot:title=\{'center':'Staff/Student'\}, xlabel='Russell'>,
-        <AxesSubplot:title=\{'center':'Admin/Student'\}, xlabel='Russell'>],
-       [<AxesSubplot:title=\{'center':'Budget/Student'\}, xlabel='Russell'>,
-        <AxesSubplot:title=\{'center':'Number of Univ.'\}, xlabel='Russell'>]],
+array([[<Axes: title=\{'center': 'Staff/Student'\}, xlabel='Russell'>,
+        <Axes: title=\{'center': 'Admin/Student'\}, xlabel='Russell'>],
+       [<Axes: title=\{'center': 'Budget/Student'\}, xlabel='Russell'>,
+        <Axes: title=\{'center': 'Number of Univ.'\}, xlabel='Russell'>]],
       dtype=object)
 \end{Verbatim}
 \end{tcolorbox}
         
     \begin{center}
-    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{unit06_files/unit06_137_1.pdf}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{unit06_files/unit06_159_1.pdf}
     \end{center}
     
     \hypertarget{solution-for-exercise-4}{%
@@ -2969,13 +3290,13 @@ We then group the data by \texttt{Country} and \texttt{Pre1800} and
 count the number of universities in each group using \texttt{count()}.
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{57}{\boxspacing}
+\prompt{In}{incolor}{67}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k}{as} \PY{n+nn}{pd}
 
 \PY{c+c1}{\PYZsh{} Use either local or remote path to data/ directory}
 \PY{c+c1}{\PYZsh{} DATA\PYZus{}PATH = \PYZsq{}../data\PYZsq{}}
-\PY{n}{DATA\PYZus{}PATH} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{https://raw.githubusercontent.com/richardfoltyn/MLFP\PYZhy{}ECON5130/main/data}\PY{l+s+s1}{\PYZsq{}}
+\PY{n}{DATA\PYZus{}PATH} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{https://raw.githubusercontent.com/richardfoltyn/python\PYZhy{}intro\PYZhy{}PGR/main/data}\PY{l+s+s1}{\PYZsq{}}
 
 \PY{c+c1}{\PYZsh{} Load CSV file}
 \PY{n}{filepath} \PY{o}{=} \PY{l+s+sa}{f}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+si}{\PYZob{}}\PY{n}{DATA\PYZus{}PATH}\PY{l+s+si}{\PYZcb{}}\PY{l+s+s1}{/universities.csv}\PY{l+s+s1}{\PYZsq{}}
@@ -2997,7 +3318,7 @@ count the number of universities in each group using \texttt{count()}.
 \end{tcolorbox}
 
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
-\prompt{Out}{outcolor}{57}{\boxspacing}
+\prompt{Out}{outcolor}{67}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 Country           Pre1800
 England           False      8
@@ -3026,7 +3347,7 @@ were not present in the initial \texttt{DataFrame}, such as the
 combination \texttt{(Wales,\ True)}.
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{58}{\boxspacing}
+\prompt{In}{incolor}{68}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{c+c1}{\PYZsh{} DataFrame with countries in rows, Pre\PYZhy{}1800 indicator in columns}
 
@@ -3046,7 +3367,7 @@ combination \texttt{(Wales,\ True)}.
 \end{tcolorbox}
 
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
-\prompt{Out}{outcolor}{58}{\boxspacing}
+\prompt{Out}{outcolor}{68}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 Founding year     After 1800  Before 1800
 Country
@@ -3064,7 +3385,7 @@ have to assign these objects ``pretty'' names.
 We can then generate the bar chart as follows:
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{59}{\boxspacing}
+\prompt{In}{incolor}{69}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{c+c1}{\PYZsh{} Create bar chart by country}
 \PY{n}{title} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Number of universities by founding year}\PY{l+s+s1}{\PYZsq{}}
@@ -3075,15 +3396,15 @@ We can then generate the bar chart as follows:
 \end{tcolorbox}
 
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
-\prompt{Out}{outcolor}{59}{\boxspacing}
+\prompt{Out}{outcolor}{69}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
-<AxesSubplot:title=\{'center':'Number of universities by founding year'\},
+<Axes: title=\{'center': 'Number of universities by founding year'\},
 xlabel='Country'>
 \end{Verbatim}
 \end{tcolorbox}
         
     \begin{center}
-    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{unit06_files/unit06_144_1.pdf}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{unit06_files/unit06_166_1.pdf}
     \end{center}
     
     Note how the legend title is automatically set to the column index name
@@ -3094,7 +3415,7 @@ and country names in columns in exactly the same way, but now call
 \texttt{unstack(level=0)} so that the first index level will be pivoted.
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{60}{\boxspacing}
+\prompt{In}{incolor}{70}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{c+c1}{\PYZsh{} Pivot first row index level to create separate columns for each country}
 \PY{n}{df\PYZus{}count} \PY{o}{=} \PY{n}{count}\PY{o}{.}\PY{n}{unstack}\PY{p}{(}\PY{n}{level}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{fill\PYZus{}value}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}
@@ -3110,7 +3431,7 @@ and country names in columns in exactly the same way, but now call
 \end{tcolorbox}
 
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
-\prompt{Out}{outcolor}{60}{\boxspacing}
+\prompt{Out}{outcolor}{70}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 Country        England  Northern Ireland  Scotland  Wales
 Founding year
@@ -3120,7 +3441,7 @@ Before 1800          5                 0         4      0
 \end{tcolorbox}
         
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{61}{\boxspacing}
+\prompt{In}{incolor}{71}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{c+c1}{\PYZsh{} Create bar chart by founding year}
 \PY{c+c1}{\PYZsh{} pass rot=0 to undo the rotation of x\PYZhy{}tick labels}
@@ -3130,15 +3451,15 @@ Before 1800          5                 0         4      0
 \end{tcolorbox}
 
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
-\prompt{Out}{outcolor}{61}{\boxspacing}
+\prompt{Out}{outcolor}{71}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
-<AxesSubplot:title=\{'center':'Number of universities by founding year'\},
+<Axes: title=\{'center': 'Number of universities by founding year'\},
 xlabel='Founding year'>
 \end{Verbatim}
 \end{tcolorbox}
         
     \begin{center}
-    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{unit06_files/unit06_147_1.pdf}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{unit06_files/unit06_169_1.pdf}
     \end{center}
     
     \hypertarget{solution-for-exercise-5}{%
@@ -3149,7 +3470,7 @@ we write the function that will be called by \texttt{apply()} to process
 sub-sets of the data which belong to a single decade:
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{62}{\boxspacing}
+\prompt{In}{incolor}{72}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{k}{def} \PY{n+nf}{regress\PYZus{}okun}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{p}{:}
     \PY{c+c1}{\PYZsh{} x is a DataFrame, restricted to rows for the current decade}
@@ -3226,7 +3547,7 @@ Lastly, we can call \texttt{apply()} to run the regression for each
 decade.
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{63}{\boxspacing}
+\prompt{In}{incolor}{73}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k}{as} \PY{n+nn}{pd}
 \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
@@ -3234,7 +3555,7 @@ decade.
 
 \PY{c+c1}{\PYZsh{} Use either local or remote path to data/ directory}
 \PY{c+c1}{\PYZsh{} DATA\PYZus{}PATH = \PYZsq{}../data\PYZsq{}}
-\PY{n}{DATA\PYZus{}PATH} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{https://raw.githubusercontent.com/richardfoltyn/MLFP\PYZhy{}ECON5130/main/data}\PY{l+s+s1}{\PYZsq{}}
+\PY{n}{DATA\PYZus{}PATH} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{https://raw.githubusercontent.com/richardfoltyn/python\PYZhy{}intro\PYZhy{}PGR/main/data}\PY{l+s+s1}{\PYZsq{}}
 
 \PY{c+c1}{\PYZsh{} Load CSV file}
 \PY{n}{filepath} \PY{o}{=} \PY{l+s+sa}{f}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+si}{\PYZob{}}\PY{n}{DATA\PYZus{}PATH}\PY{l+s+si}{\PYZcb{}}\PY{l+s+s1}{/FRED\PYZus{}QTR.csv}\PY{l+s+s1}{\PYZsq{}}
@@ -3270,7 +3591,7 @@ decade.
 \end{tcolorbox}
 
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
-\prompt{Out}{outcolor}{63}{\boxspacing}
+\prompt{Out}{outcolor}{73}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
            Const   GDP\_gap
 Decade
@@ -3289,7 +3610,7 @@ Decade
 data and overlays a regression line for each decade.
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{64}{\boxspacing}
+\prompt{In}{incolor}{74}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{c+c1}{\PYZsh{} Number of plots (= number of decades)}
 \PY{n}{Nplots} \PY{o}{=} \PY{n+nb}{len}\PY{p}{(}\PY{n}{df\PYZus{}reg}\PY{p}{)}
@@ -3339,14 +3660,14 @@ data and overlays a regression line for each decade.
 \end{tcolorbox}
 
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
-\prompt{Out}{outcolor}{64}{\boxspacing}
+\prompt{Out}{outcolor}{74}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 Text(0.5, 0.98, "Okun's law")
 \end{Verbatim}
 \end{tcolorbox}
         
     \begin{center}
-    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{unit06_files/unit06_153_1.pdf}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{unit06_files/unit06_175_1.pdf}
     \end{center}
     
 
