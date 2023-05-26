@@ -846,7 +846,7 @@ standard deviation, \etc of a string variable does not make sense.
 For categorical data, we can use
 \href{https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.value_counts.html}{\texttt{value\_counts()}}
 to tabulate the number of unique values of a variable. For example, the
-following code shows the number of institutions by the Russell Group
+following code shows the number of institutions by Russell Group
 membership:
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
@@ -1473,7 +1473,7 @@ or \texttt{\textbar{}} (logical or) operators:
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
 \prompt{In}{incolor}{28}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
-\PY{c+c1}{\PYZsh{} Select universities NOT In Russell Group located in Wales}
+\PY{c+c1}{\PYZsh{} Select universities NOT in Russell Group located in Wales}
 \PY{n}{df}\PY{p}{[}\PY{p}{(}\PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Russell}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{!=} \PY{l+m+mi}{1}\PY{p}{)} \PY{o}{\PYZam{}} \PY{p}{(}\PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Country}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{==} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Wales}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{]}
 \end{Verbatim}
 \end{tcolorbox}
@@ -2057,7 +2057,7 @@ but pandas also supports other date formats).
 \PY{n}{index} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{date\PYZus{}range}\PY{p}{(}\PY{n}{start}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{2022\PYZhy{}01\PYZhy{}01}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{end}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{2022\PYZhy{}03\PYZhy{}31}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{freq}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{D}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
 
 \PY{c+c1}{\PYZsh{} Use date range as index for Series with some artificial data}
-\PY{n}{data} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{Series}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{1}\PY{o}{+}\PY{n+nb}{len}\PY{p}{(}\PY{n}{index}\PY{p}{)}\PY{p}{)}\PY{p}{,} \PY{n}{index}\PY{o}{=}\PY{n}{index}\PY{p}{)}
+\PY{n}{data} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{Series}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{index}\PY{p}{)}\PY{p}{)}\PY{p}{,} \PY{n}{index}\PY{o}{=}\PY{n}{index}\PY{p}{)}
 
 \PY{c+c1}{\PYZsh{} Print first 5 observations}
 \PY{n}{data}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{l+m+mi}{5}\PY{p}{)}
@@ -2067,11 +2067,11 @@ but pandas also supports other date formats).
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
 \prompt{Out}{outcolor}{45}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
-2022-01-01    1
-2022-01-02    2
-2022-01-03    3
-2022-01-04    4
-2022-01-05    5
+2022-01-01    0
+2022-01-02    1
+2022-01-03    2
+2022-01-04    3
+2022-01-05    4
 Freq: D, dtype: int64
 \end{Verbatim}
 \end{tcolorbox}
@@ -2096,7 +2096,7 @@ want to select one specific date, we can pass it as a string to
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
 \prompt{Out}{outcolor}{46}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
-1
+0
 \end{Verbatim}
 \end{tcolorbox}
         
@@ -2115,11 +2115,11 @@ indexing in pandas):
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
 \prompt{Out}{outcolor}{47}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
-2022-01-01    1
-2022-01-02    2
-2022-01-03    3
-2022-01-04    4
-2022-01-05    5
+2022-01-01    0
+2022-01-02    1
+2022-01-03    2
+2022-01-04    3
+2022-01-05    4
 Freq: D, dtype: int64
 \end{Verbatim}
 \end{tcolorbox}
@@ -2143,37 +2143,37 @@ includes all observations from January since no days were specified.
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
 \prompt{Out}{outcolor}{48}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
-2022-01-01     1
-2022-01-02     2
-2022-01-03     3
-2022-01-04     4
-2022-01-05     5
-2022-01-06     6
-2022-01-07     7
-2022-01-08     8
-2022-01-09     9
-2022-01-10    10
-2022-01-11    11
-2022-01-12    12
-2022-01-13    13
-2022-01-14    14
-2022-01-15    15
-2022-01-16    16
-2022-01-17    17
-2022-01-18    18
-2022-01-19    19
-2022-01-20    20
-2022-01-21    21
-2022-01-22    22
-2022-01-23    23
-2022-01-24    24
-2022-01-25    25
-2022-01-26    26
-2022-01-27    27
-2022-01-28    28
-2022-01-29    29
-2022-01-30    30
-2022-01-31    31
+2022-01-01     0
+2022-01-02     1
+2022-01-03     2
+2022-01-04     3
+2022-01-05     4
+2022-01-06     5
+2022-01-07     6
+2022-01-08     7
+2022-01-09     8
+2022-01-10     9
+2022-01-11    10
+2022-01-12    11
+2022-01-13    12
+2022-01-14    13
+2022-01-15    14
+2022-01-16    15
+2022-01-17    16
+2022-01-18    17
+2022-01-19    18
+2022-01-20    19
+2022-01-21    20
+2022-01-22    21
+2022-01-23    22
+2022-01-24    23
+2022-01-25    24
+2022-01-26    25
+2022-01-27    26
+2022-01-28    27
+2022-01-29    28
+2022-01-30    29
+2022-01-31    30
 Freq: D, dtype: int64
 \end{Verbatim}
 \end{tcolorbox}
@@ -2202,16 +2202,16 @@ each column in the \texttt{DataFrame}:
 \prompt{Out}{outcolor}{49}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 2022-01-01     NaN
-2022-01-02     1.0
-2022-01-03     2.0
-2022-01-04     3.0
-2022-01-05     4.0
+2022-01-02     0.0
+2022-01-03     1.0
+2022-01-04     2.0
+2022-01-05     3.0
               {\ldots}
-2022-03-27    85.0
-2022-03-28    86.0
-2022-03-29    87.0
-2022-03-30    88.0
-2022-03-31    89.0
+2022-03-27    84.0
+2022-03-28    85.0
+2022-03-29    86.0
+2022-03-30    87.0
+2022-03-31    88.0
 Freq: D, Length: 90, dtype: float64
 \end{Verbatim}
 \end{tcolorbox}
@@ -2276,16 +2276,16 @@ given number of periods (default: 1).
 \prompt{Out}{outcolor}{51}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 2022-01-01         NaN
-2022-01-02    1.000000
-2022-01-03    0.500000
-2022-01-04    0.333333
-2022-01-05    0.250000
+2022-01-02         inf
+2022-01-03    1.000000
+2022-01-04    0.500000
+2022-01-05    0.333333
                 {\ldots}
-2022-03-27    0.011765
-2022-03-28    0.011628
-2022-03-29    0.011494
-2022-03-30    0.011364
-2022-03-31    0.011236
+2022-03-27    0.011905
+2022-03-28    0.011765
+2022-03-29    0.011628
+2022-03-30    0.011494
+2022-03-31    0.011364
 Freq: D, Length: 90, dtype: float64
 \end{Verbatim}
 \end{tcolorbox}
@@ -2334,9 +2334,9 @@ aggregation methods such as \texttt{mean()}:
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
 \prompt{Out}{outcolor}{52}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
-2022-01-31    16.0
-2022-02-28    45.5
-2022-03-31    75.0
+2022-01-31    15.0
+2022-02-28    44.5
+2022-03-31    74.0
 Freq: M, dtype: float64
 \end{Verbatim}
 \end{tcolorbox}
@@ -2359,20 +2359,20 @@ Sundays):
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
 \prompt{Out}{outcolor}{53}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
-2022-01-02     2
-2022-01-09     9
-2022-01-16    16
-2022-01-23    23
-2022-01-30    30
-2022-02-06    37
-2022-02-13    44
-2022-02-20    51
-2022-02-27    58
-2022-03-06    65
-2022-03-13    72
-2022-03-20    79
-2022-03-27    86
-2022-04-03    90
+2022-01-02     1
+2022-01-09     8
+2022-01-16    15
+2022-01-23    22
+2022-01-30    29
+2022-02-06    36
+2022-02-13    43
+2022-02-20    50
+2022-02-27    57
+2022-03-06    64
+2022-03-13    71
+2022-03-20    78
+2022-03-27    85
+2022-04-03    89
 Freq: W-SUN, dtype: int64
 \end{Verbatim}
 \end{tcolorbox}
@@ -2558,7 +2558,8 @@ inflation in any given year over the post-war period.
 
 \PY{n}{df}\PY{o}{.}\PY{n}{plot}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}
     \PY{n}{x}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{UNRATE}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{y}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Inflation}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} 
-    \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{none}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{edgecolor}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{steelblue}\PY{l+s+s1}{\PYZsq{}}
+    \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{none}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{edgecolor}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{steelblue}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+    \PY{n}{xlabel}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Unemployment rate}\PY{l+s+s1}{\PYZsq{}}
 \PY{p}{)}
 \end{Verbatim}
 \end{tcolorbox}
@@ -2566,7 +2567,7 @@ inflation in any given year over the post-war period.
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
 \prompt{Out}{outcolor}{58}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
-<Axes: xlabel='UNRATE', ylabel='Inflation'>
+<Axes: xlabel='Unemployment rate', ylabel='Inflation'>
 \end{Verbatim}
 \end{tcolorbox}
         
