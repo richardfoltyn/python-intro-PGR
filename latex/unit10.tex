@@ -1,6 +1,6 @@
 \documentclass{scrartcl}
 
-    \usepackage{jupyterlatex}
+	\usepackage{jupyterlatex}
 
     \usepackage[breakable]{tcolorbox}
     
@@ -67,7 +67,7 @@
 
     % The hyperref package gives us a pdf with properly built
     % internal navigation ('pdf bookmarks' for the table of contents,
-    % internal cross-reference links, web links for URLs, \etc)
+    % internal cross-reference links, web links for URLs, etc.)
     \usepackage{hyperref}
     % The default LaTeX title has an obnoxious amount of whitespace. By default,
     % titling removes some of it. It also provides customization options.
@@ -168,8 +168,9 @@
     \addtocounter{section}{\unitcounter}
     \addtocounter{section}{-1}
     \newcommand*{\mytitle}{Unit \unitcounter: Introduction to supervised learning}
+
+	\input{overrides-post}
     
-    \input{overrides-post}
     
     
     
@@ -388,7 +389,7 @@
 \begin{document}
     
     \maketitle
-    \tableofcontents
+	\tableofcontents
     
     
 
@@ -503,6 +504,7 @@ We generate a sample of \(N=30\) observations as follows:
 \PY{n}{x} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{linspace}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{10}\PY{p}{,} \PY{n}{N}\PY{p}{)}
 \PY{c+c1}{\PYZsh{} Normally distributed errors}
 \PY{n}{epsilon} \PY{o}{=} \PY{n}{rng}\PY{o}{.}\PY{n}{normal}\PY{p}{(}\PY{n}{scale}\PY{o}{=}\PY{l+m+mf}{0.7}\PY{p}{,} \PY{n}{size}\PY{o}{=}\PY{n}{N}\PY{p}{)}
+\PY{c+c1}{\PYZsh{} Create outcome variable}
 \PY{n}{y} \PY{o}{=} \PY{n}{alpha} \PY{o}{+} \PY{n}{beta} \PY{o}{*} \PY{n}{x} \PY{o}{+} \PY{n}{epsilon}
 \end{Verbatim}
 \end{tcolorbox}
@@ -659,7 +661,7 @@ purposes.
 \PY{n}{DATA\PYZus{}PATH} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{../data}\PY{l+s+s1}{\PYZsq{}}
 
 \PY{c+c1}{\PYZsh{} Load data directly from GitHub (for Google Colab)}
-\PY{c+c1}{\PYZsh{} DATA\PYZus{}PATH = \PYZsq{}https://raw.githubusercontent.com/richardfoltyn/MLFP\PYZhy{}ECON5130/main/data\PYZsq{}}
+\PY{c+c1}{\PYZsh{} DATA\PYZus{}PATH = \PYZsq{}https://raw.githubusercontent.com/richardfoltyn/python\PYZhy{}intro\PYZhy{}PGR/main/data\PYZsq{}}
 \end{Verbatim}
 \end{tcolorbox}
 
@@ -850,7 +852,7 @@ samples and adds the fitted line.
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
 \prompt{Out}{outcolor}{10}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
-<matplotlib.legend.Legend at 0x7f9414272d40>
+<matplotlib.legend.Legend at 0x7fca8d47ef50>
 \end{Verbatim}
 \end{tcolorbox}
         
@@ -891,7 +893,7 @@ error for each observations, \[
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
 \prompt{Out}{outcolor}{11}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
-<matplotlib.lines.Line2D at 0x7f941411a5c0>
+<matplotlib.lines.Line2D at 0x7fca8d227130>
 \end{Verbatim}
 \end{tcolorbox}
         
@@ -1037,7 +1039,7 @@ variables.
 \PY{n}{DATA\PYZus{}PATH} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{../data}\PY{l+s+s1}{\PYZsq{}}
 
 \PY{c+c1}{\PYZsh{} Load data directly from GitHub (for Google Colab)}
-\PY{c+c1}{\PYZsh{} DATA\PYZus{}PATH = \PYZsq{}https://raw.githubusercontent.com/richardfoltyn/MLFP\PYZhy{}ECON5130/main/data\PYZsq{}}
+\PY{c+c1}{\PYZsh{} DATA\PYZus{}PATH = \PYZsq{}https://raw.githubusercontent.com/richardfoltyn/python\PYZhy{}intro\PYZhy{}PGR/main/data\PYZsq{}}
 \end{Verbatim}
 \end{tcolorbox}
 
@@ -1397,10 +1399,11 @@ Pipeline(steps=[('poly', PolynomialFeatures()),
 \end{tcolorbox}
         
     In an interactive notebook, printing the \texttt{pipe} object will
-generate a nice unfoldable visualisation which contains details for each
-step. To transform and fit the model in a single call, we simply need to
-invoke the \texttt{fit()} method. For example, using the training data
-from above, we run
+generate a visualisation which contains details for each step (some
+editors such as Visual Studio Code even make this visualisation
+interactive). To transform and fit the model in a single call, we simply
+need to invoke the \texttt{fit()} method. For example, using the
+training data from above, we run
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
 \prompt{In}{incolor}{24}{\boxspacing}
@@ -1567,9 +1570,9 @@ method to perform hyperparameter tuning is
 \href{https://scikit-learn.org/stable/modules/grid_search.html}{grid
 search} which we won't cover in this unit.
 
-    \hypertarget{examle-tuning-of-the-polynomial-degree}{%
-\subsubsection{Example: Tuning of the polynomial
-degree}\label{examle-tuning-of-the-polynomial-degree}}
+    \hypertarget{example-tuning-of-the-polynomial-degree}{%
+\vspace{1em}\subsubsection{Example: Tuning of the polynomial
+degree}\label{example-tuning-of-the-polynomial-degree}}
 
 To illustrate the concept, we demonstrate the procedure outlined above
 by tuning the polynomial degree for the example covered in the previous
@@ -1669,8 +1672,8 @@ data sets and returns the array indices for each.
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
 \prompt{Out}{outcolor}{28}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
-array([ 79020.25214052,  55268.49840787,  55228.58262443,  55885.05012115,
-       437018.57190207])
+array([ 79020.25214052,  55268.49840787,  55228.58262438,  55885.05422781,
+       437077.00283378])
 \end{Verbatim}
 \end{tcolorbox}
         
@@ -1716,7 +1719,7 @@ function of the hyperparameter we want to tune.
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
 \prompt{Out}{outcolor}{30}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
-<matplotlib.lines.Line2D at 0x7f93bf656380>
+<matplotlib.lines.Line2D at 0x7fca84770070>
 \end{Verbatim}
 \end{tcolorbox}
         
@@ -1803,8 +1806,8 @@ earlier using \texttt{cross\_val\_score()}:
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
 \prompt{Out}{outcolor}{31}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
-array([ 79020.25214052,  55268.49840787,  55228.58262443,  55885.05012115,
-       437018.57190207])
+array([ 79020.25214052,  55268.49840787,  55228.58262438,  55885.05422781,
+       437077.00283378])
 \end{Verbatim}
 \end{tcolorbox}
         
@@ -2166,7 +2169,7 @@ instead of \texttt{np.linspace()}.
 \end{Verbatim}
 \end{tcolorbox}
 
-    The following plot shows each coefficients (one color corresponds to one
+    The following plot shows each coefficient (one color corresponds to one
 coefficients) for different values of \(\alpha\) on the \(x\)-axis. Note
 that the \(x\)-axis is plotted on a \(\log_{10}\) scale which allows us
 to zoom in on smaller values of \(\alpha\).
@@ -2196,7 +2199,7 @@ Text(0, 0.5, 'Coefficient value')
     
     For small \(\alpha\) (on the left) the estimated coefficients are close
 to the (standardised) OLS coefficients, but their values shrink towards
-zero as \(\alpha\) increases. For very large \(\alpha = 10^3\) the
+zero as \(\alpha\) increases. For a very large \(\alpha = 10^3\) the
 estimated coefficients are basically zero since the penalty dominates
 the sum of squared errors in the loss function.
 
@@ -2294,7 +2297,11 @@ plot the MSE as a function of \(\alpha\).
     \end{center}
     
     Now that we have identified the optimal \(\alpha\), we can re-fit the
-Ridge regression and plot the prediction from this model.
+Ridge regression and plot the prediction from this model. Note that this
+is not strictly necessary as the return value of \texttt{RidgeCV} can be
+used to do prediction based on coefficients estimated for the best
+\(\alpha\), but because \texttt{RidgeCV} does not support pipelines,
+we'd have to apply any transformations manually before doing so.
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
 \prompt{In}{incolor}{44}{\boxspacing}
@@ -2581,7 +2588,7 @@ changes the interpretation of the regularisation strength \(\alpha\)
 compared to Ridge regression. For our sample size of \(N=100\), an
 \(\alpha_{Ridge}\) used for the \texttt{Ridge} estimator approximately
 corresponds to \(\alpha_{Lasso} = \frac{\alpha}{200}\) when plugged into
-\texttt{Lasso}!
+\texttt{Lasso}.
 
     We next fit the model for different values of \(\alpha\) on the interval
 \([5 \times 10^{-3}, 1]\) where we again space the \(\alpha\) uniformly
@@ -2956,7 +2963,7 @@ transformation as illustrated by the following code:
 \PY{n}{bldg\PYZus{}uniq} \PY{o}{=} \PY{n+nb}{list}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{sort}\PY{p}{(}\PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{BuildingType}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{unique}\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{p}{)}
 
 \PY{c+c1}{\PYZsh{} Create dummy variable encoder}
-\PY{n}{enc} \PY{o}{=} \PY{n}{OneHotEncoder}\PY{p}{(}\PY{n}{categories}\PY{o}{=}\PY{p}{[}\PY{n}{bldg\PYZus{}uniq}\PY{p}{]}\PY{p}{,} \PY{n}{sparse}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}
+\PY{n}{enc} \PY{o}{=} \PY{n}{OneHotEncoder}\PY{p}{(}\PY{n}{categories}\PY{o}{=}\PY{p}{[}\PY{n}{bldg\PYZus{}uniq}\PY{p}{]}\PY{p}{,} \PY{n}{sparse\PYZus{}output}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}
 
 \PY{c+c1}{\PYZsh{} Convert string variable into binary indicator variables}
 \PY{n}{bldg\PYZus{}dummies} \PY{o}{=} \PY{n}{enc}\PY{o}{.}\PY{n}{fit\PYZus{}transform}\PY{p}{(}\PY{n}{df}\PY{p}{[}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{BuildingType}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{]}\PY{o}{.}\PY{n}{to\PYZus{}numpy}\PY{p}{(}\PY{p}{)}\PY{p}{)}
@@ -3102,7 +3109,7 @@ may not work as well with the \texttt{scikit-learn} API.
 \subsection{Optional exercises}\label{optional-exercises}}
 
     \hypertarget{exercise-1-interactions-of-explanatory-variables}{%
-\subsubsection{Exercise 1: Interactions of explanatory
+\subsubsection*{Exercise 1: Interactions of explanatory
 variables}\label{exercise-1-interactions-of-explanatory-variables}}
 
 In applied work, we frequently encounter interactions of variables,
@@ -3179,7 +3186,7 @@ assuming for the following model parameters:
 \end{enumerate}
 
     \hypertarget{exercise-2-polynomial-under--and-overfitting}{%
-\subsubsection{Exercise 2: Polynomial under- and
+\subsubsection*{Exercise 2: Polynomial under- and
 overfitting}\label{exercise-2-polynomial-under--and-overfitting}}
 
 Consider the following non-linear model, \[
@@ -3225,7 +3232,7 @@ included in the polynomial.
 implemented as \texttt{np.cos()} and \texttt{np.pi} in NumPy.
 
     \hypertarget{exercise-3-polynomial-fitting-with-scikit-learn-pipelines}{%
-\subsubsection{Exercise 3: Polynomial fitting with scikit-learn
+\subsubsection*{Exercise 3: Polynomial fitting with scikit-learn
 pipelines}\label{exercise-3-polynomial-fitting-with-scikit-learn-pipelines}}
 
 In this exercise, we explore how to simplify fitting models to
@@ -3247,7 +3254,7 @@ relationship and the predicted value for \(d=5\) on a grid of 101
 \(x\)-values that are uniformly spaced on \([0, 1]\).
 
     \hypertarget{exercise-4-optimal-polynomial-degree-with-cross-validation}{%
-\subsubsection{Exercise 4: Optimal polynomial degree with
+\subsubsection*{Exercise 4: Optimal polynomial degree with
 cross-validation}\label{exercise-4-optimal-polynomial-degree-with-cross-validation}}
 
 In the previous exercises, we fitted polynomials of varying degrees but
@@ -3312,7 +3319,7 @@ Proceed as follows:
 \end{enumerate}
 
     \hypertarget{exercise-5-automating-cross-validation-with-scikit-learn}{%
-\subsubsection{Exercise 5: Automating cross-validation with
+\subsubsection*{Exercise 5: Automating cross-validation with
 scikit-learn}\label{exercise-5-automating-cross-validation-with-scikit-learn}}
 
 In the previous exercise, we performed fitting and cross-validation
@@ -3352,7 +3359,7 @@ previous exercise, perform the following tasks:
 \end{enumerate}
 
     \hypertarget{exercise-6-optimising-hyperparameters-with-validation-curves}{%
-\subsubsection{Exercise 6: Optimising hyperparameters with validation
+\subsubsection*{Exercise 6: Optimising hyperparameters with validation
 curves}\label{exercise-6-optimising-hyperparameters-with-validation-curves}}
 
 This exercise asks you implemented an even faster way to find the
@@ -3410,7 +3417,7 @@ want to consult.
 \subsection{Solutions}\label{solutions}}
 
     \hypertarget{exercise-1-interactions-of-explanatory-variables}{%
-\subsubsection{Exercise 1: Interactions of explanatory
+\subsubsection*{Exercise 1: Interactions of explanatory
 variables}\label{exercise-1-interactions-of-explanatory-variables}}
 
     \hypertarget{creating-the-data-set}{%
@@ -3758,7 +3765,7 @@ Text(0, 0.5, '\$\textbackslash{}\textbackslash{}widehat\{y\}\$')
     \end{center}
     
     \hypertarget{exercise-2-polynomial-under--and-overfitting}{%
-\subsubsection{Exercise 2: Polynomial under- and
+\subsubsection*{Exercise 2: Polynomial under- and
 overfitting}\label{exercise-2-polynomial-under--and-overfitting}}
 
 \hypertarget{creating-and-plotting-the-sample}{%
@@ -3883,7 +3890,7 @@ polynomial becomes too flexible and responds strongly to local ``noise''
 introduced by measurement error (``overfitting'').
 
     \hypertarget{exercise-3-polynomial-fitting-with-scikit-learn-pipelines}{%
-\subsubsection{Exercise 3: Polynomial fitting with scikit-learn
+\subsubsection*{Exercise 3: Polynomial fitting with scikit-learn
 pipelines}\label{exercise-3-polynomial-fitting-with-scikit-learn-pipelines}}
 
 We create the sample in the same way as in exercise 2.
@@ -3992,7 +3999,7 @@ calling the \texttt{fit()} method of the pipeline object.
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
 \prompt{Out}{outcolor}{88}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
-<matplotlib.legend.Legend at 0x7f93be804d30>
+<matplotlib.legend.Legend at 0x7fca6641b3d0>
 \end{Verbatim}
 \end{tcolorbox}
         
@@ -4001,7 +4008,7 @@ calling the \texttt{fit()} method of the pipeline object.
     \end{center}
     
     \hypertarget{exercise-4-optimal-polynomial-degree-with-cross-validation}{%
-\subsubsection{Exercise 4: Optimal polynomial degree with
+\subsubsection*{Exercise 4: Optimal polynomial degree with
 cross-validation}\label{exercise-4-optimal-polynomial-degree-with-cross-validation}}
 
 \hypertarget{creating-and-plotting-the-sample}{%
@@ -4199,8 +4206,8 @@ average MSE and its standard deviation.
 \begin{Verbatim}[commandchars=\\\{\}]
 array([0.70734493, 0.42671672, 0.33501395, 0.23900256, 0.21559544,
        0.22029082, 0.22568436, 0.22577954, 0.22433218, 0.23387504,
-       0.23689982, 0.24623706, 0.25145758, 0.26281712, 0.27462136,
-       0.29084425])
+       0.23689982, 0.24623706, 0.25145758, 0.26281712, 0.27462137,
+       0.29084427])
 \end{Verbatim}
 \end{tcolorbox}
         
@@ -4252,7 +4259,7 @@ overfitting occurs for high values of \(d\).
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
 \prompt{Out}{outcolor}{97}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
-<matplotlib.lines.Line2D at 0x7f93be76ffd0>
+<matplotlib.lines.Line2D at 0x7fca664b8670>
 \end{Verbatim}
 \end{tcolorbox}
         
@@ -4295,7 +4302,7 @@ grid of \(x\)-values.
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
 \prompt{Out}{outcolor}{98}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
-<matplotlib.legend.Legend at 0x7f93be6b69e0>
+<matplotlib.legend.Legend at 0x7fca663c6440>
 \end{Verbatim}
 \end{tcolorbox}
         
@@ -4304,7 +4311,7 @@ grid of \(x\)-values.
     \end{center}
     
     \hypertarget{exercise-5-automating-cross-validation-with-scikit-learn}{%
-\subsubsection{Exercise 5: Automating cross-validation with
+\subsubsection*{Exercise 5: Automating cross-validation with
 scikit-learn}\label{exercise-5-automating-cross-validation-with-scikit-learn}}
 
 \hypertarget{creating-the-sample}{%
@@ -4403,8 +4410,8 @@ implemented in the previous exercise with much shorter code.
 \begin{Verbatim}[commandchars=\\\{\}]
 array([0.70734493, 0.42671672, 0.33501395, 0.23900256, 0.21559544,
        0.22029082, 0.22568436, 0.22577954, 0.22433218, 0.23387504,
-       0.23689982, 0.24623706, 0.25145758, 0.26281712, 0.27462136,
-       0.29084425])
+       0.23689982, 0.24623706, 0.25145758, 0.26281712, 0.27462137,
+       0.29084427])
 \end{Verbatim}
 \end{tcolorbox}
         
@@ -4444,7 +4451,7 @@ Polynomial degree with min. MSE: 4
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
 \prompt{Out}{outcolor}{103}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
-<matplotlib.lines.Line2D at 0x7f93be4f3d30>
+<matplotlib.lines.Line2D at 0x7fca662af700>
 \end{Verbatim}
 \end{tcolorbox}
         
@@ -4453,7 +4460,7 @@ Polynomial degree with min. MSE: 4
     \end{center}
     
     \hypertarget{exercise-6-optimising-hyperparameters-with-validation-curves}{%
-\subsubsection{Exercise 6: Optimising hyperparameters with validation
+\subsubsection*{Exercise 6: Optimising hyperparameters with validation
 curves}\label{exercise-6-optimising-hyperparameters-with-validation-curves}}
 
 \hypertarget{creating-the-sample}{%
@@ -4575,7 +4582,7 @@ Polynomial degree with min. MSE: 4
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
 \prompt{Out}{outcolor}{108}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
-<matplotlib.lines.Line2D at 0x7f93be6cba30>
+<matplotlib.lines.Line2D at 0x7fca66113d30>
 \end{Verbatim}
 \end{tcolorbox}
         
