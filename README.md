@@ -36,16 +36,16 @@ as a static PDF file. Alternatively, you can download the entire course as a
 |  9:00 - 12:15 | Lecture 1 | Introduction & Units 1-3 |
 | 13:30 - 15:00 | Lab 1 | Exercises for material covered in lecture 1 |
 | **Wednesday, 2023-05-24, Room 305AB** | |
-| 9:00 - 12:15 | Lectures 2 | Units 4-5 |
+| 9:00 - 12:15 | Lecture 2 | Units 4-5 |
 | 13:30 - 15:00 | Lab 2 | Exercises for material covered in lecture 2 |
 | **Friday, 2023-05-26, Room 305AB** | |
-| 9:00 - 12:15 | Lectures 3 | Units 6-7 |
+| 9:00 - 12:15 | Lecture 3 | Units 6-7 |
 | 13:30 - 15:00 | Lab 3 | Exercises for material covered in lecture 3 |
 | **Thursday, 2023-06-01, Room 305AB** | |
-|  9:00 - 12:15 | Lectures 4 | Units 8-10 |
+|  9:00 - 12:15 | Lecture 4 | Units 8-10 |
 | 13:30 - 15:00 | Lab 4 | Exercises for material covered in lecture 4 |
 | **Friday, 2023-06-02, Room 305AB** | |
-|  9:00 - 12:15 | Lectures 5 | Unit 11 |
+|  9:00 - 12:15 | Lecture 5 | Unit 11 |
 | 13:30 - 15:00 | Lab 5 | Exercises for material covered in lecture 5 |
 
 ## Python environment
