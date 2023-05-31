@@ -1,6 +1,6 @@
 \documentclass{scrartcl}
 
-    \usepackage{jupyterlatex}
+	\usepackage{jupyterlatex}
 
     \usepackage[breakable]{tcolorbox}
     
@@ -67,7 +67,7 @@
 
     % The hyperref package gives us a pdf with properly built
     % internal navigation ('pdf bookmarks' for the table of contents,
-    % internal cross-reference links, web links for URLs, \etc)
+    % internal cross-reference links, web links for URLs, etc.)
     \usepackage{hyperref}
     % The default LaTeX title has an obnoxious amount of whitespace. By default,
     % titling removes some of it. It also provides customization options.
@@ -168,8 +168,9 @@
     \addtocounter{section}{\unitcounter}
     \addtocounter{section}{-1}
     \newcommand*{\mytitle}{Unit \unitcounter: Introduction to unsupervised learning}
+
+	\input{overrides-post}
     
-    \input{overrides-post}
     
     
     
@@ -388,7 +389,7 @@
 \begin{document}
     
     \maketitle
-    \tableofcontents
+	\tableofcontents
     
     
 
@@ -451,7 +452,7 @@ three groups:
   \emph{Reinforcement learning}
 
   We won't be concerned with ML algorithms that fall into this category
-  in this part of the course.
+  in this course.
 \end{enumerate}
 
 
@@ -596,12 +597,12 @@ normal:
 \PY{n}{rho} \PY{o}{=} \PY{l+m+mf}{0.75}                          \PY{c+c1}{\PYZsh{} Correlation coefficient}
 \PY{n}{Nobs} \PY{o}{=} \PY{l+m+mi}{200}                          \PY{c+c1}{\PYZsh{} Sample size}
 
-
 \PY{c+c1}{\PYZsh{} Correlation matrix}
 \PY{n}{corr} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}
     \PY{p}{[}\PY{l+m+mf}{1.0}\PY{p}{,} \PY{n}{rho}\PY{p}{]}\PY{p}{,} 
     \PY{p}{[}\PY{n}{rho}\PY{p}{,} \PY{l+m+mf}{1.0}\PY{p}{]}
 \PY{p}{]}\PY{p}{)}
+
 \PY{c+c1}{\PYZsh{} Create variance\PYZhy{}covariance matrix}
 \PY{n}{vcv} \PY{o}{=} \PY{n}{sigma}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{k+kc}{None}\PY{p}{]} \PY{o}{*} \PY{n}{corr} \PY{o}{*} \PY{n}{sigma}
 
@@ -698,7 +699,7 @@ Principal component variances: [1.17607859 0.09444617]
     We next plot the principal components in the original data space (left
 panel). Moreover, the right panel shows the data rotated and rescaled so
 that each axes corresponds to a principal component. Most of the
-variation clearly occurs along the first axis!
+variation clearly occurs along the first axis.
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
 \prompt{In}{incolor}{5}{\boxspacing}
@@ -747,7 +748,7 @@ variation clearly occurs along the first axis!
 \subsubsection*{Performing PCA using
 scikit-learn}\label{performing-pca-using-scikit-learn}}
 
-Of course, in real applications we don't need to manually compute the
+In real applications we of course don't need to manually compute the
 principal components but can use a library such as \texttt{scikit-learn}
 to do it for us (see the documentation for
 \href{https://scikit-learn.org/stable/modules/generated/sklearn.decomposition.PCA.html\#sklearn.decomposition.PCA}{\texttt{PCA}}
@@ -1142,7 +1143,7 @@ principal components).
     \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{unit09_files/unit09_41_0.pdf}
     \end{center}
     
-    To see what's going in, we create a graph that plots the share of total
+    To see what's going on, we create a graph that plots the share of total
 variance captured by each component. This type of plot is called a
 \emph{scree plot} and is occasionally used to visually pin down the
 number of principal components to use.
@@ -1266,7 +1267,7 @@ Text(0.5, 0.98, 'Loadings for principal components')
 \subsection{Optional exercises}\label{optional-exercises}}
 
     \hypertarget{exercise-1-pca-of-uncorrelated-variables}{%
-\subsubsection{Exercise 1: PCA of uncorrelated
+\subsubsection*{Exercise 1: PCA of uncorrelated
 variables}\label{exercise-1-pca-of-uncorrelated-variables}}
 
     Imagine we have data \(\mathbf{X}\) with \(N=1000\) observations of a
@@ -1316,7 +1317,7 @@ distribution:
 \end{enumerate}
 
     \hypertarget{exercise-2-pca-of-quarterly-business-cycle-indicators}{%
-\subsubsection{Exercise 2: PCA of quarterly business cycle
+\subsubsection*{Exercise 2: PCA of quarterly business cycle
 indicators}\label{exercise-2-pca-of-quarterly-business-cycle-indicators}}
 
 In this exercise, we use the quarterly data from FRED on GDP, CPI and
@@ -1331,7 +1332,7 @@ data, proceed as follows:
 \PY{n}{DATA\PYZus{}PATH} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{../data}\PY{l+s+s1}{\PYZsq{}}
 
 \PY{c+c1}{\PYZsh{} Load data directly from GitHub}
-\PY{c+c1}{\PYZsh{} DATA\PYZus{}PATH = \PYZsq{}https://raw.githubusercontent.com/richardfoltyn/MLFP\PYZhy{}ECON5130/main/data\PYZsq{}}
+\PY{c+c1}{\PYZsh{} DATA\PYZus{}PATH = \PYZsq{}https://raw.githubusercontent.com/richardfoltyn/python\PYZhy{}intro\PYZhy{}PGR/main/data\PYZsq{}}
 
 \PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k}{as} \PY{n+nn}{pd}
 
@@ -1387,7 +1388,7 @@ This can be done using
 \subsection{Solutions}\label{solutions}}
 
     \hypertarget{solution-for-exercise-1}{%
-\subsubsection{Solution for exercise 1}\label{solution-for-exercise-1}}
+\subsubsection*{Solution for exercise 1}\label{solution-for-exercise-1}}
 
 We generate the random sample as instructed:
 
@@ -1504,7 +1505,7 @@ dimensionality reduction to this data set, since all original variables
 were already uncorrelated.
 
     \hypertarget{solution-for-exercise-2}{%
-\subsubsection{Solution for exercise 2}\label{solution-for-exercise-2}}
+\subsubsection*{Solution for exercise 2}\label{solution-for-exercise-2}}
 
 We first load the CSV file and keep only the relevant columns
 \texttt{GDP}, \texttt{CPI} and \texttt{UNRATE}.
@@ -1516,7 +1517,7 @@ We first load the CSV file and keep only the relevant columns
 \PY{n}{DATA\PYZus{}PATH} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{../data}\PY{l+s+s1}{\PYZsq{}}
 
 \PY{c+c1}{\PYZsh{} Load data directly from GitHub}
-\PY{c+c1}{\PYZsh{} DATA\PYZus{}PATH = \PYZsq{}https://raw.githubusercontent.com/richardfoltyn/MLFP\PYZhy{}ECON5130/main/data\PYZsq{}}
+\PY{c+c1}{\PYZsh{} DATA\PYZus{}PATH = \PYZsq{}https://raw.githubusercontent.com/richardfoltyn/python\PYZhy{}intro\PYZhy{}PGR/main/data\PYZsq{}}
 \end{Verbatim}
 \end{tcolorbox}
 
