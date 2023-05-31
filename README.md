@@ -22,9 +22,9 @@ as a static PDF file. Alternatively, you can download the entire course as a
 | 6    | Handling data with pandas | [PDF](latex/unit06.pdf) | [![Open in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/richardfoltyn/python-intro-PGR/blob/main/lectures/unit06.ipynb) |
 | 7    | Data input and output | [PDF](latex/unit07.pdf) |  [![Open in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/richardfoltyn/python-intro-PGR/blob/main/lectures/unit07.ipynb)
 | 8    | Random number generation and statistics | [PDF](latex/unit08.pdf) | [![Open in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/richardfoltyn/python-intro-PGR/blob/main/lectures/unit08.ipynb) |
-| 9    | Introduction to unsupervised learning | [PDF](latex/unit09.pdf) |  [![Open in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/richardfoltyn/python-intro-PGR/blob/main/lectures/unit09.ipynb)
-| 10   | Introduction to supervised learning | [PDF](latex/unit10.pdf) |  [![Open in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/richardfoltyn/python-intro-PGR/blob/main/lectures/unit10.ipynb)
-| 11   | Solving models for macroeconomics and household finance | TBA | TBA |
+| 9    | Introduction to unsupervised learning | [PDF](latex/unit09.pdf) |  [![Open in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/richardfoltyn/python-intro-PGR/blob/main/lectures/unit09.ipynb) |
+| 10   | Introduction to supervised learning | [PDF](latex/unit10.pdf) |  [![Open in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/richardfoltyn/python-intro-PGR/blob/main/lectures/unit10.ipynb) |
+| 11   | Solving models for macroeconomics and household finance | [PDF](latex/unit11.pdf) | [![Open in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/richardfoltyn/python-intro-PGR/blob/main/lectures/unit11.ipynb) |
 | 12   | Error handling (optional) | [PDF](latex/unit12.pdf) |  [![Open in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/richardfoltyn/python-intro-PGR/blob/main/lectures/unit12.ipynb) |
 
 
