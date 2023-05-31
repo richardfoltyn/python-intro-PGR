@@ -1,6 +1,6 @@
 \documentclass{scrartcl}
 
-    \usepackage{jupyterlatex}
+	\usepackage{jupyterlatex}
 
     \usepackage[breakable]{tcolorbox}
     
@@ -169,7 +169,7 @@
     \addtocounter{section}{-1}
     \newcommand*{\mytitle}{Unit \unitcounter: Random number generation and statistics}
 
-    \input{overrides-post}
+	\input{overrides-post}
     
     
     
@@ -389,7 +389,7 @@
 \begin{document}
     
     \maketitle
-    \tableofcontents
+	\tableofcontents
     
     
 
@@ -412,7 +412,7 @@ Currently, there are several ways to draw random numbers in Python:
 \def\labelenumi{\arabic{enumi}.}
 \item
   The \emph{new} programming interface implemented in NumPy, introduced
-  in version 1.17 (the current version as of this writing is 1.23)
+  in version 1.17 (the current version as of this writing is 1.24)
   {[}\href{https://numpy.org/doc/stable/reference/random/generator.html}{official
   documentation}{]}.
 \item
@@ -490,7 +490,7 @@ interval \([0.0, 1.0)\).
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
 \prompt{Out}{outcolor}{2}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
-array([0.12525986, 0.69195367, 0.32518172, 0.33900095, 0.79623733])
+array([0.49063218, 0.40138645, 0.47361608, 0.92928662, 0.38783081])
 \end{Verbatim}
 \end{tcolorbox}
         
@@ -603,7 +603,7 @@ array([1, 6, 3, 3, 3])
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
 \prompt{In}{incolor}{8}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
-\PY{n}{rng}\PY{o}{.}\PY{n}{random}\PY{p}{(}\PY{n}{size}\PY{o}{=}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{,} \PY{l+m+mi}{5}\PY{p}{]}\PY{p}{)}             \PY{c+c1}{\PYZsh{} Create 2x5 array of floats}
+\PY{n}{rng}\PY{o}{.}\PY{n}{random}\PY{p}{(}\PY{n}{size}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{,} \PY{l+m+mi}{5}\PY{p}{)}\PY{p}{)}             \PY{c+c1}{\PYZsh{} Create 2x5 array of floats}
                                     \PY{c+c1}{\PYZsh{} on [0.0, 1.0)}
 \end{Verbatim}
 \end{tcolorbox}
@@ -619,7 +619,7 @@ array([[0.21376296, 0.74146705, 0.6299402 , 0.92740726, 0.23190819],
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
 \prompt{In}{incolor}{9}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
-\PY{n}{rng}\PY{o}{.}\PY{n}{integers}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{,} \PY{n}{size}\PY{o}{=}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{,}\PY{l+m+mi}{4}\PY{p}{]}\PY{p}{)}       \PY{c+c1}{\PYZsh{} Create 2x3x4 array of integers \PYZob{}0,1\PYZcb{}}
+\PY{n}{rng}\PY{o}{.}\PY{n}{integers}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{,} \PY{n}{size}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{,}\PY{l+m+mi}{4}\PY{p}{)}\PY{p}{)}       \PY{c+c1}{\PYZsh{} Create 2x3x4 array of integers \PYZob{}0,1\PYZcb{}}
 \end{Verbatim}
 \end{tcolorbox}
 
@@ -636,7 +636,8 @@ array([[[1, 0, 1, 0],
 \end{Verbatim}
 \end{tcolorbox}
         
-    \textbf{Legacy interface}
+    \hypertarget{legacy-interface}{%
+\subsubsection*{Legacy interface}\label{legacy-interface}}
 
 For completeness, let's look how you would accomplish the same using the
 \emph{legacy} NumPy interface.
@@ -756,12 +757,12 @@ Text(0.5, 1.0, 'Histogram of normal draws')
 \vspace{1em}\emph{Example: Drawing from a multivariate normal distribution}
 
 To draw from the multivariate normal, we need to specify a vector of
-means \(\mu\) and the variance-covariance matrix \(\Sigma\), which we
-set to
+means \(\bm\mu\) and the variance-covariance matrix
+\(\bm\Sigma\), which we set to
 
 \[
-\mu = \begin{bmatrix} 0 \\ 1\end{bmatrix}, \qquad 
-\Sigma=\begin{bmatrix} \sigma_1^2 & \rho \sigma_1\sigma_2 \\ \rho\sigma_1\sigma_2 & \sigma_2^2\end{bmatrix}
+\bm\mu = \begin{bmatrix} 0 \\ 1\end{bmatrix}, \qquad 
+\bm\Sigma =\begin{bmatrix} \sigma_1^2 & \rho \sigma_1\sigma_2 \\ \rho\sigma_1\sigma_2 & \sigma_2^2\end{bmatrix}
 \]
 
 with \(\sigma_1 = 0.5\), \(\sigma_2 = 1.0\) and \(\rho = 0.5\). We call
@@ -891,7 +892,7 @@ distribution as follows:
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
 \prompt{Out}{outcolor}{14}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
-<matplotlib.legend.Legend at 0x7f9c87b135b0>
+<matplotlib.legend.Legend at 0x7f5f46b42b90>
 \end{Verbatim}
 \end{tcolorbox}
         
@@ -943,7 +944,7 @@ We can compute it as follows:
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
 \prompt{Out}{outcolor}{15}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
--0.7978845608028651
+-0.7978845608028654
 \end{Verbatim}
 \end{tcolorbox}
         
@@ -966,7 +967,7 @@ even need to apply the scaling factor \(\frac{1}{F(0)}\):
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
 \prompt{Out}{outcolor}{16}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
--0.7978845608028643
+-0.7978845608028654
 \end{Verbatim}
 \end{tcolorbox}
         
@@ -1054,7 +1055,7 @@ multivariate normal distribution we proceed as follows:
 \PY{n}{vcv} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{p}{[}\PY{n}{sigma1}\PY{o}{*}\PY{o}{*}\PY{l+m+mf}{2.0}\PY{p}{,} \PY{n}{cov}\PY{p}{]}\PY{p}{,}
                 \PY{p}{[}\PY{n}{cov}\PY{p}{,} \PY{n}{sigma2}\PY{o}{*}\PY{o}{*}\PY{l+m+mf}{2.0}\PY{p}{]}\PY{p}{]}\PY{p}{)}
 
-\PY{c+c1}{\PYZsh{} Draw some multivariate normal random numbers}
+\PY{c+c1}{\PYZsh{} Draw some multivariate\PYZhy{}normal random numbers}
 \PY{n}{x} \PY{o}{=} \PY{n}{rng}\PY{o}{.}\PY{n}{multivariate\PYZus{}normal}\PY{p}{(}\PY{n}{mean}\PY{o}{=}\PY{n}{mu}\PY{p}{,} \PY{n}{cov}\PY{o}{=}\PY{n}{vcv}\PY{p}{,} \PY{n}{size}\PY{o}{=}\PY{l+m+mi}{1000}\PY{p}{)}
 
 \PY{c+c1}{\PYZsh{} Compute correlation coefficient (function expects each row to }
@@ -1100,7 +1101,7 @@ distribution:
                 \PY{p}{[}\PY{l+m+mf}{0.5}\PY{p}{,} \PY{l+m+mf}{2.0}\PY{p}{,} \PY{l+m+mf}{0.7}\PY{p}{]}\PY{p}{,}
                 \PY{p}{[}\PY{l+m+mf}{0.2}\PY{p}{,} \PY{l+m+mf}{0.7}\PY{p}{,} \PY{l+m+mf}{0.5}\PY{p}{]}\PY{p}{]}\PY{p}{)}
 
-\PY{c+c1}{\PYZsh{} Draw some multivariate normal random numbers}
+\PY{c+c1}{\PYZsh{} Draw some multivariate\PYZhy{}normal random numbers}
 \PY{n}{x} \PY{o}{=} \PY{n}{rng}\PY{o}{.}\PY{n}{multivariate\PYZus{}normal}\PY{p}{(}\PY{n}{mean}\PY{o}{=}\PY{n}{mu}\PY{p}{,} \PY{n}{cov}\PY{o}{=}\PY{n}{vcv}\PY{p}{,} \PY{n}{size}\PY{o}{=}\PY{l+m+mi}{100}\PY{p}{)}
 
 \PY{c+c1}{\PYZsh{} Compute some descriptive statistics}
@@ -1179,7 +1180,7 @@ all the time. In this sense, the exercises are starting to resemble
 (simplified) real-world applications.
 
     \hypertarget{exercise-1-histograms-for-increasing-sample-sizes}{%
-\subsubsection{Exercise 1: Histograms for increasing sample
+\subsubsection*{Exercise 1: Histograms for increasing sample
 sizes}\label{exercise-1-histograms-for-increasing-sample-sizes}}
 
 In this exercise, we plot histograms against the actual PDF of a
@@ -1228,7 +1229,7 @@ Perform the following tasks:
 \end{enumerate}
 
     \hypertarget{exercise-2-moments-of-truncated-normal}{%
-\subsubsection{Exercise 2: Moments of truncated
+\subsubsection*{Exercise 2: Moments of truncated
 normal}\label{exercise-2-moments-of-truncated-normal}}
 
 In this exercise, you are asked to compute the second non-central moment
@@ -1314,7 +1315,7 @@ from scipy.stats import truncnorm
 \end{enumerate}
 
     \hypertarget{exercise-3-multi-period-asset-returns}{%
-\subsubsection{Exercise 3: Multi-period asset
+\subsubsection*{Exercise 3: Multi-period asset
 returns}\label{exercise-3-multi-period-asset-returns}}
 
 Consider an investor with initial assets \(a\) and a 2-period investment
@@ -1378,7 +1379,7 @@ Let \(a = 1\), \(\mu = 0.04\), \(\sigma = 0.16\) and \(\rho = 0.5\).
 \end{enumerate}
 
     \hypertarget{exercise-4-standard-error-and-increasing-sample-size}{%
-\subsubsection{Exercise 4: Standard error and increasing sample
+\subsubsection*{Exercise 4: Standard error and increasing sample
 size}\label{exercise-4-standard-error-and-increasing-sample-size}}
 
 Consider a setting in which we draw multiple samples indexed by \(k\)
@@ -1428,7 +1429,7 @@ distributed such that the underlying normal distribution has mean
 \end{enumerate}
 
     \hypertarget{exercise-5-the-jackknife}{%
-\subsubsection{Exercise 5: The
+\subsubsection*{Exercise 5: The
 jackknife}\label{exercise-5-the-jackknife}}
 
 We continue with the setting from exercise 4, but instead of computing
@@ -1475,7 +1476,7 @@ to get the sample mean and its standard error.
 \end{enumerate}
 
     \hypertarget{exercise-6-the-bootstrap}{%
-\subsubsection{Exercise 6: The
+\subsubsection*{Exercise 6: The
 bootstrap}\label{exercise-6-the-bootstrap}}
 
 We continue with the setting from exercises 4 and 5, but now we use the
@@ -1535,7 +1536,7 @@ The solutions are also provided as Python scripts in the
 \href{../lectures/solutions/unit08}{lectures/solutions/unit08/} folder.
 
     \hypertarget{solution-for-exercise-1}{%
-\subsubsection{Solution for exercise 1}\label{solution-for-exercise-1}}
+\subsubsection*{Solution for exercise 1}\label{solution-for-exercise-1}}
 
 In the following solution, we create a figure with six panels (axes) and
 iterate over these axes. In each iteration, we
@@ -1644,7 +1645,7 @@ array (since we requested a \(2 \times 3\) layout). We iterate over the
 loops over rows and columns.
 
     \hypertarget{solution-for-exercise-2}{%
-\subsubsection{Solution for exercise 2}\label{solution-for-exercise-2}}
+\subsubsection*{Solution for exercise 2}\label{solution-for-exercise-2}}
 
 Computing the second non-central moment using the first three methods is
 straightforward. All you need to do is to make sure that you pass the
@@ -1763,7 +1764,7 @@ the exercise can be found in the
 \href{../lectures/solutions/unit7}{solutions} folder
 
     \hypertarget{solution-for-exercise-3}{%
-\subsubsection{Solution for exercise 3}\label{solution-for-exercise-3}}
+\subsubsection*{Solution for exercise 3}\label{solution-for-exercise-3}}
 
 \textbf{Part 1}
 
@@ -1897,7 +1898,7 @@ to plot the histogram and the true PDF.
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
 \prompt{Out}{outcolor}{27}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
-<matplotlib.legend.Legend at 0x7f9c876e22c0>
+<matplotlib.legend.Legend at 0x7f5f4621d120>
 \end{Verbatim}
 \end{tcolorbox}
         
@@ -1909,7 +1910,7 @@ to plot the histogram and the true PDF.
 gross return.
 
     \hypertarget{solution-for-exercise-4}{%
-\subsubsection{Solution for exercise 4}\label{solution-for-exercise-4}}
+\subsubsection*{Solution for exercise 4}\label{solution-for-exercise-4}}
 
 We solve the exercise by iterating over all sample sizes, drawing a new
 log-normal sample and computing the sample mean and standard error.
@@ -1985,7 +1986,7 @@ which we then use the generate the plot.
     \end{center}
     
     \hypertarget{solution-for-exercise-5}{%
-\subsubsection{Solution for exercise 5}\label{solution-for-exercise-5}}
+\subsubsection*{Solution for exercise 5}\label{solution-for-exercise-5}}
 
 Much of this solution proceeds in the very same way as in exercise 4.
 Additionally,
@@ -2094,7 +2095,7 @@ estimate of the variance is in fact identical to the standard approach.
     \end{center}
     
     \hypertarget{solution-for-exercise-6}{%
-\subsubsection{Solution for exercise 6}\label{solution-for-exercise-6}}
+\subsubsection*{Solution for exercise 6}\label{solution-for-exercise-6}}
 
 We first define a function \texttt{bootstrap\_means()} which takes as
 given the initial sample, and
