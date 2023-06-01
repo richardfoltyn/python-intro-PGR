@@ -81,11 +81,12 @@ fig, axes = plot_solution(par, pfun_a.T, pfun_c.T, vfun.T)
 # Insert legend
 labels = [f'$y={y:.2f}$' for y in par.grid_y]
 axes[0].legend(labels, loc='upper left')
+
 # Optionally save graph as PDF
 # fig.savefig('solution_risk.pdf')
 
 
-#%% Solve HH problem using VFI + grid search
+#%% Solve HH problem using VFI + interpolation
 
 vfun, pfun_a = vfi_interp(par)
 
@@ -98,6 +99,7 @@ fig, axes = plot_solution(par, pfun_a.T, pfun_c.T, vfun.T)
 # Insert legend
 labels = [f'$y={y:.2f}$' for y in par.grid_y]
 axes[0].legend(labels, loc='upper left')
+
 # Optionally save graph as PDF
 # fig.savefig('solution_risk_interp.pdf')
 

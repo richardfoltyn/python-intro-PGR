@@ -456,7 +456,8 @@ given \(a\) and parameters.
 next-period values such as \(a'\) instead of writing \(t+1\) since time
 \(t\) does not play any explicit role.
 
-    \hypertarget{vfi-with-deterministic-income}{%
+
+\hypertarget{vfi-with-deterministic-income}{%
 \subsection{VFI with deterministic
 income}\label{vfi-with-deterministic-income}}
 
@@ -722,7 +723,7 @@ You can see the difference by plotting the resulting grids:
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
 \prompt{Out}{outcolor}{4}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
-<matplotlib.legend.Legend at 0x7ff6a7f3b190>
+<matplotlib.legend.Legend at 0x7fbcd4c43220>
 \end{Verbatim}
 \end{tcolorbox}
         
@@ -1167,7 +1168,8 @@ Text(0.5, 0, 'Assets')
     \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{unit11_files/unit11_31_1.pdf}
     \end{center}
     
-    \hypertarget{vfi-with-stochastic-labour-income}{%
+
+\hypertarget{vfi-with-stochastic-labour-income}{%
 \subsection{VFI with stochastic labour
 income}\label{vfi-with-stochastic-labour-income}}
 
@@ -1343,10 +1345,12 @@ distribution it returns in the vector \texttt{mu}.
 \PY{k+kn}{import} \PY{n+nn}{numpy}\PY{n+nn}{.}\PY{n+nn}{linalg}
 
 \PY{k}{def} \PY{n+nf}{markov\PYZus{}ergodic\PYZus{}dist}\PY{p}{(}\PY{n}{transm}\PY{p}{)}\PY{p}{:}
+    \PY{n}{transm} \PY{o}{=} \PY{n}{transm}\PY{o}{.}\PY{n}{transpose}\PY{p}{(}\PY{p}{)}
     \PY{n}{m} \PY{o}{=} \PY{n}{transm} \PY{o}{\PYZhy{}} \PY{n}{np}\PY{o}{.}\PY{n}{identity}\PY{p}{(}\PY{n}{transm}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}
     \PY{n}{m}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{1}
     \PY{n}{m} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{linalg}\PY{o}{.}\PY{n}{inv}\PY{p}{(}\PY{n}{m}\PY{p}{)}
     \PY{n}{mu} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{ascontiguousarray}\PY{p}{(}\PY{n}{m}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}
+    \PY{k}{assert} \PY{n}{np}\PY{o}{.}\PY{n}{abs}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{n}{mu}\PY{p}{)} \PY{o}{\PYZhy{}} \PY{l+m+mi}{1}\PY{p}{)} \PY{o}{\PYZlt{}} \PY{l+m+mf}{1e\PYZhy{}9}
     \PY{n}{mu} \PY{o}{/}\PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{n}{mu}\PY{p}{)}
     \PY{k}{return} \PY{n}{mu}
 \end{Verbatim}
@@ -1547,13 +1551,13 @@ deterministic income.
 \end{tcolorbox}
 
     \begin{Verbatim}[commandchars=\\\{\}]
-VFI: Iteration   0, dV=2.51e+00
-VFI: Iteration   1, dV=1.35e+00
-VFI: Iteration  50, dV=3.78e-02
-VFI: Iteration 100, dV=3.02e-03
-VFI: Iteration 150, dV=3.49e-04
-VFI: Iteration 200, dV=4.42e-05
-VFI: Converged after 237 iterations: dV=9.71e-06
+VFI: Iteration   0, dV=2.52e+00
+VFI: Iteration   1, dV=1.38e+00
+VFI: Iteration  50, dV=3.02e-02
+VFI: Iteration 100, dV=2.07e-03
+VFI: Iteration 150, dV=2.29e-04
+VFI: Iteration 200, dV=2.87e-05
+VFI: Converged after 226 iterations: dV=9.88e-06
     \end{Verbatim}
 
     Finally, we plot the solution for all levels of labour income. Note that
@@ -1678,7 +1682,7 @@ to interpolate over the pre-computed expected value of
 implementation.
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{24}{\boxspacing}
+\prompt{In}{incolor}{21}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{k}{def} \PY{n+nf}{vfi\PYZus{}interp}\PY{p}{(}\PY{n}{par}\PY{p}{,} \PY{n}{tol}\PY{o}{=}\PY{l+m+mf}{1e\PYZhy{}5}\PY{p}{,} \PY{n}{maxiter}\PY{o}{=}\PY{l+m+mi}{1000}\PY{p}{)}\PY{p}{:}
 
@@ -1743,7 +1747,7 @@ deterministic setting, the savings policy function returns savings
 arrays.
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{25}{\boxspacing}
+\prompt{In}{incolor}{22}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{n}{vfun}\PY{p}{,} \PY{n}{pfun\PYZus{}a} \PY{o}{=} \PY{n}{vfi\PYZus{}interp}\PY{p}{(}\PY{n}{par}\PY{p}{)}
 
@@ -1754,19 +1758,26 @@ arrays.
 \end{tcolorbox}
 
     \begin{Verbatim}[commandchars=\\\{\}]
-VFI: Iteration   0, dV=2.51e+00
-VFI: Iteration   1, dV=1.35e+00
-VFI: Iteration  50, dV=3.71e-02
-VFI: Iteration 100, dV=2.88e-03
-VFI: Iteration 150, dV=3.34e-04
-VFI: Iteration 200, dV=4.25e-05
-VFI: Converged after 236 iterations: dV=9.74e-06
+/home/richard/.conda/envs/python-intro-PGR/lib/python3.10/site-
+packages/scipy/optimize/\_optimize.py:2417: RuntimeWarning: invalid value
+encountered in scalar multiply
+  tmp2 = (x - v) * (fx - fw)
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+VFI: Iteration   0, dV=2.52e+00
+VFI: Iteration   1, dV=1.38e+00
+VFI: Iteration  50, dV=2.95e-02
+VFI: Iteration 100, dV=1.95e-03
+VFI: Iteration 150, dV=2.16e-04
+VFI: Iteration 200, dV=2.73e-05
+VFI: Converged after 225 iterations: dV=9.80e-06
     \end{Verbatim}
 
     We use the same code as above to visualise the results:
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{26}{\boxspacing}
+\prompt{In}{incolor}{23}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{n}{fig}\PY{p}{,} \PY{n}{axes} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{subplots}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{,} \PY{n}{sharex}\PY{o}{=}\PY{k+kc}{True}\PY{p}{,} \PY{n}{sharey}\PY{o}{=}\PY{k+kc}{False}\PY{p}{,} \PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{9}\PY{p}{,} \PY{l+m+mf}{3.0}\PY{p}{)}\PY{p}{)}
 
@@ -1791,7 +1802,7 @@ VFI: Converged after 236 iterations: dV=9.74e-06
 \end{tcolorbox}
 
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
-\prompt{Out}{outcolor}{26}{\boxspacing}
+\prompt{Out}{outcolor}{23}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 Text(0.5, 0, 'Assets')
 \end{Verbatim}

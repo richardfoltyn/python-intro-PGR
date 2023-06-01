@@ -57,7 +57,7 @@ fig, axes = plot_solution(par, pfun_a, pfun_c, vfun)
 # fig.savefig('solution.pdf')
 
 
-#%% Solve HH problem using VFI + grid search
+#%% Solve HH problem using VFI + interpolation
 
 vfun, pfun_a = vfi_interp(par)
 

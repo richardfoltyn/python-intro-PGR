@@ -28,8 +28,8 @@ def vfi_grid(par, tol=1e-5, maxiter=1000):
     -------
     vfun : np.ndarray
         Array containing the value function
-    pfun_sav : np.ndarray
-        Array containing the savings policy function
+    pfun_ia : np.ndarray
+        Array containing the indices of optimal next-period assets a'
     """
 
     # Keep track of time
@@ -40,7 +40,7 @@ def vfi_grid(par, tol=1e-5, maxiter=1000):
     vfun = np.zeros(shape)
     vfun_upd = np.empty(shape)
     # index of optimal savings decision
-    pfun_isav = np.empty(shape, dtype=np.uint)
+    pfun_ia = np.empty(shape, dtype=np.uint)
 
     # pre-compute cash at hand for each (asset, labour) grid point
     cah = (1 + par.r) * par.grid_a[None] + par.grid_y[:,None]
@@ -76,7 +76,7 @@ def vfi_grid(par, tol=1e-5, maxiter=1000):
                 # store results for next iteration
                 vopt = v_cand[ia_to_max]
                 vfun_upd[iy, ia] = vopt
-                pfun_isav[iy, ia] = ia_to_max
+                pfun_ia[iy, ia] = ia_to_max
 
         diff = np.max(np.abs(vfun - vfun_upd))
 
@@ -95,7 +95,7 @@ def vfi_grid(par, tol=1e-5, maxiter=1000):
         msg = f'Did not converge in {it:d} iterations'
         print(msg)
 
-    return vfun, pfun_isav
+    return vfun, pfun_ia
 
 
 def vfi_interp(par, tol=1e-5, maxiter=1000):
@@ -138,6 +138,11 @@ def vfi_interp(par, tol=1e-5, maxiter=1000):
 
             # function to interpolate continuation value
             f_vfun = lambda x: np.interp(x, par.grid_a, EV[iy])
+            # Alternative interpolation method:
+            # f_vfun = interp1d(par.grid_a, EV[iy], assume_sorted=True, 
+            #                   copy=False, bounds_error=False,
+            #                   fill_value='extrapolate',
+            #                   kind='quadratic')
 
             for ia, a in enumerate(par.grid_a):
                 # Solve maximization problem at given asset level

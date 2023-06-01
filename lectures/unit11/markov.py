@@ -77,9 +77,10 @@ def markov_ergodic_dist(transm):
     """
 
     # Check that this is a transition matrix
-    assert np.all(np.abs(transm.sum(axis=0) - 1) < 1e-12)
+    assert np.all(np.abs(transm.sum(axis=1) - 1) < 1e-12)
     assert np.all(transm >= 0.0)
 
+    transm = transm.transpose()
     m = transm - np.identity(transm.shape[0])
     m[-1] = 1
     m = np.linalg.inv(m)
