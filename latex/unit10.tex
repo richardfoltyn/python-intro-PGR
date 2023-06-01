@@ -2581,14 +2581,14 @@ different loss function than the one given above, namely \[
 L(\mu, \bm\beta) =  \frac{1}{2N}\sum_{i=1}^N \Bigl(
     y_i - \mu - \mathbf{x}_i'\bm\beta\Bigr)^2
     + 
-    \alpha \|\beta_k\|_1
+    \alpha \|\bm\beta\|_1
 \] which scales the sum of squared errors term by a factor of of
 \((2N)^{-1}\). This makes no difference for the optimisation, but
 changes the interpretation of the regularisation strength \(\alpha\)
 compared to Ridge regression. For our sample size of \(N=100\), an
 \(\alpha_{Ridge}\) used for the \texttt{Ridge} estimator approximately
-corresponds to \(\alpha_{Lasso} = \frac{\alpha}{200}\) when plugged into
-\texttt{Lasso}.
+corresponds to \(\alpha_{Lasso} = \frac{\alpha_{Ridge}}{200}\) when
+plugged into \texttt{Lasso}.
 
     We next fit the model for different values of \(\alpha\) on the interval
 \([5 \times 10^{-3}, 1]\) where we again space the \(\alpha\) uniformly
