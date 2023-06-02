@@ -723,7 +723,7 @@ You can see the difference by plotting the resulting grids:
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
 \prompt{Out}{outcolor}{4}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
-<matplotlib.legend.Legend at 0x7fbcd4c43220>
+<matplotlib.legend.Legend at 0x7ff91ed2b220>
 \end{Verbatim}
 \end{tcolorbox}
         
@@ -766,7 +766,7 @@ asset level itself.
     \PY{n}{vfun} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{n}{N\PYZus{}a}\PY{p}{)}
     \PY{n}{vfun\PYZus{}upd} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{empty}\PY{p}{(}\PY{n}{N\PYZus{}a}\PY{p}{)}
     \PY{c+c1}{\PYZsh{} index of optimal savings decision (stored in integer array!)}
-    \PY{n}{pfun\PYZus{}isav} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{empty}\PY{p}{(}\PY{n}{N\PYZus{}a}\PY{p}{,} \PY{n}{dtype}\PY{o}{=}\PY{n}{np}\PY{o}{.}\PY{n}{uint}\PY{p}{)}
+    \PY{n}{pfun\PYZus{}ia} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{empty}\PY{p}{(}\PY{n}{N\PYZus{}a}\PY{p}{,} \PY{n}{dtype}\PY{o}{=}\PY{n}{np}\PY{o}{.}\PY{n}{uint}\PY{p}{)}
 
     \PY{c+c1}{\PYZsh{} pre\PYZhy{}compute cash at hand for each asset grid point}
     \PY{n}{cah} \PY{o}{=} \PY{p}{(}\PY{l+m+mi}{1} \PY{o}{+} \PY{n}{par}\PY{o}{.}\PY{n}{r}\PY{p}{)} \PY{o}{*} \PY{n}{par}\PY{o}{.}\PY{n}{grid\PYZus{}a} \PY{o}{+} \PY{n}{par}\PY{o}{.}\PY{n}{y}
@@ -796,9 +796,9 @@ asset level itself.
             \PY{n}{ia\PYZus{}to\PYZus{}max} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{argmax}\PY{p}{(}\PY{n}{v\PYZus{}cand}\PY{p}{)}
 
             \PY{c+c1}{\PYZsh{} store results for next iteration}
-            \PY{n}{vopt} \PY{o}{=} \PY{n}{v\PYZus{}cand}\PY{p}{[}\PY{n}{ia\PYZus{}to\PYZus{}max}\PY{p}{]}
-            \PY{n}{vfun\PYZus{}upd}\PY{p}{[}\PY{n}{ia}\PY{p}{]} \PY{o}{=} \PY{n}{vopt}
-            \PY{n}{pfun\PYZus{}isav}\PY{p}{[}\PY{n}{ia}\PY{p}{]} \PY{o}{=} \PY{n}{ia\PYZus{}to\PYZus{}max}
+            \PY{n}{v\PYZus{}opt} \PY{o}{=} \PY{n}{v\PYZus{}cand}\PY{p}{[}\PY{n}{ia\PYZus{}to\PYZus{}max}\PY{p}{]}
+            \PY{n}{vfun\PYZus{}upd}\PY{p}{[}\PY{n}{ia}\PY{p}{]} \PY{o}{=} \PY{n}{v\PYZus{}opt}
+            \PY{n}{pfun\PYZus{}ia}\PY{p}{[}\PY{n}{ia}\PY{p}{]} \PY{o}{=} \PY{n}{ia\PYZus{}to\PYZus{}max}
 
         \PY{n}{diff} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{max}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{abs}\PY{p}{(}\PY{n}{vfun} \PY{o}{\PYZhy{}} \PY{n}{vfun\PYZus{}upd}\PY{p}{)}\PY{p}{)}
 
@@ -816,7 +816,7 @@ asset level itself.
         \PY{n}{msg} \PY{o}{=} \PY{l+s+sa}{f}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Did not converge in }\PY{l+s+si}{\PYZob{}}\PY{n}{it}\PY{l+s+si}{:}\PY{l+s+s1}{d}\PY{l+s+si}{\PYZcb{}}\PY{l+s+s1}{ iterations}\PY{l+s+s1}{\PYZsq{}}
         \PY{n+nb}{print}\PY{p}{(}\PY{n}{msg}\PY{p}{)}
 
-    \PY{k}{return} \PY{n}{vfun}\PY{p}{,} \PY{n}{pfun\PYZus{}isav}
+    \PY{k}{return} \PY{n}{vfun}\PY{p}{,} \PY{n}{pfun\PYZus{}ia}
 \end{Verbatim}
 \end{tcolorbox}
 
@@ -900,7 +900,7 @@ interpolation, which we turn to next.
     \hypertarget{vfi-with-interpolation}{%
 \subsubsection{VFI with interpolation}\label{vfi-with-interpolation}}
 
-In the previous section we saw how grid search can give rise to
+In the previous section, we saw how grid search can give rise to
 undesired numerical artifacts that misrepresent the solution. Moreover,
 unless our grid is extremely dense, the solution is unlikely to satisfy
 the first-order optimality conditions because the optimal \(a'\) need
@@ -1054,7 +1054,7 @@ implemented by the following function:
     \PY{n}{vfun} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{n}{N\PYZus{}a}\PY{p}{)}
     \PY{n}{vfun\PYZus{}upd} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{empty}\PY{p}{(}\PY{n}{N\PYZus{}a}\PY{p}{)}
     \PY{c+c1}{\PYZsh{} Optimal savings decision}
-    \PY{n}{pfun\PYZus{}sav} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{n}{N\PYZus{}a}\PY{p}{)}
+    \PY{n}{pfun\PYZus{}a} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{n}{N\PYZus{}a}\PY{p}{)}
 
     \PY{k}{for} \PY{n}{it} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{maxiter}\PY{p}{)}\PY{p}{:}
 
@@ -1075,7 +1075,7 @@ implemented by the following function:
             \PY{c+c1}{\PYZsh{} Minimiser returns NEGATIVE utility, revert that}
             \PY{n}{vfun\PYZus{}upd}\PY{p}{[}\PY{n}{ia}\PY{p}{]} \PY{o}{=} \PY{o}{\PYZhy{}} \PY{n}{res}\PY{o}{.}\PY{n}{fun}
             \PY{c+c1}{\PYZsh{} Store optimal savings a\PYZsq{}}
-            \PY{n}{pfun\PYZus{}sav}\PY{p}{[}\PY{n}{ia}\PY{p}{]} \PY{o}{=} \PY{n}{res}\PY{o}{.}\PY{n}{x}
+            \PY{n}{pfun\PYZus{}a}\PY{p}{[}\PY{n}{ia}\PY{p}{]} \PY{o}{=} \PY{n}{res}\PY{o}{.}\PY{n}{x}
 
         \PY{n}{diff} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{max}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{abs}\PY{p}{(}\PY{n}{vfun} \PY{o}{\PYZhy{}} \PY{n}{vfun\PYZus{}upd}\PY{p}{)}\PY{p}{)}
 
@@ -1093,7 +1093,7 @@ implemented by the following function:
         \PY{n}{msg} \PY{o}{=} \PY{l+s+sa}{f}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Did not converge in }\PY{l+s+si}{\PYZob{}}\PY{n}{it}\PY{l+s+si}{:}\PY{l+s+s1}{d}\PY{l+s+si}{\PYZcb{}}\PY{l+s+s1}{ iterations}\PY{l+s+s1}{\PYZsq{}}
         \PY{n+nb}{print}\PY{p}{(}\PY{n}{msg}\PY{p}{)}
 
-    \PY{k}{return} \PY{n}{vfun}\PY{p}{,} \PY{n}{pfun\PYZus{}sav}
+    \PY{k}{return} \PY{n}{vfun}\PY{p}{,} \PY{n}{pfun\PYZus{}a}
 \end{Verbatim}
 \end{tcolorbox}
 
@@ -1221,9 +1221,9 @@ matrix \(\Pi_y\) with typical element \[
 \Pi_y(i,j) = \text{Pr}\bigl[y_{t+1} = y_j~|~y_t = y_i\bigr]~.
 \]
 
-We use the following function to perform this mapping for us. Its
-arguments are the number of nodes of the discretized state space
-\texttt{n}, the mean of the AR(1) process \texttt{mu}, the
+We use the function \texttt{rouwenhorst()} defined below to perform this
+mapping for us. Its arguments are the number of nodes of the discretized
+state space \texttt{n}, the mean of the AR(1) process \texttt{mu}, the
 autocorrelation parameter \texttt{rho} and the conditional standard
 deviation \texttt{sigma} (see the file
 \href{../lectures/unit11/markov.py}{\texttt{lectures/unit11/markov.py}}
@@ -1475,7 +1475,7 @@ search (the code can also be found in
     \PY{n}{vfun} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{n}{shape}\PY{p}{)}
     \PY{n}{vfun\PYZus{}upd} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{empty}\PY{p}{(}\PY{n}{shape}\PY{p}{)}
     \PY{c+c1}{\PYZsh{} index of optimal savings decision}
-    \PY{n}{pfun\PYZus{}isav} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{empty}\PY{p}{(}\PY{n}{shape}\PY{p}{,} \PY{n}{dtype}\PY{o}{=}\PY{n}{np}\PY{o}{.}\PY{n}{uint}\PY{p}{)}
+    \PY{n}{pfun\PYZus{}ia} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{empty}\PY{p}{(}\PY{n}{shape}\PY{p}{,} \PY{n}{dtype}\PY{o}{=}\PY{n}{np}\PY{o}{.}\PY{n}{uint}\PY{p}{)}
 
     \PY{c+c1}{\PYZsh{} pre\PYZhy{}compute cash at hand for each (asset, labour) grid point}
     \PY{n}{cah} \PY{o}{=} \PY{p}{(}\PY{l+m+mi}{1} \PY{o}{+} \PY{n}{par}\PY{o}{.}\PY{n}{r}\PY{p}{)} \PY{o}{*} \PY{n}{par}\PY{o}{.}\PY{n}{grid\PYZus{}a}\PY{p}{[}\PY{k+kc}{None}\PY{p}{]} \PY{o}{+} \PY{n}{par}\PY{o}{.}\PY{n}{grid\PYZus{}y}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{k+kc}{None}\PY{p}{]}
@@ -1509,9 +1509,9 @@ search (the code can also be found in
                 \PY{n}{ia\PYZus{}to\PYZus{}max} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{argmax}\PY{p}{(}\PY{n}{v\PYZus{}cand}\PY{p}{)}
 
                 \PY{c+c1}{\PYZsh{} store results for next iteration}
-                \PY{n}{vopt} \PY{o}{=} \PY{n}{v\PYZus{}cand}\PY{p}{[}\PY{n}{ia\PYZus{}to\PYZus{}max}\PY{p}{]}
-                \PY{n}{vfun\PYZus{}upd}\PY{p}{[}\PY{n}{iy}\PY{p}{,} \PY{n}{ia}\PY{p}{]} \PY{o}{=} \PY{n}{vopt}
-                \PY{n}{pfun\PYZus{}isav}\PY{p}{[}\PY{n}{iy}\PY{p}{,} \PY{n}{ia}\PY{p}{]} \PY{o}{=} \PY{n}{ia\PYZus{}to\PYZus{}max}
+                \PY{n}{v\PYZus{}opt} \PY{o}{=} \PY{n}{v\PYZus{}cand}\PY{p}{[}\PY{n}{ia\PYZus{}to\PYZus{}max}\PY{p}{]}
+                \PY{n}{vfun\PYZus{}upd}\PY{p}{[}\PY{n}{iy}\PY{p}{,} \PY{n}{ia}\PY{p}{]} \PY{o}{=} \PY{n}{v\PYZus{}opt}
+                \PY{n}{pfun\PYZus{}ia}\PY{p}{[}\PY{n}{iy}\PY{p}{,} \PY{n}{ia}\PY{p}{]} \PY{o}{=} \PY{n}{ia\PYZus{}to\PYZus{}max}
 
         \PY{n}{diff} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{max}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{abs}\PY{p}{(}\PY{n}{vfun} \PY{o}{\PYZhy{}} \PY{n}{vfun\PYZus{}upd}\PY{p}{)}\PY{p}{)}
 
@@ -1529,7 +1529,7 @@ search (the code can also be found in
         \PY{n}{msg} \PY{o}{=} \PY{l+s+sa}{f}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Did not converge in }\PY{l+s+si}{\PYZob{}}\PY{n}{it}\PY{l+s+si}{:}\PY{l+s+s1}{d}\PY{l+s+si}{\PYZcb{}}\PY{l+s+s1}{ iterations}\PY{l+s+s1}{\PYZsq{}}
         \PY{n+nb}{print}\PY{p}{(}\PY{n}{msg}\PY{p}{)}
 
-    \PY{k}{return} \PY{n}{vfun}\PY{p}{,} \PY{n}{pfun\PYZus{}isav}
+    \PY{k}{return} \PY{n}{vfun}\PY{p}{,} \PY{n}{pfun\PYZus{}ia}
 \end{Verbatim}
 \end{tcolorbox}
 
@@ -1691,7 +1691,7 @@ implementation.
     \PY{n}{vfun} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{n}{shape}\PY{p}{)}
     \PY{n}{vfun\PYZus{}upd} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{empty}\PY{p}{(}\PY{n}{shape}\PY{p}{)}
     \PY{c+c1}{\PYZsh{} Optimal savings decision}
-    \PY{n}{pfun\PYZus{}sav} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{n}{shape}\PY{p}{)}
+    \PY{n}{pfun\PYZus{}a} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{n}{shape}\PY{p}{)}
 
     \PY{k}{for} \PY{n}{it} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{maxiter}\PY{p}{)}\PY{p}{:}
 
@@ -1715,11 +1715,11 @@ implementation.
                 \PY{n}{res} \PY{o}{=} \PY{n}{minimize\PYZus{}scalar}\PY{p}{(}\PY{n}{f\PYZus{}objective}\PY{p}{,} \PY{n}{bracket}\PY{o}{=}\PY{n}{bounds}\PY{p}{,} \PY{n}{args}\PY{o}{=}\PY{n}{args}\PY{p}{)}
 
                 \PY{c+c1}{\PYZsh{} Minimiser returns NEGATIVE utility, revert that}
-                \PY{n}{vopt} \PY{o}{=} \PY{o}{\PYZhy{}} \PY{n}{res}\PY{o}{.}\PY{n}{fun}
+                \PY{n}{v\PYZus{}opt} \PY{o}{=} \PY{o}{\PYZhy{}} \PY{n}{res}\PY{o}{.}\PY{n}{fun}
                 \PY{n}{sav\PYZus{}opt} \PY{o}{=} \PY{n+nb}{float}\PY{p}{(}\PY{n}{res}\PY{o}{.}\PY{n}{x}\PY{p}{)}
 
-                \PY{n}{vfun\PYZus{}upd}\PY{p}{[}\PY{n}{iy}\PY{p}{,} \PY{n}{ia}\PY{p}{]} \PY{o}{=} \PY{n}{vopt}
-                \PY{n}{pfun\PYZus{}sav}\PY{p}{[}\PY{n}{iy}\PY{p}{,} \PY{n}{ia}\PY{p}{]} \PY{o}{=} \PY{n}{sav\PYZus{}opt}
+                \PY{n}{vfun\PYZus{}upd}\PY{p}{[}\PY{n}{iy}\PY{p}{,} \PY{n}{ia}\PY{p}{]} \PY{o}{=} \PY{n}{v\PYZus{}opt}
+                \PY{n}{pfun\PYZus{}a}\PY{p}{[}\PY{n}{iy}\PY{p}{,} \PY{n}{ia}\PY{p}{]} \PY{o}{=} \PY{n}{sav\PYZus{}opt}
 
         \PY{n}{diff} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{max}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{abs}\PY{p}{(}\PY{n}{vfun} \PY{o}{\PYZhy{}} \PY{n}{vfun\PYZus{}upd}\PY{p}{)}\PY{p}{)}
 
@@ -1737,7 +1737,7 @@ implementation.
         \PY{n}{msg} \PY{o}{=} \PY{l+s+sa}{f}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Did not converge in }\PY{l+s+si}{\PYZob{}}\PY{n}{it}\PY{l+s+si}{:}\PY{l+s+s1}{d}\PY{l+s+si}{\PYZcb{}}\PY{l+s+s1}{ iterations}\PY{l+s+s1}{\PYZsq{}}
         \PY{n+nb}{print}\PY{p}{(}\PY{n}{msg}\PY{p}{)}
 
-    \PY{k}{return} \PY{n}{vfun}\PY{p}{,} \PY{n}{pfun\PYZus{}sav}
+    \PY{k}{return} \PY{n}{vfun}\PY{p}{,} \PY{n}{pfun\PYZus{}a}
 \end{Verbatim}
 \end{tcolorbox}
 
@@ -1823,6 +1823,324 @@ therefore optimal to consume all such ``excess'' savings, which gives
 rise to the increase in consumption at the right end of the asset grid.
 We could address this problem by allowing extrapolation, but linear
 extrapolation of value functions is undesirable for other reasons.
+
+
+\hypertarget{egm-with-stochastic-labour-income}{%
+\subsection{EGM with stochastic labour
+income}\label{egm-with-stochastic-labour-income}}
+
+While value function iteration is a robust and long-established method
+to solve dynamic problems, it tends to be slow when combined with
+interpolation, while it produces numerical artifacts when combined with
+grid search. The endogenous grid-point method (EGM) due to Carroll
+(2005) addresses both the issue of speed and at the same time produces
+smooth and accurate solutions.
+
+To fix ideas, let's revisit the stochastic labour income we studied
+above: \[
+\begin{aligned}
+V(y,a) = &\max_{c,\,a'}~\Bigl\{ u(c)
+    + \beta \mathbb{E}\bigl[\left.V(y',a')~\right|~ y\bigr] \Bigr\} \\
+    \text{s.t.} \quad &c + a' = (1+r)a  + y \\
+    & c \geq 0,\; a' \geq 0
+\end{aligned}
+\] The optimality conditions for this problem are the standard Euler
+equation combined with the budget constraint: \[
+\begin{aligned}
+c^{-\gamma} &= \beta (1+r) \mathbb{E}\left[\left.(c')^{-\gamma}\right| y\right] \\
+c + a' &= (1+r)a + y
+\end{aligned}
+\] So far, we haven't used the Euler equation at all, but it can be
+leveraged to invert the problem and speed up the solution. Suppose that
+instead of trying to determine the optimal savings level \(a'\) for an
+exogenously given beginning-of-period asset level \(a\), we ask the
+following: if we exogenously impose that the household optimally saves
+\(a'\), what is the beginning-of-period asset level \(a\) that
+rationalizes this savings choice given the household's optimality
+conditions?
+
+    To answer this question, assume we have a guess for the consumption
+policy function \(C(y,a)\); for example, we could initially impose that
+the household chooses to consume everything, \ie \(C(y,a) = a\). For a
+given \(a'\), from the Euler equation we know that \[
+(c^*)^{-\gamma} = \beta (1+r) \mathbb{E}\left[ \left.C(y',a')^{-\gamma}~\right|~y \right]
+\] where we use the notation \(c^*\) to indicate that this consumption
+level is a function of the exogenously imposed \(a'\). Consequently,
+optimal consumption today must be given by \[
+c^* = \Bigl( \beta (1+r) \mathbb{E}\left[ \left.C(y',a')^{-\gamma}~\right|~y \right] \Bigr)^{-\frac{1}{\gamma}}
+\] With \(c^*\) and \(a'\) in hand, the only unknown in the budget
+constraint are the beginning-of-period assets \(a^*\) which we again
+denote using \(*\) to stress that it is a function of the exogenous
+\(a'\): \[
+a^* = \frac{c^* + a' - y}{1+r}
+\] Note that the beginning-of-period assets \(a^*\) thus arise
+\emph{endogenously} as a function of the exogenously-imposed optimal
+savings \(a'\), hence the name \emph{endogenous} grid-point method.
+
+To summarize, every point on the exogenous savings
+\(\Gamma_{a'} = \{a'_1, a'_2, \dots, a'_{N_{a'}}\}\) gives rise to an
+endogenous tuple of values \((c^*, a^*)\). After applying this procedure
+to all \(N_{a'}\) exogenous savings levels, we have the collection of
+values \((c_i^*)_{i=1}^{N_{a'}}\) and \((a_i^*)_{i=1}^{N_{a'}}\). We are
+usually not interested in characterising the solution to the household
+problem as a function of the endogenous grid of
+\(\{a^*_1,a^*_2,\dots\}\), so the final step is to use these points to
+interpolate the consumption policy function back onto our standard
+beginning-of-period asset grid
+\(\Gamma_a = \{a_1, a_2, \dots, a_{N_a}\}\). This yields an updated
+consumption policy function \(C(y,a)\) mapping \(a\) into \(c\) which we
+can use in the next iteration.
+
+    \hypertarget{outline-of-the-algorithm}{%
+\subsubsection*{Outline of the algorithm}\label{outline-of-the-algorithm}}
+
+To solve the household problem with stochastic labour income with EGM,
+we proceed as follows:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Create an asset grid \(\Gamma_a = (a_1, \dots, a_{N_a})\) and
+  optionally and exogenous savings grid
+  \(\Gamma_{a'} = (a_1', \dots, a'_{N_{a'}})\). For simplicity we use
+  the same grid for both purposes.
+\item
+  Create a discretised labour income process with states
+  \(\Gamma_y = (y_1, \dots, y_{N_y})\) and transition matrix \(\Pi_y\).
+\item
+  Pick an initial guess \(C_0(y,a)\) for the consumption policy function
+  defined on \(\Gamma_y \times \Gamma_a\). One possibility is to assume
+  that \(C_0(y,a) = a\).
+\item
+  In iteration \(n\), perform the following steps:
+
+  For each labour income \(y_i\) at index \(i\),
+
+  \begin{enumerate}
+  \def\labelenumii{\arabic{enumii}.}
+  \tightlist
+  \item
+    Compute the vector of \emph{expected marginal utilities} for all
+    points \(a'_j\) on the exogenous savings grid with typical element
+    \[m_{ij} \equiv \mathbb{E}\left[\left.C_n\left(y',a'_j\right)^{-\gamma}~\right|~y_i \right]\]
+  \item
+    Invert the Euler equation to get a vector of today's consumption
+    levels, \[
+    c^*_{ij} = \bigl[ \beta (1+r) m_{ij} \bigr]^{-\frac{1}{\gamma}}
+    \]
+  \item
+    Use the budget constraint to find the vector of required
+    beginning-of-period asset levels \[
+    a_{ij}^* = \frac{c_{ij}^* + a'_j - y_i}{1+r}
+    \]
+  \item
+    Use the collection of values \((a_{ij})_{j=1}^{N_{a'}}\) and
+    \((c_{ij})_{j=1}^{N_{a'}}\) to interpolate optimal consumption onto
+    the beginning-of-period asset grid \(\Gamma_a\). This yields an
+    updated guess for \(C_{n+1}(y_i,a)\).
+  \item
+    Finally, note that the Euler equation only holds for \emph{interior}
+    solutions but does not hold when the household is borrowing
+    constraint. The endogenous grid point \(a_{i1}^*\) associated with
+    the first savings grid-point \(a'_{1} = 0\) exactly identifies the
+    beginning-of-period asset level at which the household is no longer
+    borrowing constraint. For all asset levels below this point, we know
+    that the household will choose not to save, so we set
+    \[C_{n+1}(y_i,a) = (1+r)a + y_i \quad \forall a < a_{i1}^*\]
+  \end{enumerate}
+\item
+  Check for convergence: If \(\|C_n-C_{n+1}\| < \epsilon\), for some
+  small tolerance \(\epsilon > 0\), exit the algorithm.
+\end{enumerate}
+
+    \hypertarget{implementing-egm-with-stochastic-labour-income}{%
+\subsubsection*{Implementing EGM with stochastic labour
+income}\label{implementing-egm-with-stochastic-labour-income}}
+
+The \texttt{lectures/unit11} folder contains two EGM implementations,
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \href{../lectures/unit11/EGM.py}{\texttt{lectures/unit11/EGM.py}}:
+  implements infinite-horizon EGM for the problem with deterministic
+  labour income;
+\item
+  \href{../lectures/unit11/EGM_risk.py}{\texttt{lectures/unit11/EGM\_risk.py}}:
+  implements infinite-horizon EGM for the problem with stochastic labour
+  income.
+\end{enumerate}
+
+Setting up the problem is identical to the case of VFI, see
+\href{../lectures/unit11/main.py}{\texttt{lectures/unit11/main.py}} for
+the problem with deterministic labour and
+\href{../lectures/unit11/main_risk.py}{\texttt{lectures/unit11/main\_risk.py}}
+for the stochastic version. For completeness, the implementation is
+shown below. Note that here we use SciPy's interpolation routine
+\href{https://docs.scipy.org/doc/scipy/reference/generated/scipy.interpolate.interp1d.html}{\texttt{interp1d()}}
+since it supports extrapolation, unlike its NumPy counterpart
+\href{https://numpy.org/doc/stable/reference/generated/numpy.interp.html}{\texttt{np.interp()}}.
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{24}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{k+kn}{from} \PY{n+nn}{scipy}\PY{n+nn}{.}\PY{n+nn}{interpolate} \PY{k+kn}{import} \PY{n}{interp1d} 
+
+\PY{k}{def} \PY{n+nf}{egm}\PY{p}{(}\PY{n}{par}\PY{p}{,} \PY{n}{tol}\PY{o}{=}\PY{l+m+mf}{1.0e\PYZhy{}8}\PY{p}{,} \PY{n}{maxiter}\PY{o}{=}\PY{l+m+mi}{10000}\PY{p}{)}\PY{p}{:}
+
+    \PY{n}{N\PYZus{}a}\PY{p}{,} \PY{n}{N\PYZus{}y} \PY{o}{=} \PY{n+nb}{len}\PY{p}{(}\PY{n}{par}\PY{o}{.}\PY{n}{grid\PYZus{}a}\PY{p}{)}\PY{p}{,} \PY{n+nb}{len}\PY{p}{(}\PY{n}{par}\PY{o}{.}\PY{n}{grid\PYZus{}y}\PY{p}{)}
+    \PY{n}{shape} \PY{o}{=} \PY{p}{(}\PY{n}{N\PYZus{}y}\PY{p}{,} \PY{n}{N\PYZus{}a}\PY{p}{)}
+
+    \PY{c+c1}{\PYZsh{} Cash\PYZhy{}at\PYZhy{}hand at every asset/savings level}
+    \PY{n}{cah} \PY{o}{=} \PY{p}{(}\PY{l+m+mf}{1.0} \PY{o}{+} \PY{n}{par}\PY{o}{.}\PY{n}{r}\PY{p}{)} \PY{o}{*} \PY{n}{par}\PY{o}{.}\PY{n}{grid\PYZus{}a}\PY{p}{[}\PY{k+kc}{None}\PY{p}{]} \PY{o}{+} \PY{n}{par}\PY{o}{.}\PY{n}{grid\PYZus{}y}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{k+kc}{None}\PY{p}{]}
+
+    \PY{c+c1}{\PYZsh{} Initial guess for consumption policy function}
+    \PY{n}{pfun\PYZus{}c} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{copy}\PY{p}{(}\PY{n}{cah}\PY{p}{)}
+    \PY{n}{pfun\PYZus{}c\PYZus{}upd} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{n}{shape}\PY{p}{)}
+
+    \PY{c+c1}{\PYZsh{} Extract parameters from par object}
+    \PY{n}{beta}\PY{p}{,} \PY{n}{gamma}\PY{p}{,} \PY{n}{r} \PY{o}{=} \PY{n}{par}\PY{o}{.}\PY{n}{beta}\PY{p}{,} \PY{n}{par}\PY{o}{.}\PY{n}{gamma}\PY{p}{,} \PY{n}{par}\PY{o}{.}\PY{n}{r}
+
+    \PY{k}{for} \PY{n}{it} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{maxiter}\PY{p}{)}\PY{p}{:}
+
+        \PY{c+c1}{\PYZsh{} Iterate over all labour income states}
+        \PY{k}{for} \PY{n}{iy}\PY{p}{,} \PY{n}{y} \PY{o+ow}{in} \PY{n+nb}{enumerate}\PY{p}{(}\PY{n}{par}\PY{o}{.}\PY{n}{grid\PYZus{}y}\PY{p}{)}\PY{p}{:}
+
+            \PY{c+c1}{\PYZsh{} Expected marginal utility tomorrow}
+            \PY{n}{mu} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{dot}\PY{p}{(}\PY{n}{par}\PY{o}{.}\PY{n}{tm\PYZus{}y}\PY{p}{[}\PY{n}{iy}\PY{p}{]}\PY{p}{,} \PY{n}{pfun\PYZus{}c}\PY{o}{*}\PY{o}{*}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{n}{gamma}\PY{p}{)}\PY{p}{)}
+            \PY{c+c1}{\PYZsh{} Compute right\PYZhy{}hand side of Euler equation (EE)}
+            \PY{n}{ee\PYZus{}rhs} \PY{o}{=} \PY{n}{beta} \PY{o}{*} \PY{p}{(}\PY{l+m+mf}{1.0} \PY{o}{+} \PY{n}{r}\PY{p}{)} \PY{o}{*} \PY{n}{mu}
+
+            \PY{c+c1}{\PYZsh{} Invert EE to get consumption as a function of savings today}
+            \PY{n}{cons\PYZus{}sav} \PY{o}{=} \PY{n}{ee\PYZus{}rhs}\PY{o}{*}\PY{o}{*}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mf}{1.0}\PY{o}{/}\PY{n}{gamma}\PY{p}{)}
+
+            \PY{c+c1}{\PYZsh{} Use budget constraint to get beginning\PYZhy{}of\PYZhy{}period assets}
+            \PY{n}{assets\PYZus{}sav} \PY{o}{=} \PY{p}{(}\PY{n}{cons\PYZus{}sav} \PY{o}{+} \PY{n}{par}\PY{o}{.}\PY{n}{grid\PYZus{}a} \PY{o}{\PYZhy{}} \PY{n}{y}\PY{p}{)} \PY{o}{/} \PY{p}{(}\PY{l+m+mf}{1.0} \PY{o}{+} \PY{n}{r}\PY{p}{)}
+
+            \PY{c+c1}{\PYZsh{} Interpolate back onto exogenous savings grid}
+            \PY{n}{f\PYZus{}cons} \PY{o}{=} \PY{n}{interp1d}\PY{p}{(}
+                \PY{n}{assets\PYZus{}sav}\PY{p}{,} \PY{n}{cons\PYZus{}sav}\PY{p}{,} 
+                \PY{n}{copy}\PY{o}{=}\PY{k+kc}{False}\PY{p}{,} \PY{n}{assume\PYZus{}sorted}\PY{o}{=}\PY{k+kc}{True}\PY{p}{,}
+                \PY{n}{bounds\PYZus{}error}\PY{o}{=}\PY{k+kc}{False}\PY{p}{,} \PY{n}{fill\PYZus{}value}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{extrapolate}\PY{l+s+s1}{\PYZsq{}}
+            \PY{p}{)}
+            \PY{n}{pfun\PYZus{}c\PYZus{}upd}\PY{p}{[}\PY{n}{iy}\PY{p}{]} \PY{o}{=} \PY{n}{f\PYZus{}cons}\PY{p}{(}\PY{n}{par}\PY{o}{.}\PY{n}{grid\PYZus{}a}\PY{p}{)}
+
+            \PY{c+c1}{\PYZsh{} Fix consumption in region where HH does not save}
+            \PY{n}{amin} \PY{o}{=} \PY{n}{assets\PYZus{}sav}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+            \PY{n}{idx} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{where}\PY{p}{(}\PY{n}{par}\PY{o}{.}\PY{n}{grid\PYZus{}a} \PY{o}{\PYZlt{}}\PY{o}{=} \PY{n}{amin}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+            \PY{c+c1}{\PYZsh{} HH consumes entire cash\PYZhy{}at\PYZhy{}hand}
+            \PY{n}{pfun\PYZus{}c\PYZus{}upd}\PY{p}{[}\PY{n}{iy}\PY{p}{,} \PY{n}{idx}\PY{p}{]} \PY{o}{=} \PY{n}{cah}\PY{p}{[}\PY{n}{iy}\PY{p}{,} \PY{n}{idx}\PY{p}{]}
+
+        \PY{c+c1}{\PYZsh{} Make sure that consumption policy satisfies constraints}
+        \PY{k}{assert} \PY{n}{np}\PY{o}{.}\PY{n}{all}\PY{p}{(}\PY{n}{pfun\PYZus{}c\PYZus{}upd} \PY{o}{\PYZgt{}}\PY{o}{=} \PY{l+m+mf}{0.0}\PY{p}{)} \PY{o+ow}{and} \PY{n}{np}\PY{o}{.}\PY{n}{all}\PY{p}{(}\PY{n}{pfun\PYZus{}c\PYZus{}upd} \PY{o}{\PYZlt{}}\PY{o}{=} \PY{n}{cah}\PY{p}{)}
+
+        \PY{c+c1}{\PYZsh{} Compute max. absolute difference to policy function from previous}
+        \PY{c+c1}{\PYZsh{} iteration.}
+        \PY{n}{diff} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{max}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{abs}\PY{p}{(}\PY{n}{pfun\PYZus{}c} \PY{o}{\PYZhy{}} \PY{n}{pfun\PYZus{}c\PYZus{}upd}\PY{p}{)}\PY{p}{)}
+
+        \PY{c+c1}{\PYZsh{} switch references to policy functions for next iteration}
+        \PY{n}{pfun\PYZus{}c}\PY{p}{,} \PY{n}{pfun\PYZus{}c\PYZus{}upd} \PY{o}{=} \PY{n}{pfun\PYZus{}c\PYZus{}upd}\PY{p}{,} \PY{n}{pfun\PYZus{}c}
+
+        \PY{k}{if} \PY{n}{diff} \PY{o}{\PYZlt{}} \PY{n}{tol}\PY{p}{:}
+            \PY{c+c1}{\PYZsh{} Convergence achieved, exit loop}
+            \PY{n}{msg} \PY{o}{=} \PY{l+s+sa}{f}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{EGM: Converged after }\PY{l+s+si}{\PYZob{}}\PY{n}{it}\PY{l+s+si}{:}\PY{l+s+s1}{d}\PY{l+s+si}{\PYZcb{}}\PY{l+s+s1}{ iterations: d(c)=}\PY{l+s+si}{\PYZob{}}\PY{n}{diff}\PY{l+s+si}{:}\PY{l+s+s1}{4.2e}\PY{l+s+si}{\PYZcb{}}\PY{l+s+s1}{\PYZsq{}}
+            \PY{n+nb}{print}\PY{p}{(}\PY{n}{msg}\PY{p}{)}
+            \PY{k}{break}
+        \PY{k}{elif} \PY{n}{it} \PY{o}{==} \PY{l+m+mi}{1} \PY{o+ow}{or} \PY{n}{it} \PY{o}{\PYZpc{}} \PY{l+m+mi}{50} \PY{o}{==} \PY{l+m+mi}{0}\PY{p}{:}
+            \PY{n}{msg} \PY{o}{=} \PY{l+s+sa}{f}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{EGM: Iteration }\PY{l+s+si}{\PYZob{}}\PY{n}{it}\PY{l+s+si}{:}\PY{l+s+s1}{4d}\PY{l+s+si}{\PYZcb{}}\PY{l+s+s1}{, dV=}\PY{l+s+si}{\PYZob{}}\PY{n}{diff}\PY{l+s+si}{:}\PY{l+s+s1}{4.2e}\PY{l+s+si}{\PYZcb{}}\PY{l+s+s1}{\PYZsq{}}
+            \PY{n+nb}{print}\PY{p}{(}\PY{n}{msg}\PY{p}{)}
+    \PY{k}{else}\PY{p}{:}
+        \PY{n}{msg} \PY{o}{=} \PY{l+s+sa}{f}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Did not converge in }\PY{l+s+si}{\PYZob{}}\PY{n}{it}\PY{l+s+si}{:}\PY{l+s+s1}{d}\PY{l+s+si}{\PYZcb{}}\PY{l+s+s1}{ iterations}\PY{l+s+s1}{\PYZsq{}}
+        \PY{n+nb}{print}\PY{p}{(}\PY{n}{msg}\PY{p}{)}
+
+    \PY{n}{pfun\PYZus{}a} \PY{o}{=} \PY{n}{cah} \PY{o}{\PYZhy{}} \PY{n}{pfun\PYZus{}c}
+
+    \PY{k}{return} \PY{n}{pfun\PYZus{}a}\PY{p}{,} \PY{n}{pfun\PYZus{}c}
+\end{Verbatim}
+\end{tcolorbox}
+
+    The following code runs and plots the results. It assumes that the
+parameters have been initialised as shown in the previous sections. Note
+that the EGM method does not return the value function since it is not
+needed for the algorithm. Once the policy functions have been computed,
+it is however possible to construction the value function from these by
+iteration (without having to perform maximisation since we already know
+the optimal choices).
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{25}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{c+c1}{\PYZsh{} Run EGM, store savings and consumption policy functions.}
+\PY{n}{pfun\PYZus{}a}\PY{p}{,} \PY{n}{pfun\PYZus{}c} \PY{o}{=} \PY{n}{egm}\PY{p}{(}\PY{n}{par}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+EGM: Iteration    0, dV=5.13e+00
+EGM: Iteration    1, dV=1.73e+00
+EGM: Iteration   50, dV=4.54e-03
+EGM: Iteration  100, dV=3.29e-04
+EGM: Iteration  150, dV=2.47e-05
+EGM: Iteration  200, dV=1.88e-06
+EGM: Iteration  250, dV=1.44e-07
+EGM: Iteration  300, dV=1.10e-08
+EGM: Converged after 302 iterations: d(c)=9.95e-09
+    \end{Verbatim}
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{26}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{c+c1}{\PYZsh{} Visualise the EGM solution}
+\PY{n}{fig}\PY{p}{,} \PY{n}{axes} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{subplots}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{,} \PY{n}{sharex}\PY{o}{=}\PY{k+kc}{True}\PY{p}{,} \PY{n}{sharey}\PY{o}{=}\PY{k+kc}{False}\PY{p}{,} \PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mf}{6.5}\PY{p}{,} \PY{l+m+mf}{3.0}\PY{p}{)}\PY{p}{)}
+
+\PY{c+c1}{\PYZsh{} Plot savings in first column}
+\PY{n}{axes}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{par}\PY{o}{.}\PY{n}{grid\PYZus{}a}\PY{p}{,} \PY{n}{pfun\PYZus{}a}\PY{o}{.}\PY{n}{T}\PY{p}{)}
+\PY{n}{axes}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{.}\PY{n}{set\PYZus{}title}\PY{p}{(}\PY{l+s+sa}{r}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Savings \PYZdl{}a\PYZca{}}\PY{l+s+s1}{\PYZob{}}\PY{l+s+s1}{\PYZbs{}}\PY{l+s+s1}{prime\PYZcb{}\PYZdl{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\PY{n}{axes}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{.}\PY{n}{set\PYZus{}xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Assets}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\PY{c+c1}{\PYZsh{} Insert legend}
+\PY{n}{labels} \PY{o}{=} \PY{p}{[}\PY{l+s+sa}{f}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZdl{}y=}\PY{l+s+si}{\PYZob{}}\PY{n}{y}\PY{l+s+si}{:}\PY{l+s+s1}{.2f}\PY{l+s+si}{\PYZcb{}}\PY{l+s+s1}{\PYZdl{}}\PY{l+s+s1}{\PYZsq{}} \PY{k}{for} \PY{n}{y} \PY{o+ow}{in} \PY{n}{par}\PY{o}{.}\PY{n}{grid\PYZus{}y}\PY{p}{]}
+\PY{n}{axes}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{n}{labels}\PY{p}{,} \PY{n}{loc}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{upper left}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+
+\PY{c+c1}{\PYZsh{} Plot consumption in second column}
+\PY{n}{axes}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{par}\PY{o}{.}\PY{n}{grid\PYZus{}a}\PY{p}{,} \PY{n}{pfun\PYZus{}c}\PY{o}{.}\PY{n}{T}\PY{p}{)}
+\PY{n}{axes}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{.}\PY{n}{set\PYZus{}title}\PY{p}{(}\PY{l+s+sa}{r}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Consumption \PYZdl{}c\PYZdl{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\PY{n}{axes}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{.}\PY{n}{set\PYZus{}xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Assets}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+
+            \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
+\prompt{Out}{outcolor}{26}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+Text(0.5, 0, 'Assets')
+\end{Verbatim}
+\end{tcolorbox}
+        
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{unit11_files/unit11_68_1.pdf}
+    \end{center}
+    
+    We close this section with a comment on the relative run time of the
+methods we have studied above to solve the problem with stochastic
+labour income. The following table shows the relative run times of each
+solution method, with the run time for VFI with grid search normalised
+to one. The problem is solved on 50 asset grid points and risky labour
+income is discretised to three grid points.
+
+\begin{longtable}[]{@{}ll@{}}
+\toprule
+Method & Relative run time\tabularnewline
+\midrule
+\endhead
+VFI + grid search & 1.00\tabularnewline
+VFI + linear interp. & 22.01\tabularnewline
+EGM & 0.21\tabularnewline
+\bottomrule
+\end{longtable}
+
+As you can see, EGM is not only more accurate but also 5 times faster
+than VFI with grid search, and 100 times faster than VFI with linear
+interpolation which on top yields worse results.
 
 
     % Add a bibliography block to the postdoc
