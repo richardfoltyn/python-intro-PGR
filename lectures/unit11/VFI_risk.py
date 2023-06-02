@@ -90,7 +90,7 @@ def vfi_grid(par, tol=1e-5, maxiter=1000):
 
         if diff < tol:
             td = perf_counter() - t0
-            msg = f'VFI: Converged after {it:3d} iterations ({td:.2f} sec.): dV={diff:4.2e}'
+            msg = f'VFI: Converged after {it:3d} iterations ({td:.3f} sec.): dV={diff:4.2e}'
             print(msg)
             break
         elif it == 1 or it % 10 == 0:
@@ -174,7 +174,7 @@ def vfi_interp(par, tol=1e-5, maxiter=1000):
 
         if diff < tol:
             td = perf_counter() - t0
-            msg = f'VFI: Converged after {it:3d} iterations ({td:.2f} sec.): dV={diff:4.2e}'
+            msg = f'VFI: Converged after {it:3d} iterations ({td:.3f} sec.): dV={diff:4.2e}'
             print(msg)
             break
         elif it == 1 or it % 10 == 0:

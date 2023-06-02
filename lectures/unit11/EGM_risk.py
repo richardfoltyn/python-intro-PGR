@@ -93,7 +93,7 @@ def egm(par, tol=1.0e-8, maxiter=10000):
         if diff < tol:
             # Convergence achieved, exit loop
             td = perf_counter() - t0
-            msg = f'EGM: Converged after {it:d} iterations ({td:.2f} sec.): ' \
+            msg = f'EGM: Converged after {it:d} iterations ({td:.3f} sec.): ' \
                   f'd(c)={diff:4.2e}'
             print(msg)
             break
