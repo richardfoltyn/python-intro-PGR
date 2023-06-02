@@ -10,7 +10,7 @@ Author: Richard Foltyn, University of Glasgow
 This introductory course consists of several units. Each unit corresponds
 to one interactive Jupyter notebook, which is also available
 as a static PDF file. Alternatively, you can download the entire course as a 
-**[single PDF](latex/python-intro-PGR.pdf)**.
+**[single PDF](raw/main/latex/python-intro-PGR.pdf)**.
 
 | Unit | Title | PDF | Google Colab |
 |------|-------|-----|--------------|
