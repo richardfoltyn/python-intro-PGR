@@ -1,3 +1,11 @@
+"""
+Helper routines to approximate AR(1) with Markov chains.
+
+Introduction to Python Programming for Economics & Finance, 2023
+University of Glasgow
+
+Author: Richard Foltyn
+"""
 
 import numpy as np
 

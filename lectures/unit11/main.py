@@ -1,6 +1,11 @@
 """
 Main script to solve household problem with deterministic labour income,
 using either VFI + grid search or VFI + interpolation.
+
+Introduction to Python Programming for Economics & Finance, 2023
+University of Glasgow
+
+Author: Richard Foltyn
 """
 
 #%% Imports and definitions
@@ -10,6 +15,7 @@ import numpy as np
 from dataclasses import dataclass
 
 from VFI import vfi_grid, vfi_interp
+from EGM import egm
 from plots import plot_solution
 
 #%% Create model parameters
@@ -53,8 +59,9 @@ pfun_c = cah - pfun_a
 
 # Plot results
 fig, axes = plot_solution(par, pfun_a, pfun_c, vfun)
+
 # Optionally save graph as PDF
-# fig.savefig('solution.pdf')
+# fig.savefig('solution_vfi.pdf')
 
 
 #%% Solve HH problem using VFI + interpolation
@@ -67,6 +74,16 @@ pfun_c = cah - pfun_a
 
 # Plot results
 fig, axes = plot_solution(par, pfun_a, pfun_c, vfun)
-# Optionally save graph as PDF
-# fig.savefig('solution_interp.pdf')
 
+# Optionally save graph as PDF
+# fig.savefig('solution_vfi_interp.pdf')
+
+#%% Solve HH problem using EGM
+
+pfun_a, pfun_c = egm(par)
+
+# Plot results
+fig, axes = plot_solution(par, pfun_a, pfun_c)
+
+# Optionally save graph as PDF
+# fig.savefig('solution_egm.pdf')

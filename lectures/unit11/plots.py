@@ -1,3 +1,12 @@
+"""
+Common plotting routines
+
+Introduction to Python Programming for Economics & Finance, 2023
+University of Glasgow
+
+Author: Richard Foltyn
+"""
+
 
 import matplotlib.pyplot as plt
 import numpy as np
@@ -42,7 +51,7 @@ def plot_solution(par, pfun_a, pfun_c, vfun=None, xlim=None):
         imax = np.where(par.grid_a > xlim[-1])[0][0] + 1
         xvalues = par.grid_a[:imax]
     else:
-        imax = vfun.shape[-1]
+        imax = len(par.grid_a)
         xvalues = par.grid_a
         
     # Common style settings
@@ -61,29 +70,28 @@ def plot_solution(par, pfun_a, pfun_c, vfun=None, xlim=None):
         'color': 'black'
     }
 
-    # Plot savings in first column
-    axes[0].plot(xvalues, pfun_a[..., :imax], **style)
+    # Plot savings
+    axes[0].plot(xvalues, pfun_a[..., :imax].T, **style)
     axes[0].set_title(r'Savings $a^{\prime}$')
     axes[0].set_xlabel('Assets')
     axes[0].set_xlim(xlim)
     axes[0].grid(**grid)
     
-    # Plot consumption in second column
-    axes[1].plot(xvalues, pfun_c[..., :imax], **style)
+    # Plot consumption
+    axes[1].plot(xvalues, pfun_c[..., :imax].T, **style)
     axes[1].set_title(r'Consumption $c$')
     axes[1].set_xlabel('Assets')
     axes[1].set_xlim(xlim)
     axes[1].grid(**grid)
 
-    # Plot value function in 3rd column, if present
+    # Plot value function, if present
     if vfun is not None:    
-        axes[2].plot(xvalues, vfun[..., :imax], **style)
+        axes[2].plot(xvalues, vfun[..., :imax].T, **style)
         axes[2].set_title('Value func. $V$')
         axes[2].set_xlabel('Assets')
         axes[2].set_xlim(xlim)
         axes[2].grid(**grid)
 
-    
     fig.tight_layout()
 
     return fig, axes

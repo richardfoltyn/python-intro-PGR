@@ -1,5 +1,10 @@
 """
 Implementation of VFI algorithms with deterministic labour income.
+
+Introduction to Python Programming for Economics & Finance, 2023
+University of Glasgow
+
+Author: Richard Foltyn
 """
 
 import numpy as np
@@ -27,8 +32,8 @@ def vfi_grid(par, tol=1e-5, maxiter=1000):
     -------
     vfun : np.ndarray
         Array containing the value function
-    pfun_sav : np.ndarray
-        Array containing the savings policy function
+    pfun_ia : np.ndarray
+        Array containing the indices of optimal next-period assets a'
     """
 
     # Keep track of time
@@ -38,7 +43,7 @@ def vfi_grid(par, tol=1e-5, maxiter=1000):
     vfun = np.zeros(N_a)
     vfun_upd = np.empty(N_a)
     # index of optimal savings decision (stored in integer array!)
-    pfun_isav = np.empty(N_a, dtype=np.uint)
+    pfun_ia = np.empty(N_a, dtype=np.uint)
 
     # pre-compute cash at hand for each asset grid point
     cah = (1 + par.r) * par.grid_a + par.y
@@ -67,10 +72,12 @@ def vfi_grid(par, tol=1e-5, maxiter=1000):
             # find the 'candidate' a' which maximizes utility
             ia_to_max = np.argmax(v_cand)
 
-            # store results for next iteration
+            # Maximised utility V(a)
             vopt = v_cand[ia_to_max]
+
+            # store results for next iteration
             vfun_upd[ia] = vopt
-            pfun_isav[ia] = ia_to_max
+            pfun_ia[ia] = ia_to_max
 
         diff = np.max(np.abs(vfun - vfun_upd))
 
@@ -79,7 +86,7 @@ def vfi_grid(par, tol=1e-5, maxiter=1000):
 
         if diff < tol:
             td = perf_counter() - t0
-            msg = f'VFI: Converged after {it:3d} iterations ({td:.1f} sec.): dV={diff:4.2e}'
+            msg = f'VFI: Converged after {it:3d} iterations ({td:.2f} sec.): dV={diff:4.2e}'
             print(msg)
             break
         elif it == 1 or it % 10 == 0:
@@ -89,7 +96,7 @@ def vfi_grid(par, tol=1e-5, maxiter=1000):
         msg = f'Did not converge in {it:d} iterations'
         print(msg)
 
-    return vfun, pfun_isav
+    return vfun, pfun_ia
 
 
 def vfi_interp(par, kind='linear', tol=1e-5, maxiter=1000):
@@ -112,8 +119,8 @@ def vfi_interp(par, kind='linear', tol=1e-5, maxiter=1000):
     -------
     vfun : np.ndarray
         Array containing the value function
-    pfun_sav : np.ndarray
-        Array containing the savings policy function
+    pfun_a : np.ndarray
+        Array containing the savings policy function (next-period asset choice a')
     """
 
     t0 = perf_counter()
@@ -122,7 +129,7 @@ def vfi_interp(par, kind='linear', tol=1e-5, maxiter=1000):
     vfun = np.zeros(N_a)
     vfun_upd = np.empty(N_a)
     # Optimal savings decision
-    pfun_sav = np.zeros(N_a)
+    pfun_a = np.zeros(N_a)
 
     for it in range(maxiter):
 
@@ -153,7 +160,7 @@ def vfi_interp(par, kind='linear', tol=1e-5, maxiter=1000):
             sav_opt = float(res.x)
 
             vfun_upd[ia] = vopt
-            pfun_sav[ia] = sav_opt
+            pfun_a[ia] = sav_opt
 
         diff = np.max(np.abs(vfun - vfun_upd))
 
@@ -162,7 +169,7 @@ def vfi_interp(par, kind='linear', tol=1e-5, maxiter=1000):
 
         if diff < tol:
             td = perf_counter() - t0
-            msg = f'VFI: Converged after {it:3d} iterations ({td:.1f} sec.): dV={diff:4.2e}'
+            msg = f'VFI: Converged after {it:3d} iterations ({td:.2f} sec.): dV={diff:4.2e}'
             print(msg)
             break
         elif it == 1 or it % 10 == 0:
@@ -172,7 +179,7 @@ def vfi_interp(par, kind='linear', tol=1e-5, maxiter=1000):
         msg = f'Did not converge in {it:d} iterations'
         print(msg)
 
-    return vfun, pfun_sav
+    return vfun, pfun_a
 
 
 def f_objective(sav, cah, par, f_vfun):

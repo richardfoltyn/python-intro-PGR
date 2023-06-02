@@ -1,6 +1,11 @@
 """
 Main script to solve household problem with risky (stochastic) labour income,
 using either VFI + grid search or VFI + interpolation.
+
+Introduction to Python Programming for Economics & Finance, 2023
+University of Glasgow
+
+Author: Richard Foltyn
 """
 
 #%% Imports and definitions
@@ -10,6 +15,7 @@ import numpy as np
 from dataclasses import dataclass
 
 from VFI_risk import vfi_grid, vfi_interp
+from EGM_risk import egm
 from markov import rouwenhorst, markov_ergodic_dist
 from plots import plot_solution
 
@@ -77,13 +83,13 @@ cah = (1.0 + par.r) * par.grid_a + par.grid_y[:, None]
 pfun_c = cah - pfun_a
 
 # Plot results
-fig, axes = plot_solution(par, pfun_a.T, pfun_c.T, vfun.T)
+fig, axes = plot_solution(par, pfun_a, pfun_c, vfun)
 # Insert legend
 labels = [f'$y={y:.2f}$' for y in par.grid_y]
 axes[0].legend(labels, loc='upper left')
 
 # Optionally save graph as PDF
-# fig.savefig('solution_risk.pdf')
+# fig.savefig('solution_risk_vfi.pdf')
 
 
 #%% Solve HH problem using VFI + interpolation
@@ -95,11 +101,23 @@ cah = (1.0 + par.r) * par.grid_a + par.grid_y[:, None]
 pfun_c = cah - pfun_a
 
 # Plot results
-fig, axes = plot_solution(par, pfun_a.T, pfun_c.T, vfun.T)
+fig, axes = plot_solution(par, pfun_a, pfun_c, vfun)
 # Insert legend
 labels = [f'$y={y:.2f}$' for y in par.grid_y]
 axes[0].legend(labels, loc='upper left')
 
 # Optionally save graph as PDF
-# fig.savefig('solution_risk_interp.pdf')
+# fig.savefig('solution_risk_vfi_interp.pdf')
 
+#%% Solve HH problem using EGM
+
+pfun_a, pfun_c = egm(par)
+
+# Plot results
+fig, axes = plot_solution(par, pfun_a, pfun_c)
+# Insert legend
+labels = [f'$y={y:.2f}$' for y in par.grid_y]
+axes[0].legend(labels, loc='upper left')
+
+# Optionally save graph as PDF
+# fig.savefig('solution_risk_egm.pdf')
